@@ -1,0 +1,16 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "modulePathIgnorePatterns": ["<rootDir>/dist/"],
+  "testPathIgnorePatterns": ["<rootDir>/dist/"],
+  "moduleNameMapper": {
+    "^entities/lib/decode\\.js$": "<rootDir>/node_modules/entities/lib/decode.js",
+    "^entities/lib/escape\\.js$": "<rootDir>/node_modules/entities/lib/escape.js",
+    "(.+)\\.js": "$1"
+  },
+  "globals": {
+    "UrlFetchApp": {},
+    "CacheService": {},
+    "Utilities": {}
+  }
+}
