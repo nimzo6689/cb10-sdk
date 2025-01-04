@@ -1,4 +1,4 @@
-import Transport from './common/Transport';
+import Transport, { SessionCredentials } from './common/Transport';
 import MessageClient from './page/MessageClient';
 import FileClient from './page/FileClient';
 import UserClient from './page/UserClient';
@@ -16,9 +16,10 @@ import BulletinClient from './page/BulletinClient';
  */
 interface CybozuOfficeOptions {
   baseUrl: string;
-  accountId: string;
+  accountId?: string;
+  id?: string;
   password: string;
-  cookie?: string;
+  sessionCredentials?: SessionCredentials;
 }
 
 /**
@@ -99,8 +100,8 @@ export class CybozuOffice {
    * ```
    */
   constructor(options: CybozuOfficeOptions) {
-    const { baseUrl, accountId, password, cookie } = options;
-    this.transport = new Transport(baseUrl, accountId, password, cookie);
+    const { baseUrl, accountId, id, password, sessionCredentials } = options;
+    this.transport = new Transport(baseUrl, password, accountId, id, sessionCredentials);
 
     // 各クライアントのインスタンスを生成
     this.message = new MessageClient(this.transport);

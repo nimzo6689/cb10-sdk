@@ -15,7 +15,7 @@
   },
   "license": "MIT",
   "author": "nimzo6689 (https://github.com/nimzo6689)",
-  "type": "commonjs",
+  "type": "module",
   "files": [
     "dist"
   ],
@@ -27,7 +27,8 @@
     "bundle": "rollup --no-treeshake -c rollup.config.mjs",
     "build": "rimraf dist && tsc --declaration --sourceMap",
     "license": "license-check-and-add add -f license-config.json",
-    "test": "jest __tests__/ --passWithNoTests --detectOpenHandles",
+    "test": "jest __tests__/",
+    "test:integration": "jest __tests__/integration",
     "test:coverage": "npm run test -- --coverage"
   },
   "engines": {

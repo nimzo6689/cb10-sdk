@@ -3,3 +3,4 @@ dist/*
 dist_clasp/*
 coverage/*
 __tests__/*
+examples/*
