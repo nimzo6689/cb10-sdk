@@ -47,7 +47,7 @@ interface GetOptions {
  * @property {string} csrfTicket - CSRFトークン
  */
 export interface SessionCredentials {
-  cookie?: string;
+  cookie: string;
   csrfTicket?: string;
 }
 
@@ -153,7 +153,7 @@ export default class Transport {
     await this.sendRequest({
       method: 'POST',
       contentType: ContentType.FORM_URLENCODED,
-      body: this.appendCsrfTicket(body),
+      body,
       ensuresLoggedIn: true,
     });
   }
@@ -166,8 +166,14 @@ export default class Transport {
    * @private
    */
   private async sendRequest(options: RequestOptions): Promise<Response> {
+    // ログイン済みが前提のリクエストの場合、 Cookie が未取得であれば Cookie を取得する
     if (options.ensuresLoggedIn && !this.sessionCredentials) {
       await this.initializeSession();
+    }
+
+    // ログイン済みが前提の POST リクエストの場合、 CSRF トークンを取得する
+    if (options.ensuresLoggedIn && !this.sessionCredentials?.csrfTicket && options.method === 'POST') {
+      this.sessionCredentials!.csrfTicket = await this.fetchCsrfTicket();
     }
 
     const url = this.buildRequestUrl(options);
@@ -208,12 +214,16 @@ export default class Transport {
       headers['Content-Type'] = options.contentType;
     }
 
-    return {
+    const retVal: RequestInit = {
       method: options.method,
       headers,
-      body: options.body || undefined,
       redirect: 'manual',
     };
+    if (options.body) {
+      retVal.body = this.appendCsrfTicket(options.body);
+    }
+
+    return retVal;
   }
 
   /**
@@ -251,11 +261,8 @@ export default class Transport {
   private async initializeSession(): Promise<void> {
     const loginResponse = await this.performLogin();
     const cookieValue = await this.extractSessionCookie(loginResponse);
-    const csrfTicket = await this.fetchCsrfTicket();
-
     this.sessionCredentials = {
       cookie: cookieValue,
-      csrfTicket,
     };
   }
 

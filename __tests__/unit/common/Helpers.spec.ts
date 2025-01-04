@@ -1,4 +1,4 @@
-import { Utils } from '../../src/common/Helpers';
+import { Utils } from '../../../src/common/Helpers';
 
 describe('ヘルパー関数', () => {
   it('クッキー文字列から AGSESSID の値を取得できるか', () => {
