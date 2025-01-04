@@ -1,6 +1,5 @@
 node_modules/*
 dist/*
-dist_clasp/*
 coverage/*
 .DS_Store
 *.tgz

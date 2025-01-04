@@ -276,12 +276,13 @@ export default class MessageClient {
   /**
    * 宛先一覧を取得
    */
-  async getReceivers(mDBID: number, mDID: number): Promise<ReceiverInfo[]> {
+  async getReceivers(mDBID: number, mDID: number, eID: number): Promise<ReceiverInfo[]> {
     try {
       const query = {
         page: `${MessageClient.PAGE_PREFIX}ReceiverAdd`,
         DBID: mDBID,
         MID: mDID,
+        eID: eID,
       };
 
       const document = await this.transport.get({ query });
@@ -302,6 +303,7 @@ export default class MessageClient {
         DBID: mDBID,
         MID: mDID,
         EID: eID,
+        Submit: '変更する',
       };
 
       await this.transport.post(`${Utils.buildQuery(body)}&${uidPairs}`);

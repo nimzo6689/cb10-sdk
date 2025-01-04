@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import MessageClient from '../../src/page/MessageClient';
+import MessageClient from '../../../src/page/MessageClient';
 
 describe('メッセージ', () => {
   const page_MyFolderMessageView_rawContent = fs
@@ -75,7 +75,7 @@ describe('メッセージ', () => {
     });
     const client = new MessageClient(new CybozuTransportMock());
 
-    const actual = await client.getReceivers(4, 4);
+    const actual = await client.getReceivers(4, 4, 782);
     const expected: never[] = [];
 
     expect(JSON.stringify(actual)).toBe(JSON.stringify(expected));
