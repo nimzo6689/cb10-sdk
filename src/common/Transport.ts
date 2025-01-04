@@ -20,6 +20,7 @@ interface RequestOptions {
   contentType?: string;
   query?: string | Record<string, unknown>;
   body?: string;
+  ensuresLoggedIn: boolean;
 }
 
 /**
@@ -45,9 +46,9 @@ interface GetOptions {
  * @property {string} cookie - セッションクッキー
  * @property {string} csrfTicket - CSRFトークン
  */
-interface SessionCredentials {
-  cookie: string;
-  csrfTicket: string;
+export interface SessionCredentials {
+  cookie?: string;
+  csrfTicket?: string;
 }
 
 /**
@@ -78,11 +79,6 @@ interface SessionCredentials {
  * ```
  */
 export default class Transport {
-  private credentials: SessionCredentials = {
-    cookie: '',
-    csrfTicket: '',
-  };
-
   /**
    * Transportクラスのインスタンスを作成します
    *
@@ -95,16 +91,11 @@ export default class Transport {
    */
   constructor(
     private readonly baseUrl: string,
-    private readonly accountId: string,
     private readonly password: string,
-    cookie?: string
-  ) {
-    if (cookie) {
-      this.credentials.cookie = cookie;
-    } else {
-      this.initializeSession();
-    }
-  }
+    private readonly accountId?: string,
+    private readonly id?: string,
+    private sessionCredentials?: SessionCredentials
+  ) {}
 
   /**
    * GETリクエストを実行します
@@ -135,6 +126,7 @@ export default class Transport {
       method: 'GET',
       path,
       query,
+      ensuresLoggedIn: true,
     });
 
     if (responseType === 'file') {
@@ -162,6 +154,7 @@ export default class Transport {
       method: 'POST',
       contentType: ContentType.FORM_URLENCODED,
       body: this.appendCsrfTicket(body),
+      ensuresLoggedIn: true,
     });
   }
 
@@ -173,10 +166,12 @@ export default class Transport {
    * @private
    */
   private async sendRequest(options: RequestOptions): Promise<Response> {
+    if (options.ensuresLoggedIn && !this.sessionCredentials) {
+      await this.initializeSession();
+    }
+
     const url = this.buildRequestUrl(options);
     const requestOptions = this.buildRequestOptions(options);
-
-    console.info({ url, options: requestOptions });
 
     const response = await fetch(url, requestOptions);
     this.validateResponse(response);
@@ -193,8 +188,8 @@ export default class Transport {
    */
   private buildRequestUrl(options: RequestOptions): string {
     const { path = '', query = null } = options;
-    const queryString = query ? `?${Utils.buildQuery(query as string | QueryParams)}` : '';
-    return `${this.baseUrl}/${path}${queryString}`;
+    const queryString = query ? `${Utils.buildQuery(query as string | QueryParams)}` : '';
+    return `${this.baseUrl}?${queryString}`;
   }
 
   /**
@@ -206,7 +201,7 @@ export default class Transport {
    */
   private buildRequestOptions(options: RequestOptions): RequestInit {
     const headers: Record<string, string> = {
-      Cookie: this.credentials.cookie,
+      Cookie: this.sessionCredentials?.cookie || '',
     };
 
     if (options.contentType) {
@@ -244,7 +239,7 @@ export default class Transport {
    * @private
    */
   private appendCsrfTicket(body: string): string {
-    return `${body}&csrf_ticket=${this.credentials.csrfTicket}`;
+    return `${body}&csrf_ticket=${this.sessionCredentials?.csrfTicket}`;
   }
 
   /**
@@ -254,11 +249,14 @@ export default class Transport {
    * @private
    */
   private async initializeSession(): Promise<void> {
-    console.info('Initializing session');
-
     const loginResponse = await this.performLogin();
-    this.credentials.cookie = await this.extractSessionCookie(loginResponse);
-    this.credentials.csrfTicket = await this.fetchCsrfTicket();
+    const cookieValue = await this.extractSessionCookie(loginResponse);
+    const csrfTicket = await this.fetchCsrfTicket();
+
+    this.sessionCredentials = {
+      cookie: cookieValue,
+      csrfTicket,
+    };
   }
 
   /**
@@ -269,13 +267,11 @@ export default class Transport {
    * @private
    */
   private async performLogin(): Promise<Response> {
-    const response = await fetch(this.baseUrl, {
+    const response = await this.sendRequest({
       method: 'POST',
-      headers: {
-        'Content-Type': ContentType.FORM_URLENCODED,
-      },
+      contentType: ContentType.FORM_URLENCODED,
       body: this.buildLoginBody(),
-      redirect: 'manual',
+      ensuresLoggedIn: false,
     });
 
     this.validateResponse(response);
@@ -290,11 +286,11 @@ export default class Transport {
    */
   private buildLoginBody(): string {
     return [
-      `_Account=${this.accountId}`,
+      this.accountId ? `_Account=${this.accountId}` : `_ID=${this.id}`,
       `Password=${this.password}`,
       '_System=login',
       '_Login=1',
-      'LoginMethod=2',
+      `LoginMethod=${this.accountId ? '2' : ''}`,
     ].join('&');
   }
 
@@ -328,7 +324,11 @@ export default class Transport {
    * @private
    */
   private async fetchCsrfTicket(): Promise<string> {
-    const page = await this.get();
+    const response = await this.sendRequest({
+      method: 'GET',
+      ensuresLoggedIn: false,
+    });
+    const page = await response.text();
     const match = /<input type="hidden" name="csrf_ticket" value="(.*?)">/i.exec(page);
 
     if (!match) {
