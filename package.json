@@ -15,17 +15,16 @@
   },
   "license": "MIT",
   "author": "nimzo6689 (https://github.com/nimzo6689)",
-  "type": "module",
   "files": [
-    "dist"
+    "dist/**/*",
+    "README.md"
   ],
   "main": "dist/index.js",
   "scripts": {
     "prepare": "husky install",
     "clean": "rimraf dist",
     "lint": "npm run license && eslint --fix --no-error-on-unmatched-pattern src/ __tests__/",
-    "bundle": "rimraf dist/bundle && rollup --no-treeshake -c rollup.config.mjs",
-    "build": "rimraf dist/build && tsc --declaration --sourceMap",
+    "build": "rimraf dist && tsc",
     "test": "npm run test:unit",
     "test:unit": "jest --projects=unit",
     "test:e2e": "jest --projects=e2e",
@@ -41,15 +40,10 @@
     ]
   },
   "dependencies": {
-    "cheerio": "^1.0.0",
-    "tough-cookie": "^5.0.0"
+    "cheerio": "^1.0.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.2",
-    "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^16.0.0",
     "@types/jest": "^29.5.14",
-    "@types/tough-cookie": "^4.0.5",
     "@typescript-eslint/eslint-plugin": "^8.19.0",
     "@typescript-eslint/parser": "^8.19.0",
     "eslint": "^8.57.1",
@@ -63,10 +57,6 @@
     "ncp": "^2.0.0",
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
-    "rollup": "^4.29.1",
-    "rollup-plugin-cleanup": "^3.2.1",
-    "rollup-plugin-license": "^3.5.3",
-    "rollup-plugin-typescript2": "^0.36.0",
     "ts-jest": "^29.2.5",
     "typescript": "^5.7.2"
   }
