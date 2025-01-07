@@ -1,5 +1,8 @@
 # cb10-sdk
 
+[![testings](https://github.com/nimzo6689/cb10-sdk/actions/workflows/ci.yaml/badge.svg)](https://github.com/nimzo6689/cb10-sdk/actions/workflows/ci.yaml)
+[![codecov](https://codecov.io/gh/nimzo6689/cb10-sdk/graph/badge.svg?token=UMKvjV7TKf)](https://codecov.io/gh/nimzo6689/cb10-sdk)
+
 Node.js で利用できるサイボウズ Office 10 用の SDK です。
 
 ## 使い方
