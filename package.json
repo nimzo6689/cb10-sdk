@@ -1,17 +1,17 @@
 {
-  "name": "cybozu-office-10-sdk",
+  "name": "cb10-sdk",
   "version": "0.1.0",
   "description": "Cybozu Office 10 SDK for Node.js",
   "keywords": [
     "cybozu"
   ],
-  "homepage": "https://github.com/nimzo6689/cybozu-office-10-sdk-nodejs#readme",
+  "homepage": "https://github.com/nimzo6689/cb10-sdk#readme",
   "bugs": {
-    "url": "https://github.com/nimzo6689/cybozu-office-10-sdk-nodejs/issues"
+    "url": "https://github.com/nimzo6689/cb10-sdk/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nimzo6689/cybozu-office-10-sdk-nodejs.git"
+    "url": "git+https://github.com/nimzo6689/cb10-sdk.git"
   },
   "license": "MIT",
   "author": "nimzo6689 (https://github.com/nimzo6689)",

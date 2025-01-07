@@ -1,4 +1,4 @@
-# cybozu-office-10-sdk-nodejs
+# cb10-sdk
 
 Node.js で利用できるサイボウズ Office 10 用の SDK です。
 
