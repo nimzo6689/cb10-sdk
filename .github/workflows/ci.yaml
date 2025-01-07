@@ -14,13 +14,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+
       - name: Install Dependencies
         run: npm install
 
       - name: Run Test
         run: npm run test:coverage
 
-      - name: Upload coverage reports to Codecov
+      - name: Upload results to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          slug: nimzo6689/cb10-sdk
