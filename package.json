@@ -2,6 +2,7 @@
   "name": "cb10-sdk",
   "version": "0.1.0",
   "description": "Cybozu Office 10 SDK for Node.js",
+  "private": false,
   "keywords": [
     "cybozu"
   ],
