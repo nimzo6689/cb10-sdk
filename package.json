@@ -28,7 +28,7 @@
     "test": "npm run test:unit",
     "test:unit": "jest --selectProjects=unit",
     "test:e2e": "jest --selectProjects=e2e",
-    "test:coverage": "npm run test -- --coverage"
+    "test:coverage": "npm run test:unit -- --coverage"
   },
   "engines": {
     "node": ">=20"
