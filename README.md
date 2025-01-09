@@ -5,9 +5,9 @@
 
 Node.js で利用できるサイボウズ Office 10 用の SDK です。
 
-## 使い方
+## 基本的な使い方
 
-基本的な使用例はこちら。
+基本的な使用例はこちらです。
 
 ```js
 const client = new CybozuOffice({
@@ -24,7 +24,11 @@ groupMembers.forEach(it => JSON.stringify(it));
 // { uID: 208, userName: '大山 春香' }
 ```
 
-サイボウズへのログインする際に、ユーザをプルダウンではなく、フォーム入力となっている場合は、以下のような実装になります。
+より詳細な使い方については [**tests**](https://github.com/nimzo6689/cb10-sdk/tree/main/__tests__) 配下のテストコードをご参照ください。
+
+### 補足：ログイン方法について
+
+サイボウズへのログインする際に、ユーザをプルダウンではなく、フォーム入力となっている場合、以下のような実装になります。
 
 ```js
 const client = new CybozuOffice({
