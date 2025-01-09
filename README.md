@@ -1,5 +1,6 @@
 # cb10-sdk
 
+[![npm version](https://badge.fury.io/js/cb10-sdk.svg)](https://badge.fury.io/js/cb10-sdk)
 [![testings](https://github.com/nimzo6689/cb10-sdk/actions/workflows/ci.yaml/badge.svg)](https://github.com/nimzo6689/cb10-sdk/actions/workflows/ci.yaml)
 [![codecov](https://codecov.io/gh/nimzo6689/cb10-sdk/graph/badge.svg?token=UMKvjV7TKf)](https://codecov.io/gh/nimzo6689/cb10-sdk)
 
