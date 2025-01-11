@@ -1,8 +1,8 @@
 import { ContentType } from './Constants';
-
-type QueryParams = Record<string, string | number | boolean>;
 import { Utils } from './Helpers';
 import { CybozuOfficeSDKException } from './Errors';
+
+type QueryParams = Record<string, string | number | boolean>;
 
 /**
  * HTTPリクエストのオプションを定義するインターフェース
@@ -21,6 +21,7 @@ interface RequestOptions {
   query?: string | Record<string, unknown>;
   body?: string;
   ensuresLoggedIn: boolean;
+  preventSessionRefresh?: boolean;
 }
 
 /**
@@ -182,6 +183,12 @@ export default class Transport {
     const response = await fetch(url, requestOptions);
     this.validateResponse(response);
 
+    const needsLogin = response.headers.get('x-cybozulogin') == '1';
+    if (!options.preventSessionRefresh && needsLogin) {
+      await this.initializeSession();
+      return this.sendRequest({ preventSessionRefresh: true, ...options });
+    }
+
     return response;
   }
 
@@ -249,7 +256,11 @@ export default class Transport {
    * @private
    */
   private appendCsrfTicket(body: string): string {
-    return `${body}&csrf_ticket=${this.sessionCredentials?.csrfTicket}`;
+    if (this.sessionCredentials?.csrfTicket) {
+      return `${body}&csrf_ticket=${this.sessionCredentials?.csrfTicket}`;
+    }
+
+    return body;
   }
 
   /**
