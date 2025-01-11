@@ -1,7 +1,7 @@
 import Transport, { SessionCredentials } from './common/Transport';
 import MessageClient from './page/MessageClient';
 import FileClient from './page/FileClient';
-import UserClient from './page/UserClient';
+import UserClient from './page/user/UserClient';
 import FolderClient from './page/FolderClient';
 import BulletinClient from './page/BulletinClient';
 
@@ -52,39 +52,38 @@ interface CybozuOfficeOptions {
 export class CybozuOffice {
   /**
    * 内部通信を行うTransportインスタンス
-   * @private
    */
-  private readonly transport: Transport;
+  readonly #transport: Transport;
 
   /**
    * メッセージ管理クライアント
    * メッセージの送信、閲覧、編集などの機能を提供します。
    */
-  public readonly message: MessageClient;
+  readonly message: MessageClient;
 
   /**
    * ファイル管理クライアント
    * ファイルのダウンロードなどの機能を提供します。
    */
-  public readonly file: FileClient;
+  readonly file: FileClient;
 
   /**
    * ユーザー管理クライアント
    * ユーザー情報の取得などの機能を提供します。
    */
-  public readonly user: UserClient;
+  readonly user: UserClient;
 
   /**
    * フォルダ管理クライアント
    * 個人フォルダの操作機能を提供します。
    */
-  public readonly folder: FolderClient;
+  readonly folder: FolderClient;
 
   /**
    * 掲示板管理クライアント
    * 掲示板の閲覧、投稿などの機能を提供します。
    */
-  public readonly bulletin: BulletinClient;
+  readonly bulletin: BulletinClient;
 
   /**
    * CybozuOfficeのインスタンスを作成します
@@ -102,13 +101,13 @@ export class CybozuOffice {
    */
   constructor(options: CybozuOfficeOptions) {
     const { baseUrl, accountId, id, password, sessionCredentials, disableSslVerification } = options;
-    this.transport = new Transport(baseUrl, password, accountId, id, sessionCredentials, disableSslVerification);
+    this.#transport = new Transport(baseUrl, password, accountId, id, sessionCredentials, disableSslVerification);
 
     // 各クライアントのインスタンスを生成
-    this.message = new MessageClient(this.transport);
-    this.file = new FileClient(this.transport);
-    this.user = new UserClient(this.transport);
-    this.folder = new FolderClient(this.transport);
-    this.bulletin = new BulletinClient(this.transport);
+    this.message = new MessageClient(this.#transport);
+    this.file = new FileClient(this.#transport);
+    this.user = new UserClient(this.#transport);
+    this.folder = new FolderClient(this.#transport);
+    this.bulletin = new BulletinClient(this.#transport);
   }
 }
