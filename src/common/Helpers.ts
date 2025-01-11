@@ -47,22 +47,4 @@ export class Utils {
       .map(([key, value]) => `${key}=${encodeURIComponent(String(value))}`)
       .join('&');
   }
-
-  /**
-   * セッションIDからクッキー文字列を生成
-   *
-   * @param agSessId - セッションID
-   * @returns クッキー文字列
-   */
-  static createCookieValue(agSessId: string): string {
-    return [
-      'CBAccount=',
-      'expires=Thu, 01-Jan-1970 00:00:00 GMT',
-      'path=/cgi-bin/cbag/',
-      `AGSESSID=${agSessId}`,
-      'path=/cgi-bin/cbag/',
-      'secure',
-      'HttpOnly',
-    ].join('; ');
-  }
 }
