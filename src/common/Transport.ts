@@ -1,4 +1,5 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
+import https from 'https';
 import { ContentType } from './Constants';
 import { Utils } from './Helpers';
 import { CybozuOfficeSDKException } from './Errors';
@@ -54,6 +55,13 @@ export interface SessionCredentials {
 }
 
 /**
+ * SSL証明書の検証を無効化したエージェント
+ */
+const agent = new https.Agent({
+  rejectUnauthorized: false,
+});
+
+/**
  * Cybozu Office 10 APIへのアクセスを管理するクラス
  *
  * このクラスはCybozu Office 10のHTTP APIへのアクセスを簡素化します。
@@ -81,7 +89,7 @@ export interface SessionCredentials {
  * ```
  */
 export default class Transport {
-  private readonly axiosInstance: AxiosInstance;
+  readonly #axiosInstance: AxiosInstance;
 
   /**
    * Transportクラスのインスタンスを作成します
@@ -98,15 +106,25 @@ export default class Transport {
     private readonly password: string,
     private readonly accountId?: string,
     private readonly id?: string,
-    private sessionCredentials?: SessionCredentials
+    private sessionCredentials?: SessionCredentials,
+    private disableSslVerification?: boolean
   ) {
-    this.axiosInstance = axios.create({
+    const axiosConfig: AxiosRequestConfig = {
       baseURL: this.baseUrl,
       maxRedirects: 0,
       validateStatus: status => {
         return status === 200 || status === 302;
       },
-    });
+    };
+
+    if (this.disableSslVerification) {
+      const agent = new https.Agent({
+        rejectUnauthorized: false,
+      });
+      axiosConfig.httpsAgent = agent;
+    }
+
+    this.#axiosInstance = axios.create(axiosConfig);
   }
 
   /**
@@ -134,7 +152,7 @@ export default class Transport {
   async get(options: GetOptions = {}): Promise<string> {
     const { path, query = '', responseType = 'text', encoding = 'utf-8' } = options;
 
-    const response = await this.sendRequest({
+    const response = await this.#sendRequest({
       method: 'GET',
       path,
       query,
@@ -161,7 +179,7 @@ export default class Transport {
    * @throws {CybozuOfficeSDKException} リクエストが失敗した場合
    */
   async post(body: string): Promise<void> {
-    await this.sendRequest({
+    await this.#sendRequest({
       method: 'POST',
       contentType: ContentType.FORM_URLENCODED,
       body,
@@ -174,33 +192,32 @@ export default class Transport {
    *
    * @param options - リクエストオプション
    * @returns axiosのレスポンス
-   * @private
    */
-  private async sendRequest(options: RequestOptions): Promise<AxiosResponse> {
+  async #sendRequest(options: RequestOptions): Promise<AxiosResponse> {
     // ログイン済みが前提のリクエストの場合、 Cookie が未取得であれば Cookie を取得する
     if (options.ensuresLoggedIn && !this.sessionCredentials) {
-      await this.initializeSession();
+      await this.#initializeSession();
     }
 
     // ログイン済みが前提の POST リクエストの場合、 CSRF トークンを取得する
     if (options.ensuresLoggedIn && !this.sessionCredentials?.csrfTicket && options.method === 'POST') {
-      this.sessionCredentials!.csrfTicket = await this.fetchCsrfTicket();
+      this.sessionCredentials!.csrfTicket = await this.#fetchCsrfTicket();
     }
 
-    const url = this.buildRequestUrl(options);
-    const requestConfig = this.buildRequestConfig(options);
+    const url = Transport.#buildRequestUrl(options);
+    const requestConfig = this.#buildRequestConfig(options);
 
-    const response = await this.axiosInstance.request({
+    const response = await this.#axiosInstance.request({
       url,
       ...requestConfig,
     });
 
-    this.validateResponse(response);
+    Transport.#validateResponse(response);
 
     const needsLogin = response.headers['x-cybozulogin'] === '1';
     if (!options.preventSessionRefresh && needsLogin) {
-      await this.initializeSession();
-      return this.sendRequest({ preventSessionRefresh: true, ...options });
+      await this.#initializeSession();
+      return this.#sendRequest({ preventSessionRefresh: true, ...options });
     }
 
     return response;
@@ -211,9 +228,8 @@ export default class Transport {
    *
    * @param options - リクエストオプション
    * @returns 構築されたURL
-   * @private
    */
-  private buildRequestUrl(options: RequestOptions): string {
+  static #buildRequestUrl(options: RequestOptions): string {
     const { query = null } = options;
     const queryString = query ? `${Utils.buildQuery(query as string | QueryParams)}` : '';
     return queryString ? `?${queryString}` : '';
@@ -224,9 +240,8 @@ export default class Transport {
    *
    * @param options - リクエストオプション
    * @returns axiosに渡すリクエスト設定
-   * @private
    */
-  private buildRequestConfig(options: RequestOptions): Record<string, unknown> {
+  #buildRequestConfig(options: RequestOptions): Record<string, unknown> {
     const headers: Record<string, string> = {
       Cookie: this.sessionCredentials?.cookie || '',
     };
@@ -242,7 +257,7 @@ export default class Transport {
     };
 
     if (options.body) {
-      config.data = this.appendCsrfTicket(options.body);
+      config.data = this.#appendCsrfTicket(options.body);
     }
 
     return config;
@@ -253,10 +268,9 @@ export default class Transport {
    *
    * @param response - axiosのレスポンス
    * @throws {CybozuOfficeSDKException} サイボウズからエラーが返された場合
-   * @private
    * @see https://jp.cybozu.help/of10/ja/error.html
    */
-  private validateResponse(response: AxiosResponse): void {
+  static #validateResponse(response: AxiosResponse): void {
     const cybozuError = response.headers['x-cybozu-error'];
     if (cybozuError) {
       throw new CybozuOfficeSDKException(cybozuError);
@@ -268,9 +282,8 @@ export default class Transport {
    *
    * @param body - 元のリクエストボディ
    * @returns CSRFトークンが追加されたボディ
-   * @private
    */
-  private appendCsrfTicket(body: string): string {
+  #appendCsrfTicket(body: string): string {
     if (this.sessionCredentials?.csrfTicket) {
       return `${body}&csrf_ticket=${this.sessionCredentials?.csrfTicket}`;
     }
@@ -282,11 +295,10 @@ export default class Transport {
    * セッションを初期化します
    *
    * @throws {CybozuOfficeSDKException} 認証に失敗した場合
-   * @private
    */
-  private async initializeSession(): Promise<void> {
-    const loginResponse = await this.performLogin();
-    const cookieValue = await this.extractSessionCookie(loginResponse);
+  async #initializeSession(): Promise<void> {
+    const loginResponse = await this.#performLogin();
+    const cookieValue = Transport.#extractSessionCookie(loginResponse);
     this.sessionCredentials = {
       cookie: cookieValue,
     };
@@ -297,17 +309,16 @@ export default class Transport {
    *
    * @returns ログインレスポンス
    * @throws {CybozuOfficeSDKException} ログインに失敗した場合
-   * @private
    */
-  private async performLogin(): Promise<AxiosResponse> {
-    const response = await this.sendRequest({
+  async #performLogin(): Promise<AxiosResponse> {
+    const response = await this.#sendRequest({
       method: 'POST',
       contentType: ContentType.FORM_URLENCODED,
-      body: this.buildLoginBody(),
+      body: this.#buildLoginBody(),
       ensuresLoggedIn: false,
     });
 
-    this.validateResponse(response);
+    Transport.#validateResponse(response);
     return response;
   }
 
@@ -315,9 +326,8 @@ export default class Transport {
    * ログインボディを構築します
    *
    * @returns ログインリクエストのボディ文字列
-   * @private
    */
-  private buildLoginBody(): string {
+  #buildLoginBody(): string {
     return [
       this.accountId ? `_Account=${this.accountId}` : `_ID=${this.id}`,
       `Password=${this.password}`,
@@ -333,20 +343,20 @@ export default class Transport {
    * @param response - ログインレスポンス
    * @returns セッションクッキー文字列
    * @throws {CybozuOfficeSDKException} クッキーの抽出に失敗した場合
-   * @private
    */
-  private async extractSessionCookie(response: AxiosResponse): Promise<string> {
+  static #extractSessionCookie(response: AxiosResponse): string {
     const setCookie = response.headers['set-cookie'];
     if (!setCookie || !Array.isArray(setCookie) || setCookie.length === 0) {
       throw new CybozuOfficeSDKException('Failed to get session cookie');
     }
 
-    const match = /AGSESSID=(.*?);/i.exec(setCookie[0]);
+    const AGSESSID_REGEX = /(AGSESSID=.*?);/i;
+    const match = setCookie.filter(cookie => AGSESSID_REGEX.test(cookie)).find(cookie => AGSESSID_REGEX.exec(cookie));
     if (!match) {
       throw new CybozuOfficeSDKException('Failed to extract AGSESSID');
     }
 
-    return Utils.createCookieValue(match[1]);
+    return match;
   }
 
   /**
@@ -354,10 +364,9 @@ export default class Transport {
    *
    * @returns CSRFトークン文字列
    * @throws {CybozuOfficeSDKException} トークンの取得に失敗した場合
-   * @private
    */
-  private async fetchCsrfTicket(): Promise<string> {
-    const response = await this.sendRequest({
+  async #fetchCsrfTicket(): Promise<string> {
+    const response = await this.#sendRequest({
       method: 'GET',
       ensuresLoggedIn: false,
     });

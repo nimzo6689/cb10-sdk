@@ -20,6 +20,7 @@ interface CybozuOfficeOptions {
   id?: string;
   password: string;
   sessionCredentials?: SessionCredentials;
+  disableSslVerification?: boolean;
 }
 
 /**
@@ -100,8 +101,8 @@ export class CybozuOffice {
    * ```
    */
   constructor(options: CybozuOfficeOptions) {
-    const { baseUrl, accountId, id, password, sessionCredentials } = options;
-    this.transport = new Transport(baseUrl, password, accountId, id, sessionCredentials);
+    const { baseUrl, accountId, id, password, sessionCredentials, disableSslVerification } = options;
+    this.transport = new Transport(baseUrl, password, accountId, id, sessionCredentials, disableSslVerification);
 
     // 各クライアントのインスタンスを生成
     this.message = new MessageClient(this.transport);
