@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import UserClient from '../../../src/page/UserClient';
+import UserClient from '../../../src/page/user/UserClient';
 
 describe('ユーザー名簿', () => {
   const page_UserListIndex_rawContent = fs
