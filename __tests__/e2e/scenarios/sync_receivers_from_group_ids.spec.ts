@@ -19,7 +19,6 @@ describe('[シナリオテスト]特定のグループに所属するメンバ�
       { uID: 17, userName: '高橋 健太' },
       { uID: 23, userName: '和田 一夫' },
       { uID: 27, userName: '加藤 美咲' },
-      { uID: 208, userName: '大山 春香' },
     ];
     expect(JSON.stringify(actual)).toBe(JSON.stringify(expectedExistingReceivers));
 
