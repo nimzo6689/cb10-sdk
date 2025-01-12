@@ -70,6 +70,13 @@ export class CybozuOffice {
   readonly bulletin: BulletinClient;
 
   /**
+   * 現在のセッション情報（Cookie, csrfTicket）を取得します。
+   */
+  get credentials(): SessionCredentials | undefined {
+    return this.#transport.credentials;
+  }
+
+  /**
    * CybozuOfficeのインスタンスを作成します
    *
    * @param options - サイボウズOfficeの接続オプション

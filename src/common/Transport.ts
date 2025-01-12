@@ -67,29 +67,13 @@ const agent = new https.Agent({
  * このクラスはCybozu Office 10のHTTP APIへのアクセスを簡素化します。
  * セッション管理、認証、CSRFトークンの処理を自動的に行います。
  *
- * @example
- * ```typescript
- * const transport = new Transport(
- *   'https://example.cybozu.com/ag.cgi',
- *   'username',
- *   'password'
- * );
- *
- * // 通常のGETリクエスト
- * const content = await transport.get({ query: 'page=1' });
- *
- * // ファイル取得
- * const file = await transport.get({
- *   path: 'file.txt',
- *   responseType: 'file'
- * });
- *
- * // POSTリクエスト
- * await transport.post('action=update&id=1');
- * ```
  */
 export default class Transport {
   readonly #axiosInstance: AxiosInstance;
+
+  get credentials(): SessionCredentials | undefined {
+    return this.sessionCredentials;
+  }
 
   /**
    * Transportクラスのインスタンスを作成します
