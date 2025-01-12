@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import MessageClient from '../../../src/page/MessageClient';
+import MessageClient from '../../../src/page/message/MessageClient';
 
 describe('メッセージ', () => {
   const page_MyFolderMessageView_rawContent = fs

@@ -35,7 +35,7 @@ interface RequestOptions {
  * @property {'text' | 'file'} [responseType] - レスポンスタイプ（デフォルト: 'text'）
  * @property {BufferEncoding} [encoding] - ファイル取得時のエンコーディング（デフォルト: 'utf-8'）
  */
-interface GetOptions {
+export interface GetOptions {
   path?: string;
   query?: string | Record<string, unknown>;
   responseType?: 'text' | 'file';

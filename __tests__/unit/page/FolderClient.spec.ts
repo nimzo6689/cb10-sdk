@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import FolderClient from '../../../src/page/FolderClient';
+import FolderClient from '../../../src/page/folder/FolderClient';
 
 describe('個人フォルダ', () => {
   const page_MyFolderIndex_rawContent = fs
