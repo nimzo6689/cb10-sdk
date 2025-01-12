@@ -56,3 +56,8 @@ export const Defaults = {
    */
   GROUP_NAME: 'サイボウズ Bot',
 } as const;
+
+/**
+ * リアクションのタイプを定義する型
+ */
+export type ReactionType = 'good' | 'ok' | 'smile' | 'sad' | '';

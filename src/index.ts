@@ -1,9 +1,9 @@
 import Transport, { SessionCredentials } from './common/Transport';
-import MessageClient from './page/MessageClient';
-import FileClient from './page/FileClient';
+import MessageClient from './page/message/MessageClient';
+import FileClient from './page/file/FileClient';
 import UserClient from './page/user/UserClient';
-import FolderClient from './page/FolderClient';
-import BulletinClient from './page/BulletinClient';
+import FolderClient from './page/folder/FolderClient';
+import BulletinClient from './page/bullentin/BulletinClient';
 
 /**
  * サイボウズOffice接続の設定オプションを定義するインターフェース
@@ -32,22 +32,6 @@ interface CybozuOfficeOptions {
  * - ユーザー管理 ({@link UserClient})
  * - フォルダ管理 ({@link FolderClient})
  * - 掲示板管理 ({@link BulletinClient})
- *
- * @example
- * ```typescript
- * const office = new CybozuOffice({
- *   baseUrl: 'https://example.cybozu.com/ag.cgi',
- *   accountId: 'username',
- *   password: 'password'
- * });
- *
- * // メッセージを送信
- * await office.message.sendMessage({
- *   subject: '件名',
- *   data: '本文',
- *   uidList: [1, 2, 3]
- * });
- * ```
  */
 export class CybozuOffice {
   /**
@@ -89,15 +73,6 @@ export class CybozuOffice {
    * CybozuOfficeのインスタンスを作成します
    *
    * @param options - サイボウズOfficeの接続オプション
-   *
-   * @example
-   * ```typescript
-   * const office = new CybozuOffice({
-   *   baseUrl: 'https://example.cybozu.com/ag.cgi',
-   *   accountId: 'username',
-   *   password: 'password'
-   * });
-   * ```
    */
   constructor(options: CybozuOfficeOptions) {
     const { baseUrl, accountId, id, password, sessionCredentials, disableSslVerification } = options;
