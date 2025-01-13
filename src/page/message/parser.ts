@@ -2,6 +2,7 @@ import * as cheerio from 'cheerio';
 import { Element } from 'domhandler';
 
 import { CommentInfo, ReceiverInfo } from './models';
+import { FileDownloadQueryOptions } from '../file/models';
 
 type CheerioAPI = cheerio.CheerioAPI;
 
@@ -36,7 +37,12 @@ export default class MessageHtmlParser {
     if (attached) {
       const [_, file, query] = attached.split(/[/?]/);
       attachedFile = file || '';
-      attachedQuery = query ? query.replace(/&amp;/gi, '&') : '';
+      const attachedQueryStr = query ? query.replace(/&amp;/gi, '&') : '';
+      if (attachedQueryStr) {
+        attachedQuery = Object.fromEntries(
+          new URLSearchParams(attachedQueryStr)
+        ) as unknown as FileDownloadQueryOptions;
+      }
     }
 
     return {

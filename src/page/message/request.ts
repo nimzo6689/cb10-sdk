@@ -1,11 +1,11 @@
 import { Defaults, MessageEditMode, ReactionType } from '../../common/Constants';
-import { Utils } from '../../common/Helpers';
+import { CustomURLPrams } from '../../common/Transport';
 import { MessageSendOptions, MessageModifyOptions } from './models';
 
 const PAGE_PREFIX = 'MyFolderMessage';
 
 export default class MessageRequestOptions {
-  static sendMessage(options: MessageSendOptions): string {
+  static sendMessage(options: MessageSendOptions): CustomURLPrams {
     const {
       subject,
       data,
@@ -16,8 +16,7 @@ export default class MessageRequestOptions {
       simpleReplyEnable = 1,
     } = options;
 
-    const uidPairs = uidList.map(uid => `UID=${uid}`).join('&');
-    const body = {
+    return {
       page: `${PAGE_PREFIX}Send`,
       Subject: subject,
       Group: group,
@@ -25,12 +24,11 @@ export default class MessageRequestOptions {
       EditableByReceivers: editableByReceivers,
       UseConfirm: useConfirm,
       SimpleReplyEnable: simpleReplyEnable,
+      UID: uidList,
     };
-
-    return `${Utils.buildQuery(body)}&${uidPairs}`;
   }
 
-  static modifyMessage(options: MessageModifyOptions): string {
+  static modifyMessage(options: MessageModifyOptions): CustomURLPrams {
     const {
       mDBID,
       mDID,
@@ -42,7 +40,7 @@ export default class MessageRequestOptions {
       simpleReplyEnable = 1,
     } = options;
 
-    const body = {
+    return {
       page: `${PAGE_PREFIX}Modify`,
       EditMode: MessageEditMode.TEXT.toString(),
       Cancel: 0,
@@ -57,24 +55,20 @@ export default class MessageRequestOptions {
       MID: mDID,
       Submit: '変更する',
     };
-
-    return Utils.buildQuery(body);
   }
 
-  static deleteMessage(mDBID: number, mDID: number): string {
-    const body = {
+  static deleteMessage(mDBID: number, mDID: number): CustomURLPrams {
+    return {
       page: `${PAGE_PREFIX}Delete`,
       DBID: mDBID,
       MID: mDID,
       Remove: 1,
       Yes: '移動する',
     };
-
-    return Utils.buildQuery(body);
   }
 
-  static moveMessage(mDBID: number, mDID: number, pID: number): string {
-    const body = {
+  static moveMessage(mDBID: number, mDID: number, pID: number): CustomURLPrams {
+    return {
       page: `${PAGE_PREFIX}View`,
       Cancel: 0,
       FRID: 0,
@@ -82,12 +76,10 @@ export default class MessageRequestOptions {
       MID: mDID,
       PID: pID,
     };
-
-    return Utils.buildQuery(body);
   }
 
-  static getComments(mDBID: number, mDID: number, hID?: number): Record<string, string | number> {
-    const query: Record<string, string | number> = {
+  static getComments(mDBID: number, mDID: number, hID?: number): CustomURLPrams {
+    const query: CustomURLPrams = {
       page: `Ajax${PAGE_PREFIX}FollowNavi`,
       DBID: mDBID,
       MID: mDID,
@@ -100,8 +92,8 @@ export default class MessageRequestOptions {
     return query;
   }
 
-  static addComment(mDBID: number, mDID: number, data: string, group = Defaults.GROUP_NAME): string {
-    const body = {
+  static addComment(mDBID: number, mDID: number, data: string, group = Defaults.GROUP_NAME): CustomURLPrams {
+    return {
       page: `Ajax${PAGE_PREFIX}FollowAdd`,
       EditMode: MessageEditMode.TEXT,
       Group: group,
@@ -109,19 +101,15 @@ export default class MessageRequestOptions {
       DBID: mDBID,
       MID: mDID,
     };
-
-    return Utils.buildQuery(body);
   }
 
-  static deleteComment(mDBID: number, mDID: number, followId: number): string {
-    const body = {
+  static deleteComment(mDBID: number, mDID: number, followId: number): CustomURLPrams {
+    return {
       page: `Ajax${PAGE_PREFIX}FollowDelete`,
       FRID: followId,
       DBID: mDBID,
       MID: mDID,
     };
-
-    return Utils.buildQuery(body);
   }
 
   static toggleReaction(
@@ -130,8 +118,8 @@ export default class MessageRequestOptions {
     followId: number,
     mark: ReactionType = '',
     cancel: number = 0
-  ): string {
-    const body: Record<string, string | number> = {
+  ): CustomURLPrams {
+    const body: CustomURLPrams = {
       page: 'AjaxSimpleReply',
       Cancel: cancel,
       FRID: followId,
@@ -143,30 +131,26 @@ export default class MessageRequestOptions {
       body.Value = mark;
     }
 
-    return Utils.buildQuery(body);
+    return body;
   }
 
-  static getReceivers(mDBID: number, mDID: number, eID: number): Record<string, string | number> {
-    const query = {
+  static getReceivers(mDBID: number, mDID: number, eID: number): CustomURLPrams {
+    return {
       page: `${PAGE_PREFIX}ReceiverAdd`,
       DBID: mDBID,
       MID: mDID,
       eID: eID,
     };
-
-    return query;
   }
 
-  static modifyReceivers(mDBID: number, mDID: number, eID: number, uidList: number[]): string {
-    const uidPairs = uidList.map(uid => `UID=${uid}`).join('&');
-    const body = {
+  static modifyReceivers(mDBID: number, mDID: number, eID: number, uidList: number[]): CustomURLPrams {
+    return {
       page: `${PAGE_PREFIX}ReceiverAdd`,
-      DBID: mDBID,
-      MID: mDID,
-      EID: eID,
+      UID: uidList,
+      DBID: mDBID.toString(),
+      MID: mDID.toString(),
+      EID: eID.toString(),
       Submit: '変更する',
     };
-
-    return `${Utils.buildQuery(body)}&${uidPairs}`;
   }
 }

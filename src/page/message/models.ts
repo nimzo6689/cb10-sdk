@@ -1,3 +1,5 @@
+import { FileDownloadQueryOptions } from '../file/models';
+
 /**
  * メッセージの送信オプションを定義するインターフェース
  */
@@ -32,7 +34,7 @@ export interface CommentInfo {
   followId: number;
   userName: string;
   attachedFile?: string;
-  attachedQuery?: string;
+  attachedQuery?: FileDownloadQueryOptions;
 }
 
 /**
