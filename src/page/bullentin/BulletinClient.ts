@@ -1,5 +1,4 @@
 import Transport from '../../common/Transport';
-import { CybozuOfficeSDKException } from '../../common/Errors';
 import { BulletinCommentData } from './models';
 import BulletinRequestOptions from './request';
 
@@ -18,17 +17,7 @@ export default class BulletinClient {
    * @returns コメントの追加が成功したかどうか
    * @throws {CybozuOfficeSDKException} コメントの追加に失敗した場合
    */
-  async addComment(commentData: BulletinCommentData): Promise<boolean> {
-    try {
-      await this.transport.post(BulletinRequestOptions.addComment(commentData));
-      return true;
-    } catch (error) {
-      if (error instanceof CybozuOfficeSDKException) {
-        throw error;
-      }
-      throw new CybozuOfficeSDKException(
-        `Failed to add comment: ${error instanceof Error ? error.message : 'Unknown error'}`
-      );
-    }
+  addComment(commentData: BulletinCommentData): Promise<void> {
+    return this.transport.post(BulletinRequestOptions.addComment(commentData));
   }
 }
