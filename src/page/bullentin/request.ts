@@ -1,5 +1,5 @@
 import { Defaults, MessageEditMode } from '../../common/Constants';
-import { Utils } from '../../common/Helpers';
+import { CustomURLPrams } from '../../common/Transport';
 import { BulletinCommentData } from './models';
 
 const PAGE_PREFIX = 'Bulletin';
@@ -11,15 +11,15 @@ export default class BulletinRequestOptions {
    * @param groupId - グループID
    * @returns リクエストオプション
    */
-  static addComment(commentData: BulletinCommentData): string {
+  static addComment(commentData: BulletinCommentData): CustomURLPrams {
     const { bid, data, group = Defaults.GROUP_NAME } = commentData;
 
-    return Utils.buildQuery({
+    return {
       page: `Ajax${PAGE_PREFIX}FollowAdd`,
-      EditMode: MessageEditMode.TEXT,
+      EditMode: `${MessageEditMode.TEXT}`,
       Group: group,
       Data: data,
       BID: bid,
-    });
+    };
   }
 }

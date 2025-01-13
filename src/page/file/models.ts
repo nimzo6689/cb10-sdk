@@ -8,6 +8,19 @@
  */
 export interface FileDownloadOptions {
   path: string;
-  query: string;
+  query: FileDownloadQueryOptions;
   encoding?: BufferEncoding;
+}
+
+export interface FileDownloadQueryOptions {
+  page: string;
+  id: string;
+  mDBID: string;
+  mEID: string;
+  mDID: string;
+  notimecard: string;
+  type: string;
+  subtype: string;
+  ct: string;
+  ext: string;
 }

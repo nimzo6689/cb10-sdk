@@ -1,10 +1,9 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
 import https from 'https';
 import { ContentType } from './Constants';
-import { Utils } from './Helpers';
 import { CybozuOfficeSDKException } from './Errors';
 
-type QueryParams = Record<string, string | number | boolean>;
+export type CustomURLPrams = Record<string, string | number | boolean | Array<string | number | boolean>>;
 
 /**
  * HTTPリクエストのオプションを定義するインターフェース
@@ -13,15 +12,15 @@ type QueryParams = Record<string, string | number | boolean>;
  * @property {string} method - HTTPメソッド（GET, POST等）
  * @property {string} [path] - リクエストパス
  * @property {string} [contentType] - コンテントタイプ
- * @property {string | Record<string, unknown>} [query] - URLクエリパラメータ
- * @property {string} [body] - リクエストボディ
+ * @property {CustomURLPrams} [query] - URLクエリパラメータ
+ * @property {CustomURLPrams} [body] - リクエストボディ
  */
 interface RequestOptions {
   method: string;
   path?: string;
   contentType?: string;
-  query?: string | Record<string, unknown>;
-  body?: string;
+  query?: CustomURLPrams;
+  body?: CustomURLPrams;
   ensuresLoggedIn: boolean;
   preventSessionRefresh?: boolean;
 }
@@ -31,13 +30,13 @@ interface RequestOptions {
  *
  * @interface GetOptions
  * @property {string} [path] - リクエストパス
- * @property {string | Record<string, unknown>} [query] - URLクエリパラメータ
+ * @property {CustomURLPrams} [query] - URLクエリパラメータ
  * @property {'text' | 'file'} [responseType] - レスポンスタイプ（デフォルト: 'text'）
  * @property {BufferEncoding} [encoding] - ファイル取得時のエンコーディング（デフォルト: 'utf-8'）
  */
 export interface GetOptions {
   path?: string;
-  query?: string | Record<string, unknown>;
+  query?: CustomURLPrams;
   responseType?: 'text' | 'file';
   encoding?: BufferEncoding;
 }
@@ -117,24 +116,10 @@ export default class Transport {
    * @param options - GETリクエストのオプション
    * @returns 取得したコンテンツ
    *
-   * @example
-   * ```typescript
-   * // 通常のGETリクエスト
-   * const content = await transport.get({ query: 'param=value' });
-   *
-   * // ファイルの取得
-   * const file = await transport.get({
-   *   path: 'filename.txt',
-   *   query: 'param=value',
-   *   responseType: 'file',
-   *   encoding: 'utf-8'
-   * });
-   * ```
-   *
    * @throws {CybozuOfficeSDKException} リクエストが失敗した場合
    */
   async get(options: GetOptions = {}): Promise<string> {
-    const { path, query = '', responseType = 'text', encoding = 'utf-8' } = options;
+    const { path, query, responseType = 'text', encoding = 'utf-8' } = options;
 
     const response = await this.#sendRequest({
       method: 'GET',
@@ -154,15 +139,9 @@ export default class Transport {
    * POSTリクエストを実行します
    *
    * @param body - POSTリクエストのボディ
-   *
-   * @example
-   * ```typescript
-   * await transport.post('action=update&id=1&value=new');
-   * ```
-   *
    * @throws {CybozuOfficeSDKException} リクエストが失敗した場合
    */
-  async post(body: string): Promise<void> {
+  async post(body: CustomURLPrams): Promise<void> {
     await this.#sendRequest({
       method: 'POST',
       contentType: ContentType.FORM_URLENCODED,
@@ -188,13 +167,19 @@ export default class Transport {
       this.sessionCredentials!.csrfTicket = await this.#fetchCsrfTicket();
     }
 
-    const url = Transport.#buildRequestUrl(options);
     const requestConfig = this.#buildRequestConfig(options);
-
-    const response = await this.#axiosInstance.request({
-      url,
-      ...requestConfig,
-    });
+    if (options.query) {
+      requestConfig.params = Transport.#createURLParams(options.query);
+    }
+    let response: AxiosResponse;
+    try {
+      response = await this.#axiosInstance.request(requestConfig);
+    } catch (e) {
+      if (e instanceof Error) {
+        throw new CybozuOfficeSDKException(e.message);
+      }
+      throw e;
+    }
 
     Transport.#validateResponse(response);
 
@@ -207,16 +192,15 @@ export default class Transport {
     return response;
   }
 
-  /**
-   * リクエストURLを構築します
-   *
-   * @param options - リクエストオプション
-   * @returns 構築されたURL
-   */
-  static #buildRequestUrl(options: RequestOptions): string {
-    const { query = null } = options;
-    const queryString = query ? `${Utils.buildQuery(query as string | QueryParams)}` : '';
-    return queryString ? `?${queryString}` : '';
+  static #createURLParams(params: CustomURLPrams): URLSearchParams {
+    return new URLSearchParams(
+      Object.entries(params).flatMap(([key, value]) => {
+        if (Array.isArray(value)) {
+          return value.map(v => [key, String(v)]);
+        }
+        return [[key, String(value)]];
+      })
+    );
   }
 
   /**
@@ -239,9 +223,12 @@ export default class Transport {
       headers,
       responseType: 'arraybuffer',
     };
-
+    if (options.query) {
+      config.params = Transport.#createURLParams(options.query);
+    }
     if (options.body) {
-      config.data = this.#appendCsrfTicket(options.body);
+      this.#appendCsrfTicket(options.body);
+      config.data = Transport.#createURLParams(options.body);
     }
 
     return config;
@@ -267,12 +254,10 @@ export default class Transport {
    * @param body - 元のリクエストボディ
    * @returns CSRFトークンが追加されたボディ
    */
-  #appendCsrfTicket(body: string): string {
+  #appendCsrfTicket(body: CustomURLPrams): void {
     if (this.sessionCredentials?.csrfTicket) {
-      return `${body}&csrf_ticket=${this.sessionCredentials?.csrfTicket}`;
+      body.csrf_ticket = this.sessionCredentials.csrfTicket;
     }
-
-    return body;
   }
 
   /**
@@ -311,14 +296,19 @@ export default class Transport {
    *
    * @returns ログインリクエストのボディ文字列
    */
-  #buildLoginBody(): string {
-    return [
-      this.accountId ? `_Account=${this.accountId}` : `_ID=${this.id}`,
-      `Password=${this.password}`,
-      '_System=login',
-      '_Login=1',
-      `LoginMethod=${this.accountId ? '2' : ''}`,
-    ].join('&');
+  #buildLoginBody(): CustomURLPrams {
+    const body: CustomURLPrams = {
+      Password: this.password,
+      _System: 'login',
+      _Login: '1',
+    };
+    if (this.id) {
+      body._ID = this.id;
+    } else if (this.accountId) {
+      body._Account = this.accountId;
+    }
+
+    return body;
   }
 
   /**
@@ -335,12 +325,11 @@ export default class Transport {
     }
 
     const AGSESSID_REGEX = /(AGSESSID=.*?);/i;
-    const match = setCookie.filter(cookie => AGSESSID_REGEX.test(cookie)).find(cookie => AGSESSID_REGEX.exec(cookie));
-    if (!match) {
+    const match = setCookie.filter(cookie => AGSESSID_REGEX.test(cookie)).map(cookie => AGSESSID_REGEX.exec(cookie));
+    if (!match || !match[0]) {
       throw new CybozuOfficeSDKException('Failed to extract AGSESSID');
     }
-
-    return match;
+    return match[0][1];
   }
 
   /**
