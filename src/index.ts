@@ -1,27 +1,11 @@
-import Transport, { SessionCredentials } from './common/Transport';
+import Transport, { CybozuOfficeOptions, SessionCredentials } from './common/Transport';
 import MessageClient from './page/message/MessageClient';
 import FileClient from './page/file/FileClient';
 import UserClient from './page/user/UserClient';
 import FolderClient from './page/folder/FolderClient';
 import BulletinClient from './page/bullentin/BulletinClient';
 
-/**
- * サイボウズOffice接続の設定オプションを定義するインターフェース
- *
- * @interface CybozuOfficeOptions
- * @property {string} baseUrl - 処理対象となるサイボウズのURL（http~/ag.cgiまで）
- * @property {string} accountId - ログインID
- * @property {string} password - パスワード
- * @property {string} [cookie] - 有効期限内のクッキー情報（未指定の場合は自動で取得）
- */
-interface CybozuOfficeOptions {
-  baseUrl: string;
-  accountId?: string;
-  id?: string;
-  password: string;
-  sessionCredentials?: SessionCredentials;
-  disableSslVerification?: boolean;
-}
+export { CybozuOfficeOptions, SessionCredentials };
 
 /**
  * Cybozu Office 10の操作APIを提供するメインクラス
@@ -82,8 +66,7 @@ export class CybozuOffice {
    * @param options - サイボウズOfficeの接続オプション
    */
   constructor(options: CybozuOfficeOptions) {
-    const { baseUrl, accountId, id, password, sessionCredentials, disableSslVerification } = options;
-    this.#transport = new Transport(baseUrl, password, accountId, id, sessionCredentials, disableSslVerification);
+    this.#transport = new Transport(options);
 
     // 各クライアントのインスタンスを生成
     this.message = new MessageClient(this.#transport);

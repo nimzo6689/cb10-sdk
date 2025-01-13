@@ -6,6 +6,25 @@ import { CybozuOfficeSDKException } from './Errors';
 export type CustomURLPrams = Record<string, string | number | boolean | Array<string | number | boolean>>;
 
 /**
+ * サイボウズOffice接続の設定オプションを定義するインターフェース
+ *
+ * @interface CybozuOfficeOptions
+ * @property {string} baseUrl - 処理対象となるサイボウズのURL（http~/ag.cgiまで）
+ * @property {string} accountId - ログインID
+ * @property {string} password - パスワード
+ * @property {string} [cookie] - 有効期限内のクッキー情報（未指定の場合は自動で取得）
+ */
+export interface CybozuOfficeOptions {
+  baseUrl: string;
+  accountId?: string;
+  id?: string;
+  password: string;
+  sessionCredentials?: SessionCredentials;
+  disableSslVerification?: boolean;
+  axiosRequestConfig?: AxiosRequestConfig;
+}
+
+/**
  * HTTPリクエストのオプションを定義するインターフェース
  *
  * @interface RequestOptions
@@ -54,13 +73,6 @@ export interface SessionCredentials {
 }
 
 /**
- * SSL証明書の検証を無効化したエージェント
- */
-const agent = new https.Agent({
-  rejectUnauthorized: false,
-});
-
-/**
  * Cybozu Office 10 APIへのアクセスを管理するクラス
  *
  * このクラスはCybozu Office 10のHTTP APIへのアクセスを簡素化します。
@@ -71,7 +83,7 @@ export default class Transport {
   readonly #axiosInstance: AxiosInstance;
 
   get credentials(): SessionCredentials | undefined {
-    return this.sessionCredentials;
+    return this.options.sessionCredentials;
   }
 
   /**
@@ -84,23 +96,17 @@ export default class Transport {
    *
    * @throws {CybozuOfficeSDKException} 認証に失敗した場合
    */
-  constructor(
-    private readonly baseUrl: string,
-    private readonly password: string,
-    private readonly accountId?: string,
-    private readonly id?: string,
-    private sessionCredentials?: SessionCredentials,
-    private disableSslVerification?: boolean
-  ) {
+  constructor(private readonly options: CybozuOfficeOptions) {
     const axiosConfig: AxiosRequestConfig = {
-      baseURL: this.baseUrl,
+      ...(options.axiosRequestConfig || {}),
+      baseURL: this.options.baseUrl,
       maxRedirects: 0,
       validateStatus: status => {
         return status === 200 || status === 302;
       },
     };
 
-    if (this.disableSslVerification) {
+    if (this.options.disableSslVerification) {
       const agent = new https.Agent({
         rejectUnauthorized: false,
       });
@@ -158,13 +164,13 @@ export default class Transport {
    */
   async #sendRequest(options: RequestOptions): Promise<AxiosResponse> {
     // ログイン済みが前提のリクエストの場合、 Cookie が未取得であれば Cookie を取得する
-    if (options.ensuresLoggedIn && !this.sessionCredentials) {
+    if (options.ensuresLoggedIn && !this.options.sessionCredentials) {
       await this.#initializeSession();
     }
 
     // ログイン済みが前提の POST リクエストの場合、 CSRF トークンを取得する
-    if (options.ensuresLoggedIn && !this.sessionCredentials?.csrfTicket && options.method === 'POST') {
-      this.sessionCredentials!.csrfTicket = await this.#fetchCsrfTicket();
+    if (options.ensuresLoggedIn && !this.options.sessionCredentials?.csrfTicket && options.method === 'POST') {
+      this.options.sessionCredentials!.csrfTicket = await this.#fetchCsrfTicket();
     }
 
     const requestConfig = this.#buildRequestConfig(options);
@@ -211,7 +217,7 @@ export default class Transport {
    */
   #buildRequestConfig(options: RequestOptions): Record<string, unknown> {
     const headers: Record<string, string> = {
-      Cookie: this.sessionCredentials?.cookie || '',
+      Cookie: this.options.sessionCredentials?.cookie || '',
     };
 
     if (options.contentType) {
@@ -255,8 +261,8 @@ export default class Transport {
    * @returns CSRFトークンが追加されたボディ
    */
   #appendCsrfTicket(body: CustomURLPrams): void {
-    if (this.sessionCredentials?.csrfTicket) {
-      body.csrf_ticket = this.sessionCredentials.csrfTicket;
+    if (this.options.sessionCredentials?.csrfTicket) {
+      body.csrf_ticket = this.options.sessionCredentials.csrfTicket;
     }
   }
 
@@ -268,7 +274,7 @@ export default class Transport {
   async #initializeSession(): Promise<void> {
     const loginResponse = await this.#performLogin();
     const cookieValue = Transport.#extractSessionCookie(loginResponse);
-    this.sessionCredentials = {
+    this.options.sessionCredentials = {
       cookie: cookieValue,
     };
   }
@@ -298,14 +304,14 @@ export default class Transport {
    */
   #buildLoginBody(): CustomURLPrams {
     const body: CustomURLPrams = {
-      Password: this.password,
+      Password: this.options.password,
       _System: 'login',
       _Login: '1',
     };
-    if (this.id) {
-      body._ID = this.id;
-    } else if (this.accountId) {
-      body._Account = this.accountId;
+    if (this.options.id) {
+      body._ID = this.options.id;
+    } else if (this.options.accountId) {
+      body._Account = this.options.accountId;
     }
 
     return body;
