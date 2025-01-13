@@ -1,5 +1,4 @@
 import Transport from '../../common/Transport';
-import { CybozuOfficeSDKException } from '../../common/Errors';
 import { FolderIndexOptions, FolderMessage } from './models';
 import FolderRequestOptions from './request';
 import FolderHtmlParser from './parser';
@@ -18,7 +17,7 @@ export default class FolderClient {
    * @param reversed - 昇順フラグ（0は降順、1は昇順）
    * @returns メッセージ一覧、一覧が空の場合はnull
    */
-  async inbox(reversed: number = 0): Promise<FolderMessage[] | null> {
+  inbox(reversed: number = 0): Promise<FolderMessage[] | null> {
     return this.#getMessages({ folderId: 'inbox', reversed });
   }
 
@@ -28,7 +27,7 @@ export default class FolderClient {
    * @param reversed - 昇順フラグ（0は降順、1は昇順）
    * @returns メッセージ一覧、一覧が空の場合はnull
    */
-  async sent(reversed: number = 0): Promise<FolderMessage[] | null> {
+  sent(reversed: number = 0): Promise<FolderMessage[] | null> {
     return this.#getMessages({ folderId: 'sent', reversed });
   }
 
@@ -38,7 +37,7 @@ export default class FolderClient {
    * @param reversed - 昇順フラグ（0は降順、1は昇順）
    * @returns メッセージ一覧、一覧が空の場合はnull
    */
-  async unsent(reversed: number = 0): Promise<FolderMessage[] | null> {
+  unsent(reversed: number = 0): Promise<FolderMessage[] | null> {
     return this.#getMessages({ folderId: 'unsent', reversed });
   }
 
@@ -49,7 +48,7 @@ export default class FolderClient {
    * @param reversed - 昇順フラグ（0は降順、1は昇順）
    * @returns メッセージ一覧、一覧が空の場合はnull
    */
-  async getByFolderId(folderId: number, reversed: number = 0): Promise<FolderMessage[] | null> {
+  getByFolderId(folderId: number, reversed: number = 0): Promise<FolderMessage[] | null> {
     return this.#getMessages({ folderId, reversed });
   }
 
@@ -61,17 +60,8 @@ export default class FolderClient {
    * @throws {CybozuOfficeSDKException} メッセージの取得に失敗した場合
    */
   async #getMessages(options: FolderIndexOptions): Promise<FolderMessage[] | null> {
-    try {
-      const query = FolderRequestOptions.addComment(options);
-      const document = await this.transport.get({ query });
-      return FolderHtmlParser.getMessages(document);
-    } catch (error) {
-      if (error instanceof CybozuOfficeSDKException) {
-        throw error;
-      }
-      throw new CybozuOfficeSDKException(
-        `Failed to get messages: ${error instanceof Error ? error.message : 'Unknown error'}`
-      );
-    }
+    const query = FolderRequestOptions.addComment(options);
+    const document = await this.transport.get({ query });
+    return FolderHtmlParser.getMessages(document);
   }
 }

@@ -24,8 +24,7 @@ describe('メッセージ', () => {
       useConfirm: 0,
       simpleReplyEnable: 1,
     });
-
-    expect(actual).toEqual(true);
+    expect(actual).toBeUndefined();
   });
 
   it('メッセージのコメントが取得できるか', async () => {

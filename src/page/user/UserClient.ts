@@ -1,5 +1,4 @@
 import Transport from '../../common/Transport';
-import { CybozuOfficeSDKException } from '../../common/Errors';
 import { UserInfo, GroupMembersOptions } from './models';
 import UserHtmlParser from './parser';
 import UserRequestOptions from './reqests';
@@ -20,17 +19,8 @@ export default class UserClient {
    * @throws {CybozuOfficeSDKException} ユーザー情報の取得に失敗した場合
    */
   async getGroupMembers(options: GroupMembersOptions): Promise<UserInfo[]> {
-    try {
-      const query = UserRequestOptions.groupMembersList(options.groupId);
-      const document = await this.transport.get({ query });
-      return UserHtmlParser.parseUserList(document);
-    } catch (error) {
-      if (error instanceof CybozuOfficeSDKException) {
-        throw error;
-      }
-      throw new CybozuOfficeSDKException(
-        `Failed to get group members: ${error instanceof Error ? error.message : 'Unknown error'}`
-      );
-    }
+    const query = UserRequestOptions.groupMembersList(options.groupId);
+    const document = await this.transport.get({ query });
+    return UserHtmlParser.parseUserList(document);
   }
 }
