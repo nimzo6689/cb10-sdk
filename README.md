@@ -43,6 +43,8 @@ npm install cb10-sdk@latest
 実装例はこちらです。
 
 ```js
+import CybozuOffice from 'cb10-sdk';
+
 const client = new CybozuOffice({
   baseUrl: 'https://onlinedemo.cybozu.info/scripts/office10/ag.cgi',
   id: '17',
@@ -50,7 +52,7 @@ const client = new CybozuOffice({
 });
 
 // グループ ID が 13（総務部）のユーザ一覧を取得
-const groupMembers = await client.message.getGroupMembers({ groupId: 13 });
+const groupMembers = await client.user.getGroupMembers({ groupId: 13 });
 groupMembers.forEach(it => JSON.stringify(it));
 // { uID: 17, userName: '高橋 健太' }
 // { uID: 27, userName: '加藤 美咲' }
@@ -59,7 +61,7 @@ groupMembers.forEach(it => JSON.stringify(it));
 
 より詳細な使い方については [\_\_tests\_\_](https://github.com/nimzo6689/cb10-sdk/tree/main/__tests__) 配下のテストコードをご参照ください。
 
-### 補足：ログイン方法について
+### 補足： ログイン方法について
 
 サイボウズへのログインする際に、ユーザをプルダウンではなくフォーム入力となっている場合、以下のような実装になります。
 
@@ -71,29 +73,41 @@ const client = new CybozuOffice({
 });
 ```
 
-### 補足：SSL 認証を無効化したい
+### 補足： HTTP 通信時の振る舞いを変更をしたい
 
-サイボウズ Office への通信時に SSL 証明書が無効化されていたり、 IP アドレス指定で通信したい場合は、 `disableSslVerification` を `true` に指定いただくことで認証を無効化できます。
-
-```js
-const client = new CybozuOffice({
-  baseUrl: 'https://192.168.0.1/xxxx/xxxx/ag.cgi',
-  accountId: 'hoge',
-  password: 'hogehoge',
-  disableSslVerification: true,
-});
-```
-
-### 補足：タイムアウトの時間を設定したい
-
-cb10-sdk では HTTP 通信をする際に [axios](https://axios-http.com/) を使用しており、 `CybozuOffice` のコンストラクタにて、 Request Config のオブジェクトを渡すことで、タイムアウトの時間を設定することができます。  
-他にも、 BASIC 認証や Proxy も設定いただけます。
+cb10-sdk では HTTP 通信をする際に [axios](https://axios-http.com/) を使用しており、 `CybozuOffice` のコンストラクタにて、 Request Config のオブジェクトを渡すことで、HTTP 通信時における細かい振る舞いを変更することができます。  
+以下、使用例です。
 
 ```js
+import https from 'https';
 import { AxiosRequestConfig } from 'axios';
+import CybozuOffice from 'cb10-sdk';
 
 const axiosRequestConfig: AxiosRequestConfig = {
-  timeout: 1000,  // デフォルトは 0 でタイムアウトしない設定です。
+  // 通信時のタイムアウトの時間を 1 秒（1,000 ミリ秒）に変更する
+  timeout: 3000,
+
+  // SSL 認証を無効化したい
+  httpsAgent: new https.Agent({
+    rejectUnauthorized: false,
+  }),
+
+  // BASIS 認証を使用する
+  auth: {
+    username: 'janedoe',
+    password: 's00pers3cret',
+  },
+
+  // PROXY を使用する
+  proxy: {
+    protocol: 'https',
+    host: '127.0.0.1',
+    port: 9000,
+    auth: {
+      username: 'mikeymike',
+      password: 'rapunz3l',
+    },
+  },
 }
 
 const client = new CybozuOffice({
