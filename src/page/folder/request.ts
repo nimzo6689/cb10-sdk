@@ -4,7 +4,7 @@ import { FolderIndexOptions } from './models';
 const PAGE_PREFIX = 'MyFolder';
 
 export default class FolderRequestOptions {
-  static addComment(options: FolderIndexOptions): CustomURLParams {
+  static getMessages(options: FolderIndexOptions): CustomURLParams {
     const { folderId, reversed = 0 } = options;
 
     return {
