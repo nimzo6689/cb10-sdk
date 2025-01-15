@@ -13,7 +13,7 @@ describe('ユーザー名簿', () => {
     }));
     const client = new UserClient(new CybozuTransportMock());
 
-    const actual = await client.getGroupMembers({ groupId: 13 });
+    const actual = await client.getMembers({ groupId: 13 });
     const expected = [
       { uID: 17, userName: '高橋 健太' },
       { uID: 27, userName: '加藤 美咲' },

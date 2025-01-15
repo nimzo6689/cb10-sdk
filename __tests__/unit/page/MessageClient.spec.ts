@@ -37,7 +37,7 @@ describe('メッセージ', () => {
     });
     const client = new MessageClient(new CybozuTransportMock());
 
-    const actual = await client.getComments(4, 4);
+    const actual = await client.getComments({ mDBID: 4, mDID: 4 });
     const expected = [
       {
         followId: 24,
@@ -84,7 +84,7 @@ describe('メッセージ', () => {
     });
     const client = new MessageClient(new CybozuTransportMock());
 
-    const actual = await client.getReceivers(4, 4, 782);
+    const actual = await client.getReceivers({ mDBID: 4, mDID: 4, eID: 782 });
     const expected: never[] = [];
 
     expect(JSON.stringify(actual)).toBe(JSON.stringify(expected));

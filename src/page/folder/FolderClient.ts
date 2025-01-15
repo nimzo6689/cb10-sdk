@@ -17,7 +17,7 @@ export default class FolderClient {
    * @param options - フォルダ一覧取得オプション
    * @returns メッセージ一覧、一覧が空の場合はnull
    */
-  getMessagesOfInbox(options: FolderNamedIndexOptions): Promise<FolderMessage[] | null> {
+  getMessagesOfInbox(options?: FolderNamedIndexOptions): Promise<FolderMessage[] | null> {
     return this.#getMessages({ folderId: 'inbox', ...options });
   }
 
@@ -27,7 +27,7 @@ export default class FolderClient {
    * @param options - フォルダ一覧取得オプション
    * @returns メッセージ一覧、一覧が空の場合はnull
    */
-  getMessagesOfSent(options: FolderNamedIndexOptions): Promise<FolderMessage[] | null> {
+  getMessagesOfSent(options?: FolderNamedIndexOptions): Promise<FolderMessage[] | null> {
     return this.#getMessages({ folderId: 'sent', ...options });
   }
 
@@ -37,7 +37,7 @@ export default class FolderClient {
    * @param options - フォルダ一覧取得オプション
    * @returns メッセージ一覧、一覧が空の場合はnull
    */
-  getMessagesOfUnsent(options: FolderNamedIndexOptions): Promise<FolderMessage[] | null> {
+  getMessagesOfUnsent(options?: FolderNamedIndexOptions): Promise<FolderMessage[] | null> {
     return this.#getMessages({ folderId: 'unsent', ...options });
   }
 
