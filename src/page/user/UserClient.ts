@@ -1,5 +1,5 @@
 import Transport from '../../common/Transport';
-import { UserInfo, GroupMembersOptions } from './models';
+import { User, GroupMembersOptions } from './models';
 import UserHtmlParser from './parser';
 import UserRequestOptions from './reqests';
 
@@ -18,7 +18,7 @@ export default class UserClient {
    * @returns ユーザー情報の配列
    * @throws {CybozuOfficeSDKException} ユーザー情報の取得に失敗した場合
    */
-  async getMembers(options: GroupMembersOptions): Promise<UserInfo[]> {
+  async getMembers(options: GroupMembersOptions): Promise<User[]> {
     const query = UserRequestOptions.getMembers(options);
     const document = await this.transport.get({ query });
     return UserHtmlParser.parseUserList(document);

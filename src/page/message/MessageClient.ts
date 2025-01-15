@@ -1,6 +1,18 @@
 import Transport from '../../common/Transport';
-import { Defaults, ReactionType } from '../../common/Constants';
-import { CommentInfo, MessageModifyOptions, MessageSendOptions, ReceiverInfo } from './models';
+import {
+  Comment,
+  MessageOptions,
+  MessageFolderOptions,
+  MessageCommentOptions,
+  MessageCommentSendOptions,
+  MessageCommentDeleteOptions,
+  MessageCommentReactionOptions,
+  MessageModifyOptions,
+  MessageSendOptions,
+  MessageReceiversOptions,
+  MessageReceiversModifyOptions,
+  Receiver,
+} from './models';
 import MessageRequestOptions from './request';
 import MessageHtmlParser from './parser';
 
@@ -29,24 +41,24 @@ export default class MessageClient {
   /**
    * メッセージを削除
    */
-  deleteMessage(mDBID: number, mDID: number): Promise<void> {
-    const body = MessageRequestOptions.deleteMessage(mDBID, mDID);
+  deleteMessage(options: MessageOptions): Promise<void> {
+    const body = MessageRequestOptions.deleteMessage(options);
     return this.transport.post(body);
   }
 
   /**
    * メッセージを移動
    */
-  moveMessage(mDBID: number, mDID: number, pID: number): Promise<void> {
-    const body = MessageRequestOptions.moveMessage(mDBID, mDID, pID);
+  moveMessage(options: MessageFolderOptions): Promise<void> {
+    const body = MessageRequestOptions.moveMessage(options);
     return this.transport.post(body);
   }
 
   /**
    * コメントを取得
    */
-  async getComments(mDBID: number, mDID: number, hID?: number): Promise<CommentInfo[]> {
-    const query = MessageRequestOptions.getComments(mDBID, mDID, hID);
+  async getComments(options: MessageCommentOptions): Promise<Comment[]> {
+    const query = MessageRequestOptions.getComments(options);
     const document = await this.transport.get({ query });
     return MessageHtmlParser.parseComments(document);
   }
@@ -54,38 +66,32 @@ export default class MessageClient {
   /**
    * コメントを追加
    */
-  addComment(mDBID: number, mDID: number, data: string, group = Defaults.GROUP_NAME): Promise<void> {
-    const body = MessageRequestOptions.addComment(mDBID, mDID, data, group);
+  sendComment(options: MessageCommentSendOptions): Promise<void> {
+    const body = MessageRequestOptions.sendComment(options);
     return this.transport.post(body);
   }
 
   /**
    * コメントを削除
    */
-  deleteComment(mDBID: number, mDID: number, followId: number): Promise<void> {
-    const body = MessageRequestOptions.deleteComment(mDBID, mDID, followId);
+  deleteComment(options: MessageCommentDeleteOptions): Promise<void> {
+    const body = MessageRequestOptions.deleteComment(options);
     return this.transport.post(body);
   }
 
   /**
    * リアクションを追加・削除
    */
-  toggleReaction(
-    mDBID: number,
-    mDID: number,
-    followId: number,
-    mark: ReactionType = '',
-    cancel: number = 0
-  ): Promise<void> {
-    const body = MessageRequestOptions.toggleReaction(mDBID, mDID, followId, mark, cancel);
+  toggleReaction(options: MessageCommentReactionOptions): Promise<void> {
+    const body = MessageRequestOptions.toggleReaction(options);
     return this.transport.post(body);
   }
 
   /**
    * 宛先一覧を取得
    */
-  async getReceivers(mDBID: number, mDID: number, eID: number): Promise<ReceiverInfo[]> {
-    const query = MessageRequestOptions.getReceivers(mDBID, mDID, eID);
+  async getReceivers(options: MessageReceiversOptions): Promise<Receiver[]> {
+    const query = MessageRequestOptions.getReceivers(options);
     const document = await this.transport.get({ query });
     return MessageHtmlParser.parseReceivers(document);
   }
@@ -93,8 +99,8 @@ export default class MessageClient {
   /**
    * 宛先を修正
    */
-  modifyReceivers(mDBID: number, mDID: number, eID: number, uidList: number[]): Promise<void> {
-    const body = MessageRequestOptions.modifyReceivers(mDBID, mDID, eID, uidList);
+  modifyReceivers(options: MessageReceiversModifyOptions): Promise<void> {
+    const body = MessageRequestOptions.modifyReceivers(options);
     return this.transport.post(body);
   }
 }

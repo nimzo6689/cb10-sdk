@@ -1,21 +1,30 @@
-import { Defaults, MessageEditMode, ReactionType } from '../../common/Constants';
+import { Defaults, MessageEditMode } from '../../common/Constants';
 import { CustomURLParams } from '../../common/Transport';
-import { MessageSendOptions, MessageModifyOptions } from './models';
+import {
+  MessageOptions,
+  MessageFolderOptions,
+  MessageCommentOptions,
+  MessageCommentSendOptions,
+  MessageCommentDeleteOptions,
+  MessageCommentReactionOptions,
+  MessageSendOptions,
+  MessageModifyOptions,
+  MessageReceiversOptions,
+  MessageReceiversModifyOptions,
+} from './models';
 
 const PAGE_PREFIX = 'MyFolderMessage';
 
 export default class MessageRequestOptions {
-  static sendMessage(options: MessageSendOptions): CustomURLParams {
-    const {
-      subject,
-      data,
-      uidList,
-      group = Defaults.GROUP_NAME,
-      editableByReceivers = 1,
-      useConfirm = 0,
-      simpleReplyEnable = 1,
-    } = options;
-
+  static sendMessage({
+    subject,
+    data,
+    uidList,
+    group = Defaults.GROUP_NAME,
+    editableByReceivers = 1,
+    useConfirm = 0,
+    simpleReplyEnable = 1,
+  }: MessageSendOptions): CustomURLParams {
     return {
       page: `${PAGE_PREFIX}Send`,
       Subject: subject,
@@ -28,21 +37,19 @@ export default class MessageRequestOptions {
     };
   }
 
-  static modifyMessage(options: MessageModifyOptions): CustomURLParams {
-    const {
-      mDBID,
-      mDID,
-      subject,
-      data,
-      group = Defaults.GROUP_NAME,
-      editableByReceivers = 1,
-      useConfirm = 0,
-      simpleReplyEnable = 1,
-    } = options;
-
+  static modifyMessage({
+    mDBID,
+    mDID,
+    subject,
+    data,
+    group = Defaults.GROUP_NAME,
+    editableByReceivers = 1,
+    useConfirm = 0,
+    simpleReplyEnable = 1,
+  }: MessageModifyOptions): CustomURLParams {
     return {
       page: `${PAGE_PREFIX}Modify`,
-      EditMode: MessageEditMode.TEXT.toString(),
+      EditMode: MessageEditMode.TEXT,
       Cancel: 0,
       FRID: 0,
       Subject: subject,
@@ -57,99 +64,93 @@ export default class MessageRequestOptions {
     };
   }
 
-  static deleteMessage(mDBID: number, mDID: number): CustomURLParams {
+  static deleteMessage(options: MessageOptions): CustomURLParams {
     return {
       page: `${PAGE_PREFIX}Delete`,
-      DBID: mDBID,
-      MID: mDID,
+      DBID: options.mDBID,
+      MID: options.mDID,
       Remove: 1,
       Yes: '移動する',
     };
   }
 
-  static moveMessage(mDBID: number, mDID: number, pID: number): CustomURLParams {
+  static moveMessage(options: MessageFolderOptions): CustomURLParams {
     return {
       page: `${PAGE_PREFIX}View`,
       Cancel: 0,
       FRID: 0,
-      DBID: mDBID,
-      MID: mDID,
-      PID: pID,
+      DBID: options.mDBID,
+      MID: options.mDID,
+      PID: options.pID,
     };
   }
 
-  static getComments(mDBID: number, mDID: number, hID?: number): CustomURLParams {
+  static getComments(options: MessageCommentOptions): CustomURLParams {
     const query: CustomURLParams = {
       page: `Ajax${PAGE_PREFIX}FollowNavi`,
-      DBID: mDBID,
-      MID: mDID,
+      DBID: options.mDBID,
+      MID: options.mDID,
     };
 
-    if (hID) {
-      query.hid = hID;
+    if (options.hID) {
+      query.hid = options.hID;
     }
 
     return query;
   }
 
-  static addComment(mDBID: number, mDID: number, data: string, group = Defaults.GROUP_NAME): CustomURLParams {
+  static sendComment(options: MessageCommentSendOptions): CustomURLParams {
     return {
       page: `Ajax${PAGE_PREFIX}FollowAdd`,
       EditMode: MessageEditMode.TEXT,
-      Group: group,
-      Data: data,
-      DBID: mDBID,
-      MID: mDID,
+      Group: options.group || Defaults.GROUP_NAME,
+      Data: options.data,
+      DBID: options.mDBID,
+      MID: options.mDID,
     };
   }
 
-  static deleteComment(mDBID: number, mDID: number, followId: number): CustomURLParams {
+  static deleteComment(options: MessageCommentDeleteOptions): CustomURLParams {
     return {
       page: `Ajax${PAGE_PREFIX}FollowDelete`,
-      FRID: followId,
-      DBID: mDBID,
-      MID: mDID,
+      FRID: options.followId,
+      DBID: options.mDBID,
+      MID: options.mDID,
     };
   }
 
-  static toggleReaction(
-    mDBID: number,
-    mDID: number,
-    followId: number,
-    mark: ReactionType = '',
-    cancel: number = 0
-  ): CustomURLParams {
+  static toggleReaction(options: MessageCommentReactionOptions): CustomURLParams {
     const body: CustomURLParams = {
       page: 'AjaxSimpleReply',
-      Cancel: cancel,
-      FRID: followId,
-      DBID: mDBID,
-      MID: mDID,
+      Cancel: options.cancel || 0,
+      FRID: options.followId,
+      DBID: options.mDBID,
+      MID: options.mDID,
     };
 
-    if (mark) {
-      body.Value = mark;
+    if (options.mark) {
+      body.Value = options.mark;
     }
 
     return body;
   }
 
-  static getReceivers(mDBID: number, mDID: number, eID: number): CustomURLParams {
+  static getReceivers(options: MessageReceiversOptions): CustomURLParams {
     return {
       page: `${PAGE_PREFIX}ReceiverAdd`,
-      DBID: mDBID,
-      MID: mDID,
-      eID: eID,
+      DBID: options.mDBID,
+      MID: options.mDID,
+      eID: options.eID,
     };
   }
 
-  static modifyReceivers(mDBID: number, mDID: number, eID: number, uidList: number[]): CustomURLParams {
+  static modifyReceivers(options: MessageReceiversModifyOptions): CustomURLParams {
     return {
       page: `${PAGE_PREFIX}ReceiverAdd`,
-      UID: uidList,
-      DBID: mDBID.toString(),
-      MID: mDID.toString(),
-      EID: eID.toString(),
+      UID: options.uidList,
+      DBID: options.mDBID,
+      MID: options.mDID,
+      EID: options.eID,
       Submit: '変更する',
     };
   }
