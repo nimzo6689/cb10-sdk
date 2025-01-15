@@ -50,14 +50,14 @@ const client = new CybozuOffice({
 });
 
 // グループ ID が 13（総務部）のユーザ一覧を取得
-const groupMembers = await client.getGroupMembers({ groupId: 13 });
+const groupMembers = await client.message.getGroupMembers({ groupId: 13 });
 groupMembers.forEach(it => JSON.stringify(it));
 // { uID: 17, userName: '高橋 健太' }
 // { uID: 27, userName: '加藤 美咲' }
 // { uID: 208, userName: '大山 春香' }
 ```
 
-より詳細な使い方については [**tests**](https://github.com/nimzo6689/cb10-sdk/tree/main/__tests__) 配下のテストコードをご参照ください。
+より詳細な使い方については [\_\_tests\_\_](https://github.com/nimzo6689/cb10-sdk/tree/main/__tests__) 配下のテストコードをご参照ください。
 
 ### 補足：ログイン方法について
 
