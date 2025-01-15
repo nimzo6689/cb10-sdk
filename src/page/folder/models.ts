@@ -15,11 +15,20 @@ export interface FolderMessage {
 /**
  * フォルダ一覧取得のオプションを定義するインターフェース
  *
+ * @interface FolderNamedIndexOptions
+ * @property {number} [reversed] - 昇順フラグ（0は降順、1は昇順）
+ */
+export interface FolderNamedIndexOptions {
+  reversed?: number;
+}
+
+/**
+ * フォルダ一覧取得のオプションを定義するインターフェース
+ *
  * @interface FolderIndexOptions
  * @property {number | string} folderId - フォルダID（FID）または特殊フォルダ名
  * @property {number} [reversed] - 昇順フラグ（0は降順、1は昇順）
  */
-export interface FolderIndexOptions {
+export interface FolderIndexOptions extends FolderNamedIndexOptions {
   folderId: number | string;
-  reversed?: number;
 }

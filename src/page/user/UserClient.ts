@@ -18,8 +18,8 @@ export default class UserClient {
    * @returns ユーザー情報の配列
    * @throws {CybozuOfficeSDKException} ユーザー情報の取得に失敗した場合
    */
-  async getGroupMembers(options: GroupMembersOptions): Promise<UserInfo[]> {
-    const query = UserRequestOptions.groupMembersList(options.groupId);
+  async getMembers(options: GroupMembersOptions): Promise<UserInfo[]> {
+    const query = UserRequestOptions.getMembers(options);
     const document = await this.transport.get({ query });
     return UserHtmlParser.parseUserList(document);
   }

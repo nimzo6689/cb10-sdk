@@ -1,5 +1,5 @@
 import Transport from '../../common/Transport';
-import { FolderIndexOptions, FolderMessage } from './models';
+import { FolderIndexOptions, FolderNamedIndexOptions, FolderMessage } from './models';
 import FolderRequestOptions from './request';
 import FolderHtmlParser from './parser';
 
@@ -14,31 +14,31 @@ export default class FolderClient {
   /**
    * 受信箱のメッセージ一覧を取得
    *
-   * @param reversed - 昇順フラグ（0は降順、1は昇順）
+   * @param options - フォルダ一覧取得オプション
    * @returns メッセージ一覧、一覧が空の場合はnull
    */
-  inbox(reversed: number = 0): Promise<FolderMessage[] | null> {
-    return this.#getMessages({ folderId: 'inbox', reversed });
+  getMessagesOfInbox(options: FolderNamedIndexOptions): Promise<FolderMessage[] | null> {
+    return this.#getMessages({ folderId: 'inbox', ...options });
   }
 
   /**
    * 送信箱のメッセージ一覧を取得
    *
-   * @param reversed - 昇順フラグ（0は降順、1は昇順）
+   * @param options - フォルダ一覧取得オプション
    * @returns メッセージ一覧、一覧が空の場合はnull
    */
-  sent(reversed: number = 0): Promise<FolderMessage[] | null> {
-    return this.#getMessages({ folderId: 'sent', reversed });
+  getMessagesOfSent(options: FolderNamedIndexOptions): Promise<FolderMessage[] | null> {
+    return this.#getMessages({ folderId: 'sent', ...options });
   }
 
   /**
    * 下書きのメッセージ一覧を取得
    *
-   * @param reversed - 昇順フラグ（0は降順、1は昇順）
+   * @param options - フォルダ一覧取得オプション
    * @returns メッセージ一覧、一覧が空の場合はnull
    */
-  unsent(reversed: number = 0): Promise<FolderMessage[] | null> {
-    return this.#getMessages({ folderId: 'unsent', reversed });
+  getMessagesOfUnsent(options: FolderNamedIndexOptions): Promise<FolderMessage[] | null> {
+    return this.#getMessages({ folderId: 'unsent', ...options });
   }
 
   /**
@@ -48,8 +48,8 @@ export default class FolderClient {
    * @param reversed - 昇順フラグ（0は降順、1は昇順）
    * @returns メッセージ一覧、一覧が空の場合はnull
    */
-  getByFolderId(folderId: number, reversed: number = 0): Promise<FolderMessage[] | null> {
-    return this.#getMessages({ folderId, reversed });
+  getMessagesByFolderId(options: FolderIndexOptions): Promise<FolderMessage[] | null> {
+    return this.#getMessages(options);
   }
 
   /**
@@ -59,8 +59,8 @@ export default class FolderClient {
    * @returns メッセージ一覧、一覧が空の場合はnull
    * @throws {CybozuOfficeSDKException} メッセージの取得に失敗した場合
    */
-  async #getMessages(options: FolderIndexOptions): Promise<FolderMessage[] | null> {
-    const query = FolderRequestOptions.addComment(options);
+  async #getMessages({ folderId, reversed = 0 }: FolderIndexOptions): Promise<FolderMessage[] | null> {
+    const query = FolderRequestOptions.getMessages({ folderId, reversed });
     const document = await this.transport.get({ query });
     return FolderHtmlParser.getMessages(document);
   }
