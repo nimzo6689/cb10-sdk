@@ -31,7 +31,7 @@ export interface MessageReceiversModifyOptions extends MessageReceiversOptions {
   uidList: number[];
 }
 
-export interface MessageModifyOptions extends MessageOptions {
+export interface MessageContentOptions {
   subject: string;
   data: string;
   group?: string;
@@ -40,7 +40,9 @@ export interface MessageModifyOptions extends MessageOptions {
   simpleReplyEnable?: number;
 }
 
-export interface MessageSendOptions extends MessageModifyOptions {
+export interface MessageModifyOptions extends MessageOptions, MessageContentOptions {}
+
+export interface MessageSendOptions extends MessageContentOptions {
   uidList: number[];
 }
 

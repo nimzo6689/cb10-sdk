@@ -13,7 +13,7 @@ describe('個人フォルダ', () => {
     }));
     const client = new FolderClient(new CybozuTransportMock());
 
-    const actual = await client.inbox();
+    const actual = await client.getMessagesOfInbox();
     const expected = [
       { mDBID: 2, mDID: 4, subject: 'try' },
       { mDBID: 4, mDID: 4, subject: '【講読自由】総務からのお知らせ' },

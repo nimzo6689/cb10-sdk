@@ -52,7 +52,7 @@ const client = new CybozuOffice({
 });
 
 // グループ ID が 13（総務部）のユーザ一覧を取得
-const groupMembers = await client.user.getGroupMembers({ groupId: 13 });
+const groupMembers = await client.user.getMembers({ groupId: 13 });
 groupMembers.forEach(it => JSON.stringify(it));
 // { uID: 17, userName: '高橋 健太' }
 // { uID: 27, userName: '加藤 美咲' }
