@@ -1,6 +1,6 @@
 import { Defaults, MessageEditMode } from '../../common/Constants';
-import { CustomURLPrams } from '../../common/Transport';
-import { BulletinCommentData } from './models';
+import { CustomURLParams } from '../../common/Transport';
+import { BulletinCommentRequest } from './models';
 
 const PAGE_PREFIX = 'Bulletin';
 
@@ -11,8 +11,8 @@ export default class BulletinRequestOptions {
    * @param groupId - グループID
    * @returns リクエストオプション
    */
-  static addComment(commentData: BulletinCommentData): CustomURLPrams {
-    const { bid, data, group = Defaults.GROUP_NAME } = commentData;
+  static sendComment(request: BulletinCommentRequest): CustomURLParams {
+    const { bid, data, group = Defaults.GROUP_NAME } = request;
 
     return {
       page: `Ajax${PAGE_PREFIX}FollowAdd`,

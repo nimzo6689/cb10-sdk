@@ -1,11 +1,11 @@
 import { Defaults, MessageEditMode, ReactionType } from '../../common/Constants';
-import { CustomURLPrams } from '../../common/Transport';
+import { CustomURLParams } from '../../common/Transport';
 import { MessageSendOptions, MessageModifyOptions } from './models';
 
 const PAGE_PREFIX = 'MyFolderMessage';
 
 export default class MessageRequestOptions {
-  static sendMessage(options: MessageSendOptions): CustomURLPrams {
+  static sendMessage(options: MessageSendOptions): CustomURLParams {
     const {
       subject,
       data,
@@ -28,7 +28,7 @@ export default class MessageRequestOptions {
     };
   }
 
-  static modifyMessage(options: MessageModifyOptions): CustomURLPrams {
+  static modifyMessage(options: MessageModifyOptions): CustomURLParams {
     const {
       mDBID,
       mDID,
@@ -57,7 +57,7 @@ export default class MessageRequestOptions {
     };
   }
 
-  static deleteMessage(mDBID: number, mDID: number): CustomURLPrams {
+  static deleteMessage(mDBID: number, mDID: number): CustomURLParams {
     return {
       page: `${PAGE_PREFIX}Delete`,
       DBID: mDBID,
@@ -67,7 +67,7 @@ export default class MessageRequestOptions {
     };
   }
 
-  static moveMessage(mDBID: number, mDID: number, pID: number): CustomURLPrams {
+  static moveMessage(mDBID: number, mDID: number, pID: number): CustomURLParams {
     return {
       page: `${PAGE_PREFIX}View`,
       Cancel: 0,
@@ -78,8 +78,8 @@ export default class MessageRequestOptions {
     };
   }
 
-  static getComments(mDBID: number, mDID: number, hID?: number): CustomURLPrams {
-    const query: CustomURLPrams = {
+  static getComments(mDBID: number, mDID: number, hID?: number): CustomURLParams {
+    const query: CustomURLParams = {
       page: `Ajax${PAGE_PREFIX}FollowNavi`,
       DBID: mDBID,
       MID: mDID,
@@ -92,7 +92,7 @@ export default class MessageRequestOptions {
     return query;
   }
 
-  static addComment(mDBID: number, mDID: number, data: string, group = Defaults.GROUP_NAME): CustomURLPrams {
+  static addComment(mDBID: number, mDID: number, data: string, group = Defaults.GROUP_NAME): CustomURLParams {
     return {
       page: `Ajax${PAGE_PREFIX}FollowAdd`,
       EditMode: MessageEditMode.TEXT,
@@ -103,7 +103,7 @@ export default class MessageRequestOptions {
     };
   }
 
-  static deleteComment(mDBID: number, mDID: number, followId: number): CustomURLPrams {
+  static deleteComment(mDBID: number, mDID: number, followId: number): CustomURLParams {
     return {
       page: `Ajax${PAGE_PREFIX}FollowDelete`,
       FRID: followId,
@@ -118,8 +118,8 @@ export default class MessageRequestOptions {
     followId: number,
     mark: ReactionType = '',
     cancel: number = 0
-  ): CustomURLPrams {
-    const body: CustomURLPrams = {
+  ): CustomURLParams {
+    const body: CustomURLParams = {
       page: 'AjaxSimpleReply',
       Cancel: cancel,
       FRID: followId,
@@ -134,7 +134,7 @@ export default class MessageRequestOptions {
     return body;
   }
 
-  static getReceivers(mDBID: number, mDID: number, eID: number): CustomURLPrams {
+  static getReceivers(mDBID: number, mDID: number, eID: number): CustomURLParams {
     return {
       page: `${PAGE_PREFIX}ReceiverAdd`,
       DBID: mDBID,
@@ -143,7 +143,7 @@ export default class MessageRequestOptions {
     };
   }
 
-  static modifyReceivers(mDBID: number, mDID: number, eID: number, uidList: number[]): CustomURLPrams {
+  static modifyReceivers(mDBID: number, mDID: number, eID: number, uidList: number[]): CustomURLParams {
     return {
       page: `${PAGE_PREFIX}ReceiverAdd`,
       UID: uidList,

@@ -3,7 +3,7 @@ import https from 'https';
 import { ContentType } from './Constants';
 import { CybozuOfficeSDKException } from './Errors';
 
-export type CustomURLPrams = Record<string, string | number | boolean | Array<string | number | boolean>>;
+export type CustomURLParams = Record<string, string | number | boolean | Array<string | number | boolean>>;
 
 /**
  * サイボウズOffice接続の設定オプションを定義するインターフェース
@@ -37,8 +37,8 @@ interface RequestOptions {
   method: string;
   path?: string;
   contentType?: string;
-  query?: CustomURLPrams;
-  body?: CustomURLPrams;
+  query?: CustomURLParams;
+  body?: CustomURLParams;
   ensuresLoggedIn: boolean;
   preventSessionRefresh?: boolean;
 }
@@ -54,7 +54,7 @@ interface RequestOptions {
  */
 export interface GetOptions {
   path?: string;
-  query?: CustomURLPrams;
+  query?: CustomURLParams;
   responseType?: 'text' | 'file';
   encoding?: BufferEncoding;
 }
@@ -139,7 +139,7 @@ export default class Transport {
    * @param body - POSTリクエストのボディ
    * @throws {CybozuOfficeSDKException} リクエストが失敗した場合
    */
-  async post(body: CustomURLPrams): Promise<void> {
+  async post(body: CustomURLParams): Promise<void> {
     await this.#sendRequest({
       method: 'POST',
       contentType: ContentType.FORM_URLENCODED,
@@ -190,7 +190,7 @@ export default class Transport {
       });
   }
 
-  static #createURLParams(params: CustomURLPrams): URLSearchParams {
+  static #createURLParams(params: CustomURLParams): URLSearchParams {
     return new URLSearchParams(
       Object.entries(params).flatMap(([key, value]) => {
         if (Array.isArray(value)) {
@@ -252,7 +252,7 @@ export default class Transport {
    * @param body - 元のリクエストボディ
    * @returns CSRFトークンが追加されたボディ
    */
-  #appendCsrfTicket(body: CustomURLPrams): void {
+  #appendCsrfTicket(body: CustomURLParams): void {
     if (this.options.sessionCredentials?.csrfTicket) {
       body.csrf_ticket = this.options.sessionCredentials.csrfTicket;
     }
@@ -294,8 +294,8 @@ export default class Transport {
    *
    * @returns ログインリクエストのボディ文字列
    */
-  #buildLoginBody(): CustomURLPrams {
-    const body: CustomURLPrams = {
+  #buildLoginBody(): CustomURLParams {
+    const body: CustomURLParams = {
       Password: this.options.password,
       _System: 'login',
       _Login: '1',

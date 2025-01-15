@@ -1,5 +1,5 @@
 import Transport from '../../common/Transport';
-import { BulletinCommentData } from './models';
+import { BulletinCommentRequest } from './models';
 import BulletinRequestOptions from './request';
 
 /**
@@ -13,11 +13,11 @@ export default class BulletinClient {
   /**
    * 掲示板にコメントを追加
    *
-   * @param commentData - コメントデータ
+   * @param request - コメントデータ
    * @returns コメントの追加が成功したかどうか
    * @throws {CybozuOfficeSDKException} コメントの追加に失敗した場合
    */
-  addComment(commentData: BulletinCommentData): Promise<void> {
-    return this.transport.post(BulletinRequestOptions.addComment(commentData));
+  sendComment(request: BulletinCommentRequest): Promise<void> {
+    return this.transport.post(BulletinRequestOptions.sendComment(request));
   }
 }
