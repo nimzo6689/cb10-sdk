@@ -20,7 +20,6 @@ export interface CybozuOfficeOptions {
   id?: string;
   password: string;
   sessionCredentials?: SessionCredentials;
-  disableSslVerification?: boolean;
   axiosRequestConfig?: AxiosRequestConfig;
 }
 
@@ -105,13 +104,6 @@ export default class Transport {
         return status === 200 || status === 302;
       },
     };
-
-    if (this.options.disableSslVerification) {
-      const agent = new https.Agent({
-        rejectUnauthorized: false,
-      });
-      axiosConfig.httpsAgent = agent;
-    }
 
     this.#axiosInstance = axios.create(axiosConfig);
   }
