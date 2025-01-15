@@ -11,8 +11,8 @@ export default class BulletinRequestOptions {
    * @param groupId - グループID
    * @returns リクエストオプション
    */
-  static sendComment(request: BulletinCommentRequest): CustomURLParams {
-    const { bid, data, group = Defaults.GROUP_NAME } = request;
+  static sendComment(options: BulletinCommentRequest): CustomURLParams {
+    const { bid, data, group = Defaults.GROUP_NAME } = options;
 
     return {
       page: `Ajax${PAGE_PREFIX}FollowAdd`,
