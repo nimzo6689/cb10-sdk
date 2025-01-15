@@ -5,7 +5,7 @@
  * @property {number} uID - ユーザーID
  * @property {string} userName - ユーザー名
  */
-export interface UserInfo {
+export interface User {
   uID: number;
   userName: string;
 }

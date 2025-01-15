@@ -1,36 +1,58 @@
+import { ReactionType } from '../../common/Constants';
 import { FileDownloadQueryOptions } from '../file/models';
 
-/**
- * メッセージの送信オプションを定義するインターフェース
- */
-export interface MessageSendOptions {
+export interface MessageOptions {
+  mDBID: number;
+  mDID: number;
+}
+
+export interface MessageFolderOptions extends MessageOptions {
+  pID: number;
+}
+
+export interface MessageCommentOptions extends MessageOptions {
+  hID?: number;
+}
+
+export interface MessageCommentDeleteOptions extends MessageOptions {
+  followId: number;
+}
+
+export interface MessageCommentReactionOptions extends MessageCommentDeleteOptions {
+  mark?: ReactionType;
+  cancel?: number;
+}
+
+export interface MessageReceiversOptions extends MessageOptions {
+  eID: number;
+}
+
+export interface MessageReceiversModifyOptions extends MessageReceiversOptions {
+  uidList: number[];
+}
+
+export interface MessageModifyOptions extends MessageOptions {
   subject: string;
   data: string;
-  uidList: number[];
   group?: string;
   editableByReceivers?: number;
   useConfirm?: number;
   simpleReplyEnable?: number;
 }
 
-/**
- * メッセージの編集オプションを定義するインターフェース
- */
-export interface MessageModifyOptions {
-  mDBID: number;
-  mDID: number;
-  subject: string;
+export interface MessageSendOptions extends MessageModifyOptions {
+  uidList: number[];
+}
+
+export interface MessageCommentSendOptions extends MessageOptions {
   data: string;
   group?: string;
-  editableByReceivers?: number;
-  useConfirm?: number;
-  simpleReplyEnable?: number;
 }
 
 /**
  * コメント情報を定義するインターフェース
  */
-export interface CommentInfo {
+export interface Comment {
   followId: number;
   userName: string;
   attachedFile?: string;
@@ -40,7 +62,7 @@ export interface CommentInfo {
 /**
  * 宛先ユーザー情報を定義するインターフェース
  */
-export interface ReceiverInfo {
+export interface Receiver {
   uID: number;
   userName: string;
 }

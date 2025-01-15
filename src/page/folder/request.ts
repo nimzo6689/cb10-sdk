@@ -4,9 +4,7 @@ import { FolderIndexOptions } from './models';
 const PAGE_PREFIX = 'MyFolder';
 
 export default class FolderRequestOptions {
-  static getMessages(options: FolderIndexOptions): CustomURLParams {
-    const { folderId, reversed = 0 } = options;
-
+  static getMessages({ folderId, reversed = 0 }: FolderIndexOptions): CustomURLParams {
     return {
       page: `${PAGE_PREFIX}Index`,
       FID: folderId,

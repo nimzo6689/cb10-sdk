@@ -19,7 +19,7 @@ export interface FolderMessage {
  * @property {number} [reversed] - 昇順フラグ（0は降順、1は昇順）
  */
 export interface FolderNamedIndexOptions {
-  reversed?: number;
+  reversed?: 0 | 1;
 }
 
 /**

@@ -1,15 +1,15 @@
 import * as cheerio from 'cheerio';
 import { Element } from 'domhandler';
 
-import { CommentInfo, ReceiverInfo } from './models';
+import { Comment, Receiver } from './models';
 import { FileDownloadQueryOptions } from '../file/models';
 
 type CheerioAPI = cheerio.CheerioAPI;
 
 export default class MessageHtmlParser {
-  static parseComments(html: string): CommentInfo[] {
+  static parseComments(html: string): Comment[] {
     const $ = cheerio.load(html);
-    const comments: CommentInfo[] = [];
+    const comments: Comment[] = [];
 
     $('#Follows > div').each((_: number, el: Element) => {
       const comment = MessageHtmlParser.#extractCommentInfo($, el);
@@ -21,7 +21,7 @@ export default class MessageHtmlParser {
     return comments;
   }
 
-  static #extractCommentInfo($: CheerioAPI, element: Element): CommentInfo | null {
+  static #extractCommentInfo($: CheerioAPI, element: Element): Comment | null {
     const $element = $(element);
     const followIdMatch = $element.attr('id')?.match(/(?<=follow-root-)[0-9]+/i);
 
@@ -53,9 +53,9 @@ export default class MessageHtmlParser {
     };
   }
 
-  static parseReceivers(html: string): ReceiverInfo[] {
+  static parseReceivers(html: string): Receiver[] {
     const $ = cheerio.load(html);
-    const receivers: ReceiverInfo[] = [];
+    const receivers: Receiver[] = [];
 
     $('select[name="UID"] > option').each((_: number, el: Element) => {
       const $element = $(el);
