@@ -17,7 +17,7 @@ export default class FileClient {
    * @returns ファイルの内容
    * @throws {CybozuOfficeSDKException} ダウンロードに失敗した場合
    */
-  downloadFile(options: FileDownloadOptions): Promise<string> {
-    return this.transport.get(FileRequestOptions.downloadFile(options));
+  readFile(options: FileDownloadOptions): Promise<string> {
+    return this.transport.get(FileRequestOptions.readFile(options));
   }
 }

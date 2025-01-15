@@ -13,11 +13,11 @@ export default class BulletinClient {
   /**
    * 掲示板にコメントを追加
    *
-   * @param request - コメントデータ
+   * @param options - コメントデータ
    * @returns コメントの追加が成功したかどうか
    * @throws {CybozuOfficeSDKException} コメントの追加に失敗した場合
    */
-  sendComment(request: BulletinCommentRequest): Promise<void> {
-    return this.transport.post(BulletinRequestOptions.sendComment(request));
+  sendComment(options: BulletinCommentRequest): Promise<void> {
+    return this.transport.post(BulletinRequestOptions.sendComment(options));
   }
 }
