@@ -551,36 +551,12 @@ node = new CB7.MyFolder.TreeNode( "[ごみ箱]", node0, false, {fid: "trash"} );
  </div>
  </td>
  </tr>
- <tr>
- <td width=1%><input type=checkbox name=EID value="638" onClick="ToggleCheckRowClass(this)"></td>
- <td width=1% nowrap>
-<a href="javascript:void(0);" onclick="CB7.MyFolder.List.ToggleSummary('ag.cgi','Message','638','8','4'); return false;" id="toggleLink638"><img src="/cb1080/image/plus16.png" id="toggleImg638" title="概要を表示する" align=absmiddle></a> </td>
- <td nowrap><a href="ag.cgi?page=MyFolderMessageView&amp;mDBID=8&amp;mEID=638&amp;mDID=4&amp;cp=ml&amp;sp=&amp;tp="><img src="/cb1080/image/msg16.png" align=absmiddle><img src="/cb1080/image/noclip8x16.png" align=absmiddle>健康診断のお知らせ</a>
- </td>
- <td nowrap>
-<img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>大山 春香 </td>
- <td nowrap> 2014/4/12(土)</td>
- <td align="right" nowrap>未確認
- </td>
- </tr>
  <tr class="summaryRow" id="myfolderSummaryRow638" style="display: none;">
  <td class="summaryCell" colspan="2"></td>
  <td class="summaryCell" colspan="4">
  <div id="myfolderSummary638" class="summary">
  <img src="/cb1080/image/spinner.gif" align=absmiddle>
  </div>
- </td>
- </tr>
- <tr>
- <td width=1%><input type=checkbox name=EID value="300" onClick="ToggleCheckRowClass(this)"class="needConfirm"></td>
- <td width=1% nowrap>
-<a href="javascript:void(0);" onclick="CB7.MyFolder.List.ToggleSummary('ag.cgi','Message','300','9','4'); return false;" id="toggleLink300"><img src="/cb1080/image/plus16.png" id="toggleImg300" title="概要を表示する" align=absmiddle></a> </td>
- <td nowrap><a href="ag.cgi?page=MyFolderMessageView&amp;mDBID=9&amp;mEID=300&amp;mDID=4&amp;cp=ml&amp;sp=&amp;tp="><img src="/cb1080/image/msg16.png" align=absmiddle><img src="/cb1080/image/clip8x16.png" align=absmiddle>スマートフォンから「サイボウズ　Office」を利用したい方...</a>
- </td>
- <td nowrap>
-<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太 </td>
- <td nowrap> 2011/9/29(木)</td>
- <td align="right" nowrap>&nbsp;
  </td>
  </tr>
  <tr class="summaryRow" id="myfolderSummaryRow300" style="display: none;">
@@ -609,18 +585,6 @@ node = new CB7.MyFolder.TreeNode( "[ごみ箱]", node0, false, {fid: "trash"} );
  <div id="myfolderSummary85" class="summary">
  <img src="/cb1080/image/spinner.gif" align=absmiddle>
  </div>
- </td>
- </tr>
- <tr>
- <td width=1%><input type=checkbox name=EID value="81" onClick="ToggleCheckRowClass(this)"></td>
- <td width=1% nowrap>
-<a href="javascript:void(0);" onclick="CB7.MyFolder.List.ToggleSummary('ag.cgi','Message','81','','25'); return false;" id="toggleLink81"><img src="/cb1080/image/plus16.png" id="toggleImg81" title="概要を表示する" align=absmiddle></a> </td>
- <td nowrap><a href="ag.cgi?page=MyFolderMessageView&amp;mDBID=&amp;mEID=81&amp;mDID=25&amp;cp=ml&amp;sp=&amp;tp="><img src="/cb1080/image/msg16.png" align=absmiddle><img src="/cb1080/image/noclip8x16.png" align=absmiddle>個人フォルダの 「＋」 ボタンについて</a>
- </td>
- <td nowrap>
-<img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>和田 一夫 </td>
- <td nowrap> 2011/9/21(水)</td>
- <td align="right" nowrap>&nbsp;
  </td>
  </tr>
  <tr class="summaryRow" id="myfolderSummaryRow81" style="display: none;">

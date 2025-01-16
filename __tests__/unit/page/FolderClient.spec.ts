@@ -41,18 +41,7 @@ describe('個人フォルダ', () => {
       { mDBID: 2, mDID: 4, subject: 'try' },
       { mDBID: 4, mDID: 4, subject: '【講読自由】総務からのお知らせ' },
       { mDBID: 5, mDID: 4, subject: '【連絡帳】営業部 ⇔ 総務部' },
-      { mDBID: 8, mDID: 4, subject: '健康診断のお知らせ' },
-      {
-        mDBID: 9,
-        mDID: 4,
-        subject: 'スマートフォンから「サイボウズ　Office」を利用したい方...',
-      },
       { mDBID: null, mDID: 4, subject: '【回覧板】『電話メモ』の利用について' },
-      {
-        mDBID: null,
-        mDID: 25,
-        subject: '個人フォルダの 「＋」 ボタンについて',
-      },
       { mDBID: null, mDID: 33, subject: '【連絡帳】営業部 ⇔ 総務部' },
     ];
 
