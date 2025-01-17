@@ -81,7 +81,7 @@ export interface SessionCredentials {
 export default class Transport {
   readonly #axiosInstance: AxiosInstance;
 
-  get credentials(): SessionCredentials | undefined {
+  get sessionCredentials(): SessionCredentials | undefined {
     return this.options.sessionCredentials;
   }
 
