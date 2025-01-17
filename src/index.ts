@@ -21,7 +21,7 @@ export class CybozuOffice {
   /**
    * 内部通信を行うTransportインスタンス
    */
-  readonly #transport: Transport;
+  readonly transport: Transport;
 
   /**
    * メッセージ管理クライアント
@@ -54,25 +54,18 @@ export class CybozuOffice {
   readonly bulletin: BulletinClient;
 
   /**
-   * 現在のセッション情報（Cookie, csrfTicket）を取得します。
-   */
-  get credentials(): SessionCredentials | undefined {
-    return this.#transport.credentials;
-  }
-
-  /**
    * CybozuOfficeのインスタンスを作成します
    *
    * @param options - サイボウズOfficeの接続オプション
    */
   constructor(options: CybozuOfficeOptions) {
-    this.#transport = new Transport(options);
+    this.transport = new Transport(options);
 
     // 各クライアントのインスタンスを生成
-    this.message = new MessageClient(this.#transport);
-    this.file = new FileClient(this.#transport);
-    this.user = new UserClient(this.#transport);
-    this.folder = new FolderClient(this.#transport);
-    this.bulletin = new BulletinClient(this.#transport);
+    this.message = new MessageClient(this.transport);
+    this.file = new FileClient(this.transport);
+    this.user = new UserClient(this.transport);
+    this.folder = new FolderClient(this.transport);
+    this.bulletin = new BulletinClient(this.transport);
   }
 }

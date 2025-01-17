@@ -61,7 +61,7 @@ groupMembers.forEach(it => JSON.stringify(it));
 
 より詳細な使い方については [\_\_tests\_\_](https://github.com/nimzo6689/cb10-sdk/tree/main/__tests__) 配下のテストコードをご参照ください。
 
-### 補足： ログイン方法について
+### ログイン方法について
 
 サイボウズへのログインする際に、ユーザをプルダウンではなくフォーム入力となっている場合、以下のような実装になります。
 
@@ -73,7 +73,7 @@ const client = new CybozuOffice({
 });
 ```
 
-### 補足： HTTP 通信時の振る舞いを変更をしたい
+### HTTP 通信時の振る舞いを変更をしたい
 
 cb10-sdk では HTTP 通信をする際に [axios](https://axios-http.com/) を使用しており、 `CybozuOffice` のコンストラクタにて、 Request Config のオブジェクトを渡すことで、HTTP 通信時における細かい振る舞いを変更することができます。  
 以下、使用例です。
@@ -120,3 +120,78 @@ const client = new CybozuOffice({
 
 設定可能な項目については [axios - リクエスト設定](https://axios-http.com/ja/docs/req_config) をご参照ください。  
 また、すべての項目を適用する実装にしていますが、項目によっては cb10-sdk が意図しない挙動になる可能性があるため、ご注意ください。
+
+### 前回ログインした際のセッション情報を使い回ししたい
+
+サイボウズ Office 10 のセッションはデフォルト設定の場合、前回のアクセスから 24 時間以内であれば有効になります。  
+そのため、5 分おきなどにサイボウズから情報を取得するスクリプトを各場合、毎回ログインするのは無駄になるので、以下の方法でセッションを使い回しすることができます。
+
+```js
+// 使用していたセッション情報を取得する
+const session = previousClient.transport.sessionCredentials;
+
+// 前回使用していたセッション情報を再利用する
+const currentClient = new CybozuOffice({
+  baseUrl: 'https://your-cybozu-office-site/xxxx/xxxx/ag.cgi',
+  accountId: 'hoge',
+  password: 'hogehoge',
+  sessionCredentials: session,
+});
+
+// 前回のセッションが有効期限内であれば、ログインに関する HTTP リクエストは発生しません
+currentClient.user.getMembers({ groupId: 13 });
+```
+
+また、もしセッションが有効期限切れしていた場合、 SDK 内部で再ログインしてリトライするため、特にユーザ側でセッションが有効期限内かどうかを判定する処理を省略いただいても問題ございません。
+
+### 未対応のページの情報を取得したり、フォームの送信を行いたい
+
+`CybozuOffice` の `transport` にて実装できます。  
+`transport` を使うことで、サイボウズ Office 10 への Cookie の取得や、csrf_ticket を Body に入れるといった共通処理をユーザ側で実装する手間がなくなり、HTML のパースやフォームの送信の実装に集中いただけます。
+
+#### `transport.get` で未対応のページの情報を取得する
+
+ページの情報取得の場合、 URL のリクエストパラメータ部分の情報を query にオブジェクトとして渡すことでページの HTML が取得できます。
+
+その後、 Cheerio でパースしてもらえれば、該当の文字列を取得することができます。
+
+```js
+import * as cheerio from 'cheerio';
+
+const html = await client.transport.get({
+  query: {
+    page: 'MyFolderMemoView',
+    mEID: 42,
+  },
+});
+
+const $ = cheerio.load(html);
+
+// メモのタイトルを取得
+const title = $('.vr_viewTitleAreaSubject').text();
+// メモの本文を取得
+const content = $('.vr_mainColumn').text();
+```
+
+#### `transport.post` でフォームの送信を行う
+
+ブラウザの開発者ツールにて、「Network」→「Fetch/XHR or Doc」→「Payload」にてフォームの送信内容が確認できるので、そちらを参考に body に指定するオブジェクトを実装することでフォームの送信ができます。
+
+```js
+import * as cheerio from 'cheerio';
+
+// 例外がおきなければ送信成功です。
+await client.transport.post({
+  body: {
+    Page: 'MyFolderMemoModify',
+    FID: 23,
+    EID: 42,
+    Subject: '変更後のメモのタイトル',
+    EditMode: 0,
+    Data: `変更後のメモの本文を送信。
+複数行でも可能です。`,
+    Submit: '変更する',
+    AjaxRequest: 'AjaxRequest',
+  },
+});
+```
