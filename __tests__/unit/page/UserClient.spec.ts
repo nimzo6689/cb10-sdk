@@ -3,13 +3,11 @@ import fs from 'fs';
 import UserClient from '../../../src/page/user/UserClient';
 
 describe('ユーザー名簿', () => {
-  const page_UserListIndex_rawContent = fs
-    .readFileSync(`${__dirname}/../resources/page_UserListIndex.rawContent`)
-    .toString();
+  const userListIndexHtml = fs.readFileSync(`${__dirname}/../resources/page_UserListIndex.html`).toString();
 
   it('ユーザー名簿から取得するUIDリストが正しいこと', async () => {
     const CybozuTransportMock = jest.fn().mockImplementation(() => ({
-      get: jest.fn().mockReturnValue(page_UserListIndex_rawContent),
+      get: jest.fn().mockReturnValue(userListIndexHtml),
     }));
     const client = new UserClient(new CybozuTransportMock());
 

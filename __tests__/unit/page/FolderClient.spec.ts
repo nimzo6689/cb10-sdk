@@ -3,7 +3,7 @@ import { AxiosAdapter, AxiosRequestConfig } from 'axios';
 
 import { CybozuOffice } from '../../../src/index';
 
-const myFolderIndex_rawContent = fs.readFileSync(`${__dirname}/../resources/page_MyFolderIndex.rawContent`).toString();
+const myFolderIndexHtml = fs.readFileSync(`${__dirname}/../resources/page_MyFolderIndex.html`).toString();
 
 const normalResponse = {
   status: 200,
@@ -23,7 +23,7 @@ const defaultCB10Options = {
 
 const adapter: AxiosAdapter = function (config: AxiosRequestConfig) {
   if (config.params.get('page') === 'MyFolderIndex' && config.params.get('FID') === 'inbox') {
-    return new Promise(resolve => resolve({ ...normalResponse, data: myFolderIndex_rawContent }));
+    return new Promise(resolve => resolve({ ...normalResponse, data: myFolderIndexHtml }));
   }
 
   return new Promise((_, reject) => reject(new Error(`Not Found`)));

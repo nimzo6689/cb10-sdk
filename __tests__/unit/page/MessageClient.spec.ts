@@ -3,9 +3,7 @@ import fs from 'fs';
 import MessageClient from '../../../src/page/message/MessageClient';
 
 describe('メッセージ', () => {
-  const page_MyFolderMessageView_rawContent = fs
-    .readFileSync(`${__dirname}/../resources/page_MyFolderMessageView.rawContent`)
-    .toString();
+  const myFolderMessageViewHtml = fs.readFileSync(`${__dirname}/../resources/page_MyFolderMessageView.html`).toString();
 
   it('メッセージの送信', async () => {
     const CybozuTransportMock = jest.fn().mockImplementation(() => {
@@ -31,7 +29,7 @@ describe('メッセージ', () => {
     const CybozuTransportMock = jest.fn().mockImplementation(() => {
       return {
         get: (x = '') => {
-          return page_MyFolderMessageView_rawContent;
+          return myFolderMessageViewHtml;
         },
       };
     });
@@ -78,7 +76,7 @@ describe('メッセージ', () => {
     const CybozuTransportMock = jest.fn().mockImplementation(() => {
       return {
         get: (x = '') => {
-          return page_MyFolderMessageView_rawContent;
+          return myFolderMessageViewHtml;
         },
       };
     });
