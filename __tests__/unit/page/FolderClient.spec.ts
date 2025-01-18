@@ -36,7 +36,7 @@ describe('個人フォルダ', () => {
   });
 
   it('個人フォルダ（受信箱）から取得できるか(Mock不使用)', async () => {
-    const actual = await client.folder.getMessagesOfInbox();
+    const actual = await client.folder.getMessages({ folderId: 'inbox' });
     const expected = [
       { mDBID: 2, mDID: 4, subject: 'try' },
       { mDBID: 4, mDID: 4, subject: '【講読自由】総務からのお知らせ' },
