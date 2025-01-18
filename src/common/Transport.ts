@@ -338,6 +338,8 @@ export default class Transport {
    */
   async #fetchCsrfTicket(): Promise<string> {
     const response = await this.#sendRequest({
+      // 「ファイルの追加」ページは HTML のファイルサイズが小さく、かつ、CSRF トークンが取得できるため利用
+      query: { page: 'FileAdd' },
       method: 'GET',
       ensuresLoggedIn: false,
     });
