@@ -285,7 +285,6 @@ export default class Transport {
       ensuresLoggedIn: false,
     });
 
-    Transport.#validateResponse(response);
     return response;
   }
 
