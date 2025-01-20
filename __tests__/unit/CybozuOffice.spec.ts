@@ -3,7 +3,7 @@ import { AxiosAdapter, AxiosRequestConfig } from 'axios';
 
 import { CybozuOffice } from '../../src/index';
 
-const fileAddHtml = fs.readFileSync(`${__dirname}/resources/page_FileAdd.html`).toString();
+const fileAddHtml = fs.readFileSync(`${__dirname}/resources/page_FileAdd`).toString();
 
 const normalResponse = {
   status: 200,

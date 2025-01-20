@@ -3,7 +3,7 @@ import fs from 'fs';
 import UserClient from '../../../src/page/user/UserClient';
 
 describe('ユーザー名簿', () => {
-  const userListIndexHtml = fs.readFileSync(`${__dirname}/../resources/page_UserListIndex.html`).toString();
+  const userListIndexHtml = fs.readFileSync(`${__dirname}/../resources/page_UserListIndex`).toString();
 
   it('ユーザー名簿から取得するUIDリストが正しいこと', async () => {
     const CybozuTransportMock = jest.fn().mockImplementation(() => ({

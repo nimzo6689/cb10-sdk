@@ -1,25 +1,6 @@
-import fs from 'fs';
 import { AxiosAdapter, AxiosRequestConfig } from 'axios';
 import { CybozuOffice } from '../../../src/index';
-
-const myFolderMessageViewHtml = fs.readFileSync(`${__dirname}/../resources/page_MyFolderMessageView.html`).toString();
-
-const normalResponse = {
-  status: 200,
-  statusText: 'OK',
-  headers: {} as any,
-  config: {} as any,
-};
-
-const defaultCB10Options = {
-  baseUrl: 'https://xxxxx/scripts/office10/ag.cgi',
-  id: 'username',
-  password: 'password',
-  sessionCredentials: {
-    cookie: 'skip',
-    csrfTicket: 'skip',
-  },
-};
+import { defaultCB10Options, myFolderMessageViewHtml, normalResponse } from '../utils';
 
 describe('メッセージ', () => {
   it('メッセージの送信', async () => {

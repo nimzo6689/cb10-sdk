@@ -3,7 +3,7 @@ import { AxiosAdapter, AxiosRequestConfig } from 'axios';
 
 import { CybozuOffice } from '../../../src/index';
 
-const myFolderIndexHtml = fs.readFileSync(`${__dirname}/../resources/page_MyFolderIndex.html`).toString();
+const myFolderIndexHtml = fs.readFileSync(`${__dirname}/../resources/page_MyFolderIndex`).toString();
 
 const normalResponse = {
   status: 200,
