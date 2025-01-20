@@ -1,19 +1,38 @@
 import fs from 'fs';
+import { AxiosAdapter, AxiosRequestConfig } from 'axios';
+import { CybozuOffice } from '../../../src/index';
 
-import MessageClient from '../../../src/page/message/MessageClient';
+const myFolderMessageViewHtml = fs.readFileSync(`${__dirname}/../resources/page_MyFolderMessageView.html`).toString();
+
+const normalResponse = {
+  status: 200,
+  statusText: 'OK',
+  headers: {} as any,
+  config: {} as any,
+};
+
+const defaultCB10Options = {
+  baseUrl: 'https://xxxxx/scripts/office10/ag.cgi',
+  id: 'username',
+  password: 'password',
+  sessionCredentials: {
+    cookie: 'skip',
+    csrfTicket: 'skip',
+  },
+};
 
 describe('メッセージ', () => {
-  const myFolderMessageViewHtml = fs.readFileSync(`${__dirname}/../resources/page_MyFolderMessageView.html`).toString();
-
   it('メッセージの送信', async () => {
-    const CybozuTransportMock = jest.fn().mockImplementation(() => {
-      return {
-        post: (x = '') => {},
-      };
-    });
-    const client = new MessageClient(new CybozuTransportMock());
+    const adapter: AxiosAdapter = function (config: AxiosRequestConfig) {
+      const body = new URLSearchParams(config.data);
+      if (body.get('page') === 'MyFolderMessageSend') {
+        return new Promise(resolve => resolve({ ...normalResponse, data: '' }));
+      }
+      throw new Error(`Unknown request.`);
+    };
+    const client = new CybozuOffice({ ...defaultCB10Options, axiosRequestConfig: { adapter } });
 
-    const actual = await client.sendMessage({
+    const actual = await client.message.sendMessage({
       subject: 'タイトル',
       data: '本文',
       uidList: [1],
@@ -26,16 +45,15 @@ describe('メッセージ', () => {
   });
 
   it('メッセージのコメントが取得できるか', async () => {
-    const CybozuTransportMock = jest.fn().mockImplementation(() => {
-      return {
-        get: (x = '') => {
-          return myFolderMessageViewHtml;
-        },
-      };
-    });
-    const client = new MessageClient(new CybozuTransportMock());
+    const adapter: AxiosAdapter = function (config: AxiosRequestConfig) {
+      if (config.params.get('page') === 'AjaxMyFolderMessageFollowNavi') {
+        return new Promise(resolve => resolve({ ...normalResponse, data: myFolderMessageViewHtml }));
+      }
+      throw new Error(`Unknown request.`);
+    };
+    const client = new CybozuOffice({ ...defaultCB10Options, axiosRequestConfig: { adapter } });
 
-    const actual = await client.getComments({ mDBID: 4, mDID: 4 });
+    const actual = await client.message.getComments({ mDBID: 4, mDID: 4 });
     const expected = [
       {
         followId: 24,
@@ -73,16 +91,15 @@ describe('メッセージ', () => {
   });
 
   it('宛先リストを取得する', async () => {
-    const CybozuTransportMock = jest.fn().mockImplementation(() => {
-      return {
-        get: (x = '') => {
-          return myFolderMessageViewHtml;
-        },
-      };
-    });
-    const client = new MessageClient(new CybozuTransportMock());
+    const adapter: AxiosAdapter = function (config: AxiosRequestConfig) {
+      if (config.params.get('page') === 'MyFolderMessageReceiverAdd') {
+        return new Promise(resolve => resolve({ ...normalResponse, data: myFolderMessageViewHtml }));
+      }
+      throw new Error(`Unknown request.`);
+    };
+    const client = new CybozuOffice({ ...defaultCB10Options, axiosRequestConfig: { adapter } });
 
-    const actual = await client.getReceivers({ mDBID: 4, mDID: 4, eID: 782 });
+    const actual = await client.message.getReceivers({ mDBID: 4, mDID: 4, eID: 782 });
     const expected: never[] = [];
 
     expect(JSON.stringify(actual)).toBe(JSON.stringify(expected));
