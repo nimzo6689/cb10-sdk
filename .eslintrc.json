@@ -5,7 +5,14 @@
     "es2020": true
   },
   "extends": ["./node_modules/gts", "prettier"],
-  "overrides": [],
+  "overrides": [
+    {
+      "files": ["samples/**/*.ts", "samples/**/*.js", "samples/**/*.mjs"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",

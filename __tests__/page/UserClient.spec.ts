@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import UserClient from '../../../src/page/user/UserClient';
+import UserClient from '../../src/page/user/UserClient';
 
 describe('ユーザー名簿', () => {
   const userListIndexHtml = fs.readFileSync(`${__dirname}/../resources/page_UserListIndex`).toString();

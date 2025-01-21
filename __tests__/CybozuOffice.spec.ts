@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { AxiosAdapter, AxiosRequestConfig } from 'axios';
 
-import { CybozuOffice } from '../../src/index';
+import { CybozuOffice } from '../src/index';
 
 const fileAddHtml = fs.readFileSync(`${__dirname}/resources/page_FileAdd`).toString();
 
