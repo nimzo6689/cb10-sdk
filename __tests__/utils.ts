@@ -1,6 +1,7 @@
 import fs from 'fs';
 
 export const myFolderMessageViewHtml = fs.readFileSync(`${__dirname}/resources/page_MyFolderMessageView`).toString();
+export const userListIndexHtml = fs.readFileSync(`${__dirname}/resources/page_UserListIndex`).toString();
 
 export const normalResponse = {
   status: 200,

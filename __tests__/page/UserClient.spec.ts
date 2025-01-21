@@ -1,17 +1,18 @@
-import fs from 'fs';
-
-import UserClient from '../../src/page/user/UserClient';
+import { AxiosAdapter, AxiosRequestConfig } from 'axios';
+import { CybozuOffice } from '../../src/index';
+import { defaultCB10Options, userListIndexHtml, normalResponse } from '../utils';
 
 describe('ユーザー名簿', () => {
-  const userListIndexHtml = fs.readFileSync(`${__dirname}/../resources/page_UserListIndex`).toString();
-
   it('ユーザー名簿から取得するUIDリストが正しいこと', async () => {
-    const CybozuTransportMock = jest.fn().mockImplementation(() => ({
-      get: jest.fn().mockReturnValue(userListIndexHtml),
-    }));
-    const client = new UserClient(new CybozuTransportMock());
+    const adapter: AxiosAdapter = function (config: AxiosRequestConfig) {
+      if (config.params.get('page') === 'UserListIndex') {
+        return new Promise(resolve => resolve({ ...normalResponse, data: userListIndexHtml }));
+      }
+      throw new Error(`Unknown request.`);
+    };
+    const client = new CybozuOffice({ ...defaultCB10Options, axiosRequestConfig: { adapter } });
 
-    const actual = await client.getMembers({ groupId: 13 });
+    const actual = await client.user.getMembers({ groupId: 13 });
     const expected = [
       { uID: 17, userName: '高橋 健太' },
       { uID: 27, userName: '加藤 美咲' },
