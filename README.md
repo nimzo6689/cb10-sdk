@@ -81,7 +81,7 @@ groupMembers.forEach(it => JSON.stringify(it));
 // { uID: 208, userName: '大山 春香' }
 ```
 
-より詳細な使い方については [\_\_tests\_\_](https://github.com/nimzo6689/cb10-sdk/tree/main/__tests__) 配下のテストコードをご参照ください。
+具体的な使い方については [samples](https://github.com/nimzo6689/cb10-sdk/tree/main/samples) 配下のコードをご参考ください。
 
 ### ログイン方法について
 
