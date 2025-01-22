@@ -170,24 +170,15 @@ export default class Transport {
       requestConfig.params = Transport.#createURLParams(options.query);
     }
 
-    return this.#axiosInstance
-      .request(requestConfig)
-      .then(async response => {
-        Transport.#validateResponse(response);
+    const response = await this.#axiosInstance.request(requestConfig);
+    Transport.#validateResponse(response);
 
-        const needsLogin = response.headers['x-cybozulogin'] === '1';
-        if (!options.preventSessionRefresh && needsLogin) {
-          await this.#initializeSession();
-          return this.#sendRequest({ preventSessionRefresh: true, ...options });
-        }
-        return response;
-      })
-      .catch(e => {
-        if (e instanceof Error) {
-          throw new CybozuOfficeSDKException(e.message);
-        }
-        throw e;
-      });
+    const needsLogin = response.headers['x-cybozulogin'] === '1';
+    if (!options.preventSessionRefresh && needsLogin) {
+      await this.#initializeSession();
+      return this.#sendRequest({ preventSessionRefresh: true, ...options });
+    }
+    return response;
   }
 
   static #createURLParams(params: CustomURLParams): URLSearchParams {

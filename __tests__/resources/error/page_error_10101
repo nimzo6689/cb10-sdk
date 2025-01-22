@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<title>ログイン - サイボウズ Office</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<link rel="stylesheet" type="text/css" href="/cb1080/html/std.css?_v=1086120220502162043.css" />
+<link rel="stylesheet" type="text/css" href="/cb1080/html/login.css?_v=1086120220502162043.css" />
+<link rel="stylesheet" type="text/css" href="/cb1080/html/header.css?_v=1086120220502162043.css" />
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/yui/utilities/utilities.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/jquery/jquery.min.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/std.js?_v=1086120220502162043.js"></script>
+<script language="JavaScript" type="text/javascript"><!--
+CB7.Init( "", "ts.1737514890" );
+CB7.HTM_PATH = "/cb1080/html";
+CB7.IMG_PATH = "/cb1080/image";
+CB7.FORM_KEY = "";
+CB7.PRODUCT_TITLE = "サイボウズ Office";
+CB7.LOGIN_ID = "";
+CB7.BUILD_VERSION = "1086120220502162043";
+g_strImgPath = "/cb1080/image";
+//--></script>
+<link href="/cb1080/image/cybozuoffice.ico" rel="shortcut icon">
+<script language="JavaScript" type="text/javascript"><!--
+function init()
+{
+ document.LoginForm.Password.focus();
+}
+//--></script>
+</head>
+<body class="login" onLoad="init()">
+<div id="headbar-wrapper">
+ <div id="headbar" class="headbar">
+ <table id="headerTable" class="layout" width="100%">
+ <tr>
+ <td class="vr_logo" nowrap>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/std.js?_v=1086120220502162043.js"></script>
+<script language="JavaScript" type="text/javascript"><!--
+CB7.Init( "", "ts.1737514890" );
+CB7.HTM_PATH = "/cb1080/html";
+CB7.IMG_PATH = "/cb1080/image";
+CB7.FORM_KEY = "";
+CB7.PRODUCT_TITLE = "サイボウズ Office";
+CB7.LOGIN_ID = "";
+CB7.BUILD_VERSION = "1086120220502162043";
+g_strImgPath = "/cb1080/image";
+//--></script>
+<h1 class="visuallyHidden">サイボウズ Office</h1><span class="vr_logoImage">
+<img src="/cb1080/image/logo_hd.png" alt="トップページ"></span>
+ </td>
+ <td align="right">
+ <span class="headerTextHelp"><a href="https://jp.cybozu.help/of10/ja/user/per/p01/login.html" target="_blank"><img src="/cb1080/image/help16.png" align=absmiddle>ヘルプ</a></span>
+ </td>
+ </tr>
+ </table>
+ </div>
+</div>
+<div id="content-wrapper"">
+ <div class="content">
+ <div style="width:100%;">
+<table class="vr_loginBase" border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td class="vr_loginForm">
+<center>
+<div style="width:100%;">
+<div class="vr_loginPageInfoTop">
+<!-- ここからカスタマイズ -->
+<table cellspacing="0" cellpadding="10" border="0" align="center">
+</td>
+<td align="left">
+<p><b><font size="6">サイボウズ Office  デモサイト</font></p>
+</td>
+<table cellspacing="0" cellpadding="10" border="0" align="center">
+</td>
+<td align="left">
+<p><font size="4">●ご利用上のご注意</font></p>
+<p><font size="2">・こちらのデモサイトは、パッケージ版サイボウズ Officeの環境です。</p>
+<p>・他のお客様との共有環境となります。機密情報や個人情報を記載しないようお願いいたします。</p>
+<p>・ご利用前に <a href=" https://cybozu.co.jp/sales/admission/onlinedemo/admission-demo.pdf">利用規約</a> のご確認をお願いいたします。</p>
+<p>・自社専用のお試し環境を利用する場合は、<a href=" https://office.cybozu.co.jp/trial/cloud/office/?utm_source=onlinedemo&utm_medium=referral&utm_campaign=login">30日の無償お試し</a> をご利用ください。</font></p>
+</td></tr>
+</table>
+<!-- ここまでカスタマイズ -->
+<div class="monospace clearfix">
+<div><strong>デモ用アカウント</strong></div><div><strong>高橋健太 / 加藤美咲 / 和田一夫 / 大山春香</strong></div><div><strong>パスワード：なし</strong></div></div>
+</div>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td class="loginBase1"></td>
+<td class="loginBase2"></td>
+<td class="loginBase3"></td>
+</tr>
+<tr>
+<td class="loginBase4"></td>
+<td class="loginBase5">
+<div class="vr_loginAreaWrapper">
+<div class="vr_loginArea">
+<table cellspacing="0" cellpadding="10" border="0" align="center">
+ <tr>
+ <td><b>デモサイト</b></td>
+ </tr>
+</table>
+<table cellspacing="0" border="0" align="center">
+<form method="post" name="LoginForm" action="ag.cgi?" autocomplete="off" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="">
+<input type=hidden name="_System" value=login>
+<input type=hidden name="_Login" value=1>
+<input type=hidden name="LoginMethod" value="">
+<tr><td nowrap style="width:25em; line-height:0;">&nbsp;</td></tr>
+<tr>
+<td class="loginmain">
+<table align="center">
+<tr><td nowrap>名前</td></tr>
+<tr><td><select class="vr_loginForm" name="_ID"><option value="">(あなたのお名前)
+<option value=17 selected>高橋 健太</option><option value=23>和田 一夫</option><option value=27>加藤 美咲</option><option value=208>大山 春香</option></select></td></tr>
+ </tr>
+<tr><td nowrap>&nbsp;</td></tr>
+<tr><td nowrap>パスワード</td></tr>
+<tr><td><input class="vr_loginForm" type=password name=Password></td></tr>
+<tr><td nowrap>&nbsp;</td></tr>
+<tr><td><input class="vr_hotButton vr_uMenu" type=submit name=Submit value="ログイン"></td></tr>
+</table>
+</td>
+</tr>
+</form>
+</table>
+</div>
+</div>
+</td>
+<td class="loginBase6"></td>
+</tr>
+<tr>
+<td class="loginBase7"></td>
+<td class="loginBase8"></td>
+<td class="loginBase9"></td>
+</tr>
+</table>
+</div>
+</center>
+</td></tr></table>
+</div></div>
+ <div class="footbar">
+<div class="copyright">サイボウズ Office Version 10.8.6 20220502162043</div></div></div></body>
+</html>
