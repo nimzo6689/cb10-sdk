@@ -5,6 +5,7 @@ import UserClient from './page/user/UserClient';
 import FolderClient from './page/folder/FolderClient';
 import BulletinClient from './page/bullentin/BulletinClient';
 import NotificationClient from './page/notification/NotificationClient';
+import ScheduleClient from './page/schedule/ScheduleClient';
 
 export { CybozuOfficeOptions, SessionCredentials };
 
@@ -18,6 +19,7 @@ export { CybozuOfficeOptions, SessionCredentials };
  * - フォルダ管理 ({@link FolderClient})
  * - 掲示板管理 ({@link BulletinClient})
  * - 通知一覧管理 ({@link NotificationClient})
+ * - スケジュール管理 ({@link ScheduleClient})
  */
 export class CybozuOffice {
   /**
@@ -62,6 +64,12 @@ export class CybozuOffice {
   readonly notification: NotificationClient;
 
   /**
+   * 通知一覧クライアント
+   * 未読一覧が取得できる機能を提供します。
+   */
+  readonly schedule: ScheduleClient;
+
+  /**
    * CybozuOfficeのインスタンスを作成します
    *
    * @param options - サイボウズOfficeの接続オプション
@@ -76,5 +84,6 @@ export class CybozuOffice {
     this.folder = new FolderClient(this.transport);
     this.bulletin = new BulletinClient(this.transport);
     this.notification = new NotificationClient(this.transport);
+    this.schedule = new ScheduleClient(this.transport);
   }
 }

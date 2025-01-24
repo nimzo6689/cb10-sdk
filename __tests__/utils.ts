@@ -5,6 +5,7 @@ export const myFolderMessageViewHtml = fs.readFileSync(`${__dirname}/resources/p
 export const userListIndexHtml = fs.readFileSync(`${__dirname}/resources/page_UserListIndex`).toString();
 export const myFolderIndexHtml = fs.readFileSync(`${__dirname}/resources/page_MyFolderIndex`).toString();
 export const notificationIndexHtml = fs.readFileSync(`${__dirname}/resources/page_NotificationIndex`).toString();
+export const scheduleUserMonthHtml = fs.readFileSync(`${__dirname}/resources/page_ScheduleUserMonth`).toString();
 
 export const error10101Html = fs.readFileSync(`${__dirname}/resources/error/page_error_10101`).toString();
 
