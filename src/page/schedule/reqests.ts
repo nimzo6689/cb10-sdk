@@ -5,9 +5,9 @@ const PAGE_PREFIX = 'Schedule';
 
 export default class ScheduleRequestOptions {
   /**
-   * グループメンバー取得のリクエストオプション
+   * 予定取得のリクエストオプション
    *
-   * @param options - グループメンバー取得オプション
+   * @param options - 予定取得オプション
    * @returns リクエストオプション
    */
   static getEvents(options: EventRequestOptions): CustomURLParams {

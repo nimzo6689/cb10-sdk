@@ -64,8 +64,8 @@ export class CybozuOffice {
   readonly notification: NotificationClient;
 
   /**
-   * 通知一覧クライアント
-   * 未読一覧が取得できる機能を提供します。
+   * スケジュール管理クライアント
+   * スケジュールのイベント一覧が取得できる機能を提供します。
    */
   readonly schedule: ScheduleClient;
 

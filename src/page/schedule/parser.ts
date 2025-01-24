@@ -18,7 +18,6 @@ export default class ScheduleHtmlParser {
 
       if (cellMonth !== month) return;
 
-      // Process regular events
       $(cell)
         .find('.eventLink')
         .each((index, eventEl) => {
@@ -43,7 +42,6 @@ export default class ScheduleHtmlParser {
           events.push({ year, month, day, start, end, title });
         });
 
-      // Process private events
       $(cell)
         .find('.eventText')
         .each((idx, eventEl) => {
