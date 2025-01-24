@@ -1,0 +1,2333 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/cyedit.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/jquery/jquery.min.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/std.js?_v=1086120220502162043.js"></script>
+<script language="JavaScript" type="text/javascript"><!--
+CB7.Init( "NotificationIndex", "ts.1737698303" );
+CB7.HTM_PATH = "/cb1080/html";
+CB7.IMG_PATH = "/cb1080/image";
+CB7.FORM_KEY = "46295a6abc7c55600950c26fab5a2688";
+CB7.PRODUCT_TITLE = "サイボウズ Office";
+CB7.LOGIN_ID = "27";
+CB7.BUILD_VERSION = "1086120220502162043";
+g_strImgPath = "/cb1080/image";
+g_bHeadbarFix = true;
+//--></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/tinymce/tinymce.jquery.min.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/spinner.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/richeditor.js?_v=1086120220502162043.js"></script>
+<title>通知一覧（未読一覧） - サイボウズ Office</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<link rel="stylesheet" type="text/css" href="/cb1080/html/std.css?_v=1086120220502162043.css" />
+<link rel="stylesheet" type="text/css" href="/cb1080/html/yui/menu/assets/menu.css?_v=1086120220502162043.css" />
+<link rel="stylesheet" type="text/css" href="/cb1080/html/yui/container/assets/container.css?_v=1086120220502162043.css" />
+<link rel="stylesheet" type="text/css" href="/cb1080/html/dialog.css?_v=1086120220502162043.css" />
+<link rel="stylesheet" type="text/css" href="/cb1080/html/header.css?_v=1086120220502162043.css" />
+<link rel="stylesheet" type="text/css" href="/cb1080/html/trialbutton.css?_v=1086120220502162043.css" />
+<link rel="stylesheet" id="designcss" type="text/css" href="/cb1080/html/theme-kimono/theme-kimono.css?_v=1086120220502162043.css" />
+<script type="text/javascript"><!--
+(function(){
+ var settings = {
+ type: "GET",
+ dataType: "jsonp",
+ url: "/cb1080/html/designlist.js?_v=20112.js",
+ jsonpCallback: "cb_OfficeDesignList",
+ success: function (json) {
+ if (json['theme-kimono'] !== true) {
+ $("#designcss").attr("href", "/cb1080/html/std-varaha/std-varaha.css?_v=1086120220502162043.css");
+ initDesign()
+ }
+ },
+ cache: true
+ };
+ $.ajax(settings);
+ var initDesign = function () {
+ var settings = {
+ url: "?page=AjaxDesignInitJson"
+ };
+ CB7.JqueryAjax(settings);
+ };
+})();
+//--></script>
+<script type="text/javascript"><!--
+(function(){
+ var settings = {
+ type: "GET",
+ dataType: "jsonp",
+ url: "/cb1080/html/theme-kimono/theme-kimono.js?_v=20112.js",
+ jsonpCallback: "cb_OfficeDesignLinks",
+ success: function (json) {
+ $.each(json, function (index, item) {
+ appendLink(item['class'], item.url);
+ });
+ },
+ cache: true
+ };
+ $.ajax(settings);
+ var appendLink = function (argClassName, argUrl) {
+ if (!argClassName || !argUrl) {
+ return false;
+ }
+ $(function () {
+ $("#vr_themeHeader").children("." + argClassName).click(function () {
+ window.open(encodeURI(argUrl))
+ });
+ });
+ };
+})();
+//--></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/yui/utilities/utilities.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/dom.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/form.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/image.js?_v=1086120220502162043.js"></script>
+<link href="/cb1080/image/cybozuoffice.ico" rel="shortcut icon">
+<script type="text/javascript"><!--
+YAHOO.util.Event.on( document, "click", CB7.AutoHideMenu.HideAll );
+//--></script>
+<link rel="stylesheet" type="text/css" href="/cb1080/html/notification.css?_v=1086120220502162043.css" />
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/notification.js?_v=1086120220502162043.js"></script>
+<script>
+$(document).ready(function() {
+ CB7.Notification.setFilter('');
+ CB7.Notification.setEmptyMessage('');
+ CB7.Notification.setEffects( $(".notificationBody"), 250, 200 );
+ CB7.Notification.setCustomappTableCellClass( $(".dz_viewRecordDefaultFieldValue, .dz_viewRecordValue"));
+ CB7.Notification.setCounts();
+ CB7.Notification.setNaviFlow();
+});
+</script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/follow.js?_v=1086120220502162043.js"></script>
+</head>
+<body class="notificationIndex">
+<div class="trialLinkWrapper">
+ <a class="trialLink" href="https://office.cybozu.co.jp/trial/cloud/office/?utm_source=onlinedemo&utm_medium=referral&utm_campaign=hover
+ " target="_blank" >30日間無料で試用する</a>
+</div>
+<div id="headbar-wrapper" class="vr_headbarFix">
+<div class="vr_AGWarning">
+<b>サイボウズ Office 10 継続サービスライセンスの有効期限は 2025 年 1 月 31 日 までです。お客様のライセンスについては、<a style="text-decoration:underline;" href="ag.cgi?page=AGSupportWarning">こちら</a> をクリックしてください。</b><br>
+</div>
+ <div id="headbar" class="headbar">
+ <table id="headerTable" class="layout" width="100%" role="presentation">
+ <colgroup width="1">
+ <colgroup width="1%">
+ <colgroup width="200px">
+ <colgroup width="">
+ <tr>
+ <td class="vr_logo" nowrap><h1 class="visuallyHidden">サイボウズ Office</h1><a href="ag.cgi?page=AGIndex"><img src="/cb1080/image/logo_hd.png" alt="トップページ"></a>
+ </td>
+ <td class="vr_headerNotifireList" nowrap><ul>
+</ul>
+ </td>
+ <td class="vr_headbarSearch" nowrap>
+<form method="get" name="headbarSearchForm" action="ag.cgi?" style="display:inline;">
+ <input type="hidden" name="page"   value="AGSimpleSearch">
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/search.js?_v=1086120220502162043.js"></script>
+ <table class="vr_headbarSearchArea">
+ <tr>
+ <td class="vr_headbarSearchTdInput">
+ <input type="text" name="Text" id="searchText" onfocus="CB7.HeaderSearchToggle.ClearPlaceholder();" onblur="CB7.HeaderSearchToggle.ShowPlaceholder();" class="vr_headerSearchText vr_placeholder" value="" maxlength="100">
+ </td>
+ <td class="vr_headbarSearchTdButton">
+ <input type="submit" class="vr_headerSearchButton" value="" alt="検索" title="検索" onclick="CB7.HeaderSearchToggle.ClearPlaceholder();">
+<script language="JavaScript" type="text/javascript">
+<!--
+CB7.HeaderSearchToggle.Initialize( '製品内を検索', 'searchText', 'vr_placeholder' );
+CB7.HeaderSearchToggle.TogglePlaceholder();
+//-->
+</script>
+ </td>
+ </tr>
+ </table>
+ </form>
+ </td>
+ <td class="vr_menu">
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/yui/container/container-min.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/yui/menu/menu-min.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/dialog.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/headermenu.js?_v=1086120220502162043.js"></script>
+<script language="JavaScript" type="text/javascript"><!--//
+CB7.HeaderMenu.Dialog.LINK_URL = "ag.cgi?page=AjaxXHRLinkDialog";
+//--></script>
+<div id="headermenu" class="yuimenubar">
+ <div class="bd clearfix">
+ <ul class="first-of-type headermenutip">
+ <li id="header-menu-notification" class="yuimenubaritem vr_headerMenuNotification">
+ <a href="ag.cgi?page=NotificationIndex" class="yuimenubaritemlabel"><img class="comHeaderMenuImage vr_notificationImage" src="/cb1080/image/comHeader_bell.png" alt="通知一覧"></a>
+ </li>
+ <li id="header-menu-application" class="yuimenubaritem vr_headerMenuApp">
+ <a href="javascript:void(0)" class="yuimenubaritemlabel"><span class="yuimenubaritemlabelinner">アプリ一覧<span class="yuimenubaritemlabelinnerArrow"></span></span></a>
+ <div id="applicationmenu" class="headersubmenu yuimenu" style="visibility:hidden;">
+ <div class="bd">
+ <ul>
+ <li id="headermenuAppBox">
+ <span id="headermenuAppItem" class="vr_headerAppMenu">
+<span class="appMenuItem"><a href="ag.cgi?page=AGIndex"><span class="appmenucss appMenuAGIndex"></span><br><span class="vr_naviAppMenu">トップページ</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=MyFolderIndex"><span class="appmenucss appMenuMyFolderIndex"></span><br><span class="vr_naviAppMenu">個人フォルダ</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=MailIndex"><span class="appmenucss appMenuMailIndex"></span><br><span class="vr_naviAppMenu">メール</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=ScheduleIndex"><span class="appmenucss appMenuScheduleIndex"></span><br><span class="vr_naviAppMenu">スケジュール</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=ScheduleIndex&amp;gid=fh"><span class="appmenucss appMenuScheduleFacility"></span><br><span class="vr_naviAppMenu">施設予約</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=WhereIndex"><span class="appmenucss appMenuWhereIndex"></span><br><span class="vr_naviAppMenu">電話メモ（在席確認）</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=TimeCardIndex"><span class="appmenucss appMenuTimeCardIndex"></span><br><span class="vr_naviAppMenu">タイムカード</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=ToDoIndex"><span class="appmenucss appMenuToDoIndex"></span><br><span class="vr_naviAppMenu">ToDoリスト</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=BulletinIndex"><span class="appmenucss appMenuBulletinIndex"></span><br><span class="vr_naviAppMenu">掲示板</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=FileIndex"><span class="appmenucss appMenuFileIndex"></span><br><span class="vr_naviAppMenu">ファイル管理</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=AddressIndex"><span class="appmenucss appMenuAddressIndex"></span><br><span class="vr_naviAppMenu">アドレス帳</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=UserListIndex"><span class="appmenucss appMenuUserListIndex"></span><br><span class="vr_naviAppMenu">ユーザー名簿</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=WorkFlowIndex"><span class="appmenucss appMenuWorkFlowIndex"></span><br><span class="vr_naviAppMenu">ワークフロー</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=ReportIndex"><span class="appmenucss appMenuReportIndex"></span><br><span class="vr_naviAppMenu">報告書</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=ProjectIndex"><span class="appmenucss appMenuProjectIndex"></span><br><span class="vr_naviAppMenu">プロジェクト</span></a></span>
+<span class="appMenuItem"><a href="https://office.cybozu.co.jp/trial/apply/?utm_source=onlinedemo&amp;utm_medium=referral&amp;utm_campaign=appmenu"><img class="appmenuimg" src="ag.cgi?page=OfficeDownload&amp;notimecard=1&amp;type=image&amp;subtype=png&amp;id=187&amp;ct=1&amp;v=1573810718&amp;width=32&amp;height=32&amp;ext=.png" alt="30日間お試し" height="32" width="32" border="0"><br><span class="vr_naviAppMenu">30日間お試し</span></a></span>
+<span class="appMenuItem"><a href="ag.cgi?page=DBIndex"><span class="appmenucss appMenuDBIndex"></span><br><span class="vr_naviAppMenu">カスタムアプリ</span></a></span>
+<span class="appMenuItem "><a href="ag.cgi?page=DBView&did=43"><img class="appmenuimg" src="ag.cgi?page=DBIconDownload&amp;MainType=image&amp;SubType=png&amp;notimecard=1&amp;did=43&amp;ct=1&amp;v=1316877727&amp;width=32&amp;height=32&amp;ext=.png" alt="クレーム管理" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">クレーム管理</span></a></span>
+<span class="appMenuItem "><a href="ag.cgi?page=DBView&did=50"><img class="appmenuimg" src="ag.cgi?page=DBIconDownload&amp;MainType=image&amp;SubType=png&amp;notimecard=1&amp;did=50&amp;ct=1&amp;v=1316878244&amp;width=32&amp;height=32&amp;ext=.png" alt="契約書管理" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">契約書管理</span></a></span>
+<span class="appMenuItem appMenuItemNew"><a href="ag.cgi?page=DBView&did=57"><img class="appmenuimg" src="ag.cgi?page=DBIconDownload&amp;MainType=image&amp;SubType=png&amp;notimecard=1&amp;did=57&amp;ct=1&amp;v=1335938580&amp;width=32&amp;height=32&amp;ext=.png" alt="障害対応依頼" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">障害対応依頼</span></a></span>
+<span class="appMenuItem "><a href="ag.cgi?page=DBView&did=82"><img class="appmenuimg" src="/cb1080/image/customapp32_05.png" alt="情シスへの依頼箱" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">情シスへの依頼箱</span></a></span>
+<span class="appMenuItem "><a href="ag.cgi?page=DBView&did=84"><img class="appmenuimg" src="/cb1080/image/customapp32_16.png" alt="共有ToDo" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">共有ToDo</span></a></span>
+<span class="appMenuItem appMenuItemNew"><a href="ag.cgi?page=DBView&did=102"><img class="appmenuimg" src="ag.cgi?page=DBIconDownload&amp;MainType=image&amp;SubType=png&amp;notimecard=1&amp;did=102&amp;ct=1&amp;v=1371429444&amp;width=32&amp;height=32&amp;ext=.png" alt="見積り依頼受付" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">見積り依頼受付</span></a></span>
+<span class="appMenuItem "><a href="ag.cgi?page=DBView&did=116"><img class="appmenuimg" src="ag.cgi?page=DBIconDownload&amp;MainType=image&amp;SubType=png&amp;notimecard=1&amp;did=116&amp;ct=1&amp;v=&amp;width=32&amp;height=32&amp;ext=.png" alt="商談進捗管理" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">商談進捗管理</span></a></span>
+<span class="appMenuItem appMenuItemNew"><a href="ag.cgi?page=DBView&did=124"><img class="appmenuimg" src="ag.cgi?page=DBIconDownload&amp;MainType=image&amp;SubType=png&amp;notimecard=1&amp;did=124&amp;ct=1&amp;v=&amp;width=32&amp;height=32&amp;ext=.png" alt="共有タスク管理" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">共有タスク管理</span></a></span>
+ </span>
+ </li>
+ </ul>
+ </div>
+ </div>
+ </li>
+ <li id="header-menu-linklist" class="yuimenubaritem vr_headerMenuLink">
+ <a href="javascript:void(0)" class="yuimenubaritemlabel"><span class="yuimenubaritemlabelinner">リンク<span class="yuimenubaritemlabelinnerArrow"></span></span></a>
+ <div id="linklistmenu" class="headersubmenu yuimenu" style="visibility:hidden;">
+ <div class="bd" cb7page="AjaxXHRHeaderSubMenu" cb7query="method=LinkList" cb7state="complete">
+<ul class="first-of-type">
+ <li class="yuimenuitem"><a class="yuimenuitemlabel" href="javascript:void(0);" onclick="CB7.HeaderMenu.Dialog.Open('link');"><img src="/cb1080/image/write16.png" align=absmiddle>この画面を追加する</a></li>
+ <li class="yuimenuitem"><a class="yuimenuitemlabel" href="javascript:void(0);" onclick="CB7.HeaderMenu.Dialog.Open('link',0,{appId:'',iconId:''});"><img src="/cb1080/image/write16.png" align=absmiddle>新規作成する</a></li>
+<li class="yuimenuitem headermenuSep">&nbsp;</li>
+ <li class="yuimenuitem"><a class="yuimenuitemlabel" href="ag.cgi?page=LinkIndex&type=system"><img src="/cb1080/image/node16.png" align=absmiddle>共有リンク集</a>
+ <div class="yuimenu">
+ <div class="bd">
+<ul>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="http://products.cybozu.co.jp/office/"><img src="/cb1080/image/listmark16.png" align=absmiddle>サイボウズ Office 10 Webサイト　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="http://faq.cybozu.info/alphascope/cybozu/web/office10/Search.aspx"><img src="/cb1080/image/listmark16.png" align=absmiddle>よくある質問と答え　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="https://officetimeline.cybozu.co.jp/"><img src="/cb1080/image/listmark16.png" align=absmiddle>サイボウズ Officeタイムライン　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="http://cybozu.co.jp/community/"><img src="/cb1080/image/listmark16.png" align=absmiddle>サイボウズコミュニティ　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="http://manual.cybozu.co.jp/of10/"><img src="/cb1080/image/listmark16.png" align=absmiddle>オンラインマニュアル　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+</ul>
+ </div>
+ </div>
+ </li>
+<li class="yuimenuitem headermenuSep">&nbsp;</li>
+ <li class="yuimenuitem"><a class="yuimenuitemlabel" href="ag.cgi?page=PersonalStartMenuAdmin"><img src="/cb1080/image/node16.png" align=absmiddle>始めるメニュー</a>
+ <div class="yuimenu">
+ <div class="bd">
+<ul>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="ag.cgi?page=MyFolderMessageSend"><img src="/cb1080/image/msg16.png" align=absmiddle>メッセージを送る　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="ag.cgi?page=MailSend"><img src="/cb1080/image/mail16.png" align=absmiddle>メールを送る　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="ag.cgi?page=MyFolderMemoAdd"><img src="/cb1080/image/memo16.png" align=absmiddle>メモを書く　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="ag.cgi?page=ToDoEntry"><img src="/cb1080/image/todo16.png" align=absmiddle>ToDoを追加する　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="ag.cgi?page=WorkFlowSend"><img src="/cb1080/image/workflow16.png" align=absmiddle>申請する　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+<li class="yuimenuitem headermenuSep">&nbsp;</li>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="ag.cgi?page=BulletinSend"><img src="/cb1080/image/bulletin16.png" align=absmiddle>掲示を書き込む　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="ag.cgi?page=AddressEntry"><img src="/cb1080/image/address16.png" align=absmiddle>アドレスを登録する　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="ag.cgi?page=ReportSend"><img src="/cb1080/image/report16.png" align=absmiddle>報告書を作成する　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+<li class="yuimenuitem headermenuSep">&nbsp;</li>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="ag.cgi?page=ScheduleEntry"><img src="/cb1080/image/schedule16.png" align=absmiddle>予定を登録する　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+<li class="yuimenuitem"><a class="yuimenuitemlabel haspopup" href="ag.cgi?page=ScheduleAdjust"><img src="/cb1080/image/adjust16.png" align=absmiddle>予定を調整する　<img class="popupicon" src="/cb1080/image/popup16.png" align=absmiddle></a></li>
+<li class="yuimenuitem headermenuSep">&nbsp;</li>
+</ul>
+ </div>
+ </div>
+ </li>
+</ul>
+ </div>
+ </div>
+ </li>
+ <li id="header-menu-user" class="yuimenubaritem first-of-type vr_headerMenuUser">
+ <a href="javascript:void(0)" class="yuimenubaritemlabel"><img class="profileImage" src="/cb1080/image/comHeader_defaulticon_small.png"><span class="yuimenubaritemlabelinner">加藤 美咲<span class="yuimenubaritemlabelinnerArrow"></span></span></a>
+ <div id="usermenu" class="headersubmenu yuimenu" style="visibility:hidden;">
+ <div class="bd">
+ <span class="vr_headerUserImage"><img class="profileImage" src="/cb1080/image/comHeader_defaulticon.png">
+</span>
+ <ul>
+ <li class="yuimenuitem vr_headerAccount"><a href="ag.cgi?page=UserListView&uid=27">加藤 美咲</a></li>
+ <li class="yuimenuitem vr_headerAccount"><a href="ag.cgi?page=PersonalUser">編集</a></li>
+ <li class="yuimenuitem headermenuSep">&nbsp;</li>
+ <li class="yuimenuitem"><a class="vr_headerPersonalSettings" href="ag.cgi?page=PersonalAdminMenu">個人設定</a></li>
+ <li class="yuimenuitem"><a href="ag.cgi?page=PersonalUserPassword">パスワードの変更</a></li>
+ <li class="yuimenuitem"><a href="ag.cgi?Page=PersonalDesign">デザインの変更</a></li>
+ <li class="yuimenuitem headermenuSep">&nbsp;</li>
+ <li class="yuimenuitem" style="display: none;"><a class="vr_headerTouchDesignCheckbox" href="javascript:void(0);" onclick="CB7.TouchDesign.ToggleSetting(this);">タッチモード</a></li>
+ <li class="yuimenuitem"><a  class="vr_headerSignageCheckbox" href="javascript:void(0);" onclick="CB7.Signage.Start();">全画面表示</a></li>
+ <li class="yuimenuitem headermenuSep">&nbsp;</li>
+ <li class="yuimenuitem"><a href="https://jp.cybozu.help/of10/ja/user.html" target="_blank">ヘルプ</a></li>
+<form method="post" id="topLogoutForm" name="topLogoutForm" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+<input type="hidden" name="_System" value="Login"><input type="hidden" name="_Logout" value="ログアウト"></form> <li class="yuimenuitem"><a href="#" onclick="javascript:document.topLogoutForm.submit();">ログアウト</a></li>
+ </ul>
+ </div>
+ </div>
+ </li>
+ <li id="header-menu-admin" class="yuimenubaritem vr_headerMenuAdmin">
+ <a href="javascript:void(0)" class="yuimenubaritemlabel"><img src="/cb1080/image/comHeader_settings.png" alt="管理者メニュー"></a>
+ <div id="adminmenu" class="headersubmenu yuimenu" style="visibility:hidden;">
+ <div class="bd">
+ <ul>
+ <li class="yuimenuitem"><a href="ag.cgi?page=SystemAdminMenu">システム設定</a></li>
+ <li class="yuimenuitem headermenuSep">&nbsp;</li>
+ <li class="yuimenuitem"><a href="https://jp.cybozu.help/of10/ja/admin.html" target="_blank">管理者ヘルプ</a></li>
+ </ul>
+ </div>
+ </div>
+ </li>
+ </ul>
+ </div>
+</div>
+<script language="JavaScript" type="text/javascript"><!--//
+YAHOO.util.Event.onContentReady( 'headermenu', function(){
+ new CB7.HeaderMenu('headermenu', {
+ requesturl:'ag.cgi', position: 'static',
+ autosubmenudisplay: false, clicktohide: true, scrollincrement:3, lazyload:true
+ });
+});
+//--></script>
+<script language="JavaScript" type="text/javascript"><!--//
+(function(){ CB7.TouchDesign.Init(); })();
+//--></script>
+<script>CB7.Signage.Init("NotificationIndex");</script>
+ </td>
+ </tr>
+ </table>
+ </div>
+</div>
+<script language="JavaScript" type="text/javascript"><!--//
+YAHOO.util.Event.onContentReady( 'headbar-wrapper', function(){
+ OnHashJump();
+ SetContentPaddingTop();
+ $(window).resize(function(){SetContentPaddingTop();});
+});
+//--></script>
+<div id="content-wrapper" class="vr_headbarWarningFix">
+<div class="vr_themeHeaderWrapper">
+<div class="vr_themeHeader" id="vr_themeHeader"><div class="vr_themeHeaderLink1"></div><div class="vr_themeHeaderLink2"></div><div class="vr_themeHeaderLink3"></div></div>
+<div class="vr_themeHeaderOuterDivider"></div>
+<div id='appIconMenuFrame' style='overflow-y:hidden;'>
+<div class="vr_themeHeaderInnerDivider"></div>
+<div class="vr_naviAppMenu"><nav role="navigation"><ul class="naviAppMenuList">
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=AGIndex"><span class="appmenucss appMenuAGIndex"></span><br><span class="vr_naviAppMenu">トップページ</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=MyFolderIndex"><span class="appmenucss appMenuMyFolderIndex"></span><br><span class="vr_naviAppMenu">個人フォルダ</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=MailIndex"><span class="appmenucss appMenuMailIndex"></span><br><span class="vr_naviAppMenu">メール</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=ScheduleIndex"><span class="appmenucss appMenuScheduleIndex"></span><br><span class="vr_naviAppMenu">スケジュール</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=ScheduleIndex&amp;gid=fh"><span class="appmenucss appMenuScheduleFacility"></span><br><span class="vr_naviAppMenu">施設予約</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=WhereIndex"><span class="appmenucss appMenuWhereIndex"></span><br><span class="vr_naviAppMenu">電話メモ（在席確認）</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=TimeCardIndex"><span class="appmenucss appMenuTimeCardIndex"></span><br><span class="vr_naviAppMenu">タイムカード</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=ToDoIndex"><span class="appmenucss appMenuToDoIndex"></span><br><span class="vr_naviAppMenu">ToDoリスト</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=BulletinIndex"><span class="appmenucss appMenuBulletinIndex"></span><br><span class="vr_naviAppMenu">掲示板</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=FileIndex"><span class="appmenucss appMenuFileIndex"></span><br><span class="vr_naviAppMenu">ファイル管理</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=AddressIndex"><span class="appmenucss appMenuAddressIndex"></span><br><span class="vr_naviAppMenu">アドレス帳</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=UserListIndex"><span class="appmenucss appMenuUserListIndex"></span><br><span class="vr_naviAppMenu">ユーザー名簿</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=WorkFlowIndex"><span class="appmenucss appMenuWorkFlowIndex"></span><br><span class="vr_naviAppMenu">ワークフロー</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=ReportIndex"><span class="appmenucss appMenuReportIndex"></span><br><span class="vr_naviAppMenu">報告書</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=ProjectIndex"><span class="appmenucss appMenuProjectIndex"></span><br><span class="vr_naviAppMenu">プロジェクト</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="https://office.cybozu.co.jp/trial/apply/?utm_source=onlinedemo&amp;utm_medium=referral&amp;utm_campaign=appmenu"><img class="appmenuimg" src="ag.cgi?page=OfficeDownload&amp;notimecard=1&amp;type=image&amp;subtype=png&amp;id=187&amp;ct=1&amp;v=1573810718&amp;width=32&amp;height=32&amp;ext=.png" alt="30日間お試し" height="32" width="32" border="0"><br><span class="vr_naviAppMenu">30日間お試し</span></a></span>
+</li>
+<li class="naviAppMenuListItem">
+<span class="appMenuItem"><a href="ag.cgi?page=DBIndex"><span class="appmenucss appMenuDBIndex"></span><br><span class="vr_naviAppMenu">カスタムアプリ</span></a></span>
+</li>
+<li class="naviAppMenuListItem"><span class="appMenuItem "><a href="ag.cgi?page=DBView&did=43"><img class="appmenuimg" src="ag.cgi?page=DBIconDownload&amp;MainType=image&amp;SubType=png&amp;notimecard=1&amp;did=43&amp;ct=1&amp;v=1316877727&amp;width=32&amp;height=32&amp;ext=.png" alt="クレーム管理" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">クレーム管理</span></a></span>
+</li>
+<li class="naviAppMenuListItem"><span class="appMenuItem "><a href="ag.cgi?page=DBView&did=50"><img class="appmenuimg" src="ag.cgi?page=DBIconDownload&amp;MainType=image&amp;SubType=png&amp;notimecard=1&amp;did=50&amp;ct=1&amp;v=1316878244&amp;width=32&amp;height=32&amp;ext=.png" alt="契約書管理" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">契約書管理</span></a></span>
+</li>
+<li class="naviAppMenuListItem"><span class="appMenuItem appMenuItemNew"><a href="ag.cgi?page=DBView&did=57"><img class="appmenuimg" src="ag.cgi?page=DBIconDownload&amp;MainType=image&amp;SubType=png&amp;notimecard=1&amp;did=57&amp;ct=1&amp;v=1335938580&amp;width=32&amp;height=32&amp;ext=.png" alt="障害対応依頼" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">障害対応依頼</span></a></span>
+</li>
+<li class="naviAppMenuListItem"><span class="appMenuItem "><a href="ag.cgi?page=DBView&did=82"><img class="appmenuimg" src="/cb1080/image/customapp32_05.png" alt="情シスへの依頼箱" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">情シスへの依頼箱</span></a></span>
+</li>
+<li class="naviAppMenuListItem"><span class="appMenuItem "><a href="ag.cgi?page=DBView&did=84"><img class="appmenuimg" src="/cb1080/image/customapp32_16.png" alt="共有ToDo" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">共有ToDo</span></a></span>
+</li>
+<li class="naviAppMenuListItem"><span class="appMenuItem appMenuItemNew"><a href="ag.cgi?page=DBView&did=102"><img class="appmenuimg" src="ag.cgi?page=DBIconDownload&amp;MainType=image&amp;SubType=png&amp;notimecard=1&amp;did=102&amp;ct=1&amp;v=1371429444&amp;width=32&amp;height=32&amp;ext=.png" alt="見積り依頼受付" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">見積り依頼受付</span></a></span>
+</li>
+<li class="naviAppMenuListItem"><span class="appMenuItem "><a href="ag.cgi?page=DBView&did=116"><img class="appmenuimg" src="ag.cgi?page=DBIconDownload&amp;MainType=image&amp;SubType=png&amp;notimecard=1&amp;did=116&amp;ct=1&amp;v=&amp;width=32&amp;height=32&amp;ext=.png" alt="商談進捗管理" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">商談進捗管理</span></a></span>
+</li>
+<li class="naviAppMenuListItem"><span class="appMenuItem appMenuItemNew"><a href="ag.cgi?page=DBView&did=124"><img class="appmenuimg" src="ag.cgi?page=DBIconDownload&amp;MainType=image&amp;SubType=png&amp;notimecard=1&amp;did=124&amp;ct=1&amp;v=&amp;width=32&amp;height=32&amp;ext=.png" alt="共有タスク管理" width="32" height="32" align=absmiddle><br><span class="vr_naviAppMenu">共有タスク管理</span></a></span>
+</li>
+</ul></nav></div></div>
+</div>
+<div><div id='appmenuToggler' class='appmenuExpand'><div class='appmenuToggleButton'></div></div></div>
+
+<script language="javascript" type="text/javascript">
+<!--
+ShowSitePosition("m", "", "", '通知一覧（未読一覧）', false, false, false);
+//-->
+</script>
+
+<div class="content">
+<div style="width:100%;">
+<div class="vr_filterbar" data-filter="all">
+<button class="linkedRadioButton linkedButtonFirst linkedRadioButtonSelected" onclick="CB7.Notification.changeView('ag.cgi?page=NotificationIndex&amp;Sort=&amp;Rev=', 0, 0); return false;"><span class="linkedRadioButtonLabel">未読</span></button><button class="linkedRadioButton linkedButtonLast" onclick="CB7.Notification.changeView('ag.cgi?page=NotificationIndex&amp;Sort=&amp;Rev=', 1, 0); return false;"><span class="linkedRadioButtonLabel">既読</span></button>&nbsp;
+<img src="/cb1080/image/arrow_right_sharp16.png" align=absmiddle>&nbsp;<button id="vr_allButton" class="linkedRadioButton linkedButtonFirst linkedRadioButtonSelected" onclick="CB7.Notification.changeView('ag.cgi?page=NotificationIndex&amp;Sort=&amp;Rev=', 0, 0);"><span class="linkedRadioButtonLabel">すべて</span></button><button id="vr_mentionButton" class="linkedRadioButton linkedButtonLast" onclick="CB7.Notification.changeView('ag.cgi?page=NotificationIndex&amp;Sort=&amp;Rev=', 0, 1);"><span class="linkedRadioButtonLabel">@自分</span></button></div>
+<table class="vr_contentArea" width="100%" role="presentation"><tr><td class="vr_contentAreaTd">
+<table class="multicol" width="100%" role="presentation">
+ <tr valign="top">
+ <td class="naviColumn" width="1%" nowrap>
+ <div class="vr_naviColumn">
+<div class="notificationNaviWrapper">
+<table class="notificationNavi">
+<div class="smallcorner">アプリケーション</div>
+<table class="notificationNavi">
+<tr><td class="categoryItem categoryItemFirst" nowrap data-app=""><img src="/cb1080/image/node16.png"><span class="categoryItemSpan activeCategory"><a id="" href="javascript: void(0)" onClick="CB7.Notification.setFilter('', this); CB7.Notification.setNaviFlowStyle(); CB7.Notification.setEmptyMessage('');">すべて</a></span></td></tr>
+<tr><td class="categoryItem" nowrap data-app="0"><img src="/cb1080/image/node16.png"><span class="categoryItemSpan"><a id="" href="javascript: void(0)" onClick="CB7.Notification.setFilter('', this); CB7.Notification.setNaviFlowStyle(); CB7.Notification.setEmptyMessage('');">電話メモ</a></span></td></tr>
+<tr><td class="categoryItem" nowrap data-app="1"><img src="/cb1080/image/node16.png"><span class="categoryItemSpan"><a id="" href="javascript: void(0)" onClick="CB7.Notification.setFilter('', this); CB7.Notification.setNaviFlowStyle(); CB7.Notification.setEmptyMessage('');">ワークフロー</a></span></td></tr>
+<tr><td class="categoryItem" nowrap data-app="2"><img src="/cb1080/image/node16.png"><span class="categoryItemSpan"><a id="" href="javascript: void(0)" onClick="CB7.Notification.setFilter('', this); CB7.Notification.setNaviFlowStyle(); CB7.Notification.setEmptyMessage('');">メッセージ</a></span></td></tr>
+<tr><td class="categoryItem" nowrap data-app="3"><img src="/cb1080/image/node16.png"><span class="categoryItemSpan"><a id="" href="javascript: void(0)" onClick="CB7.Notification.setFilter('', this); CB7.Notification.setNaviFlowStyle(); CB7.Notification.setEmptyMessage('');">メール</a></span></td></tr>
+<tr><td class="categoryItem" nowrap data-app="7"><img src="/cb1080/image/node16.png"><span class="categoryItemSpan"><a id="" href="javascript: void(0)" onClick="CB7.Notification.setFilter('', this); CB7.Notification.setNaviFlowStyle(); CB7.Notification.setEmptyMessage('');">スケジュール</a></span></td></tr>
+<tr><td class="categoryItem" nowrap data-app="5"><img src="/cb1080/image/node16.png"><span class="categoryItemSpan"><a id="" href="javascript: void(0)" onClick="CB7.Notification.setFilter('', this); CB7.Notification.setNaviFlowStyle(); CB7.Notification.setEmptyMessage('');">掲示板</a></span></td></tr>
+<tr><td class="categoryItem" nowrap data-app="6"><img src="/cb1080/image/node16.png"><span class="categoryItemSpan"><a id="" href="javascript: void(0)" onClick="CB7.Notification.setFilter('', this); CB7.Notification.setNaviFlowStyle(); CB7.Notification.setEmptyMessage('');">ファイル管理</a></span></td></tr>
+<tr><td class="categoryItem" nowrap data-app="4"><img src="/cb1080/image/node16.png"><span class="categoryItemSpan"><a id="" href="javascript: void(0)" onClick="CB7.Notification.setFilter('', this); CB7.Notification.setNaviFlowStyle(); CB7.Notification.setEmptyMessage('');">報告書</a></span></td></tr>
+<tr><td class="categoryItem" nowrap data-app="8"><img src="/cb1080/image/node16.png"><span class="categoryItemSpan"><a id="" href="javascript: void(0)" onClick="CB7.Notification.setFilter('', this); CB7.Notification.setNaviFlowStyle(); CB7.Notification.setEmptyMessage('');">プロジェクト</a></span></td></tr>
+<tr><td class="categoryItem" nowrap data-app="11"><img src="/cb1080/image/node16.png"><span class="categoryItemSpan"><a id="" href="javascript: void(0)" onClick="CB7.Notification.setFilter('', this); CB7.Notification.setNaviFlowStyle(); CB7.Notification.setEmptyMessage('');">カスタムアプリ</a></span></td></tr>
+<tr><td class="categoryItem  categoryItemLast" nowrap data-app="10"><img src="/cb1080/image/node16.png"><span class="categoryItemSpan"><a id="" href="javascript: void(0)" onClick="CB7.Notification.setFilter('', this); CB7.Notification.setNaviFlowStyle(); CB7.Notification.setEmptyMessage('');">連携システムからの通知</a></span></td></tr>
+</table>
+<br>
+</div>
+<input type="hidden" id="ActiveApp" value="">
+ </div>
+ </td>
+ <td class="vr_spaceColumn"></td>
+ <td class="listColumn" width="99%">
+ <div class="vr_listColumn"><!-- for ie margin -->
+ <div class="vr_mainColumn">
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/dbheader.js?_v=1086120220502162043.js"></script>
+<script>
+$(function(){
+ CB7.Notification.Controller.init();
+});
+window.onload = function(){
+ var notificationRow = $("#vr_allNotifications .notificationRow");
+ notificationRow.each(function() {
+ var controller = $(this).find(".notificationController");
+ CB7.DBHeader.init({
+ targets: controller.find("tr:first"),
+ bellow: "#headbar-wrapper",
+ helperClasses: "notification-controller-fixed js-notification-controller-helper",
+ wrapper: controller.parent(),
+ useSwitcher: false,
+ refreshEvent: "refreshNotificationController"
+ });
+ });
+}
+</script>
+<div id="vr_allNotifications" style="display:block">
+<div class="notificationCategory notificationCategoryWorkflow" data-type="Workflow" data-app="1">
+<div class="notificationCategoryName">ワークフロー</div>
+<div class="notificationRows">
+<div class="notificationRow" data-id="866">
+<div class="notificationControllerWrapper">
+ <table class="notificationController">
+ <tr>
+ <td nowrap="nowrap">
+ <div class="notificationControllerInner">
+<a href="javascript:void(0)" class="notificationControllerPrev vr_stdButton lightButton" title="前へ"><span><img src="/cb1080/image/arrow_top_sharp16.png"></span></a><a href="javascript:void(0)" class="notificationControllerNext vr_stdButton lightButton" title="次へ"><span><img src="/cb1080/image/arrow_bottom_sharp16.png"></span></a>
+<div type="button" class="vr_stdButton" onclick="javascript:void(0);" style="visibility: hidden">&nbsp</div>
+ </div>
+ </td>
+ </tr>
+ </table>
+</div>
+<div class="notificationSubject"><a href="ag.cgi?page=WorkFlowHandle&wid=866"><img src="/cb1080/image/workflow_confirm16.png" align=absmiddle>交通費申請書 （2月の交通費）</a></div>
+<div class="notificationContents">
+<div class="notificationMain notificationMainUnread">
+<div class="notificationAddress"><span class="notificationAddressItem"><span class="notificationAddressLabel">申請者：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>和田 一夫</span></span><span class="notificationAddressItem"><span class="notificationAddressLabel">申請日：</span><span class="notificationAddressText"> 2016/2/26(金) 18:26</span></span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+ <link rel="stylesheet" href="/cb1080/html/jquery/ui/jquery-ui.min.css?_v=1086120220502162043.css">
+ <script type="text/javascript" charset="UTF-8" src="/cb1080/html/jquery/ui/jquery-ui.min.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/token_input.js?_v=1086120220502162043.js"></script>
+<link rel="stylesheet" type="text/css" href="/cb1080/html/token_input.css?_v=1086120220502162043.css" />
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/mention_input.js?_v=1086120220502162043.js"></script>
+<div class="notificationCategory notificationCategoryMessage" data-type="Message" data-app="2">
+<div class="notificationCategoryName">メッセージ</div>
+<div class="notificationRows">
+<div class="notificationRow notificationTypeUpdate" data-id="607">
+<div class="notificationControllerWrapper">
+ <table class="notificationController">
+ <tr>
+ <td nowrap="nowrap">
+ <div class="notificationControllerInner">
+<a href="javascript:void(0)" class="notificationControllerPrev vr_stdButton lightButton" title="前へ"><span><img src="/cb1080/image/arrow_top_sharp16.png"></span></a><a href="javascript:void(0)" class="notificationControllerNext vr_stdButton lightButton" title="次へ"><span><img src="/cb1080/image/arrow_bottom_sharp16.png"></span></a>
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+ </div>
+ </td>
+ </tr>
+ </table>
+</div>
+<div class="notificationSubject"><a href="ag.cgi?page=MyFolderMessageView&amp;mDBID=5&amp;mDID=4&amp;mEID=607&tp=t&amp;dummy=1#Follow"><img src="/cb1080/image/msg16_u.png" align=absmiddle>【連絡帳】営業部 ⇔ 総務部</a></div>
+<div class="notificationContents">
+<div class="notificationMain notificationMainUnread">
+<div class="notificationAddress"><span class="notificationAddressItem"><span class="notificationAddressLabel">差出人：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太</span><span class="notificationAddressText"> 2015/10/8(木) 11:37</span></span><span class="notificationAddressItem"><span class="notificationAddressLabel">最終更新者：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太</span><span class="notificationAddressText"> 2015/10/8(木) 13:42</span></span></div>
+<div class="notificationBodyWrapper">
+<div class="notificationBody"><div class="notificationBodyExpand"><div class="notificationBodyText"><div id="messageText">
+<tt>部署間での情報交換、意見交換をするメッセージです。<br><br><a href="ag.cgi?Page=DBTotalingView&amp;DID=116&amp;VID=69&amp;Prev=DBView&amp;QID=all&amp;TID=291#inline">ag.cgi?Page=DBTotalingView&amp;DID=116&amp;VID=69&amp;Prev=DBView&amp;QID=all&amp;TID=291#inline</a></tt></div>
+<div id="js-dbgraph-libraries">
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/highcharts/highcharts.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/chart.js?_v=1086120220502162043.js"></script>
+</div>
+<link rel="stylesheet" type="text/css" href="/cb1080/html/lightbox.css?_v=1086120220502162043.css" />
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/lightbox.js?_v=1086120220502162043.js"></script>
+<script type="text/javascript"><!--
+ShowDBInlineView( "messageText" );
+//--></script>
+<div class="followMenu clearfix vr_viewContentsMenu">
+ <div class="followMenuMain">
+ <span class="followMenuLinkWrapper">
+ <span class="followMenuLinkInner" id="simpleReplyLinkText-message-607-0" onmouseover="YAHOO.util.Dom.addClass(this.parentNode, 'simpleReplyLinkWrapperHover')" onmouseout="YAHOO.util.Dom.removeClass(this.parentNode, 'simpleReplyLinkWrapperHover')">
+ <a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('message', 607, 0, null, false);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>確認しました</a><a id="simpleReplyImageMenuLink-message-607-0" class="simpleReplyImageMenuLink" href="#" onclick="CB7.follow.toggleSimpleReplyMenu(this, 'message', 607, 0);return false;"><img src="/cb1080/image/showdown12.png" align=absmiddle></a>
+ </span>
+ <span class="followMenuLinkInner" id="simpleReplyLinkCancel-message-607-0" style="display:none">
+<a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('message', 607, 0, null, true);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>「確認しました」を取り消す</a>
+ </span>
+ </span>
+ </div>
+</div>
+<div>
+<div class="simpleReplyUserList" id="simpleReplyUserList-message-607-0" style="display:none">
+ <div class="simpleReplyUserListTip"></div>
+ <ul class="simpleReplyUsers">
+ <li class="simpleReplyUser" id="simpleReplyUser-message-607-0-spinner" style="display:none">
+ <span class="simpleReplyUserArea"><img src="/cb1080/image/spinner.gif" align="absmiddle"></span>
+ </li>
+ <li class="simpleReplyUser simpleReplyUserMe" id="simpleReplyUser-message-607-0-me" style="display:none">
+ <a href="#" onclick="javascript:CB7.follow.showSimpleReplyMenu(this, 'message', 607, 0);return false;">
+ <span class="profileSimpleReplyImage" style="cursor:pointer" title="加藤 美咲">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle><script language="JavaScript" type="text/javascript"><!--
+CB7.follow.simpleReplyValues['message-607-0'] = null;
+//--></script>
+ </span>
+ </a>
+ </li>
+ <li class="simpleReplyUserCollapse">
+ <a id="simpleReplyUserCounter-message-607-0" class="simpleReplyUserCount" href="#" onclick="CB7.follow.showSimpleReplyUsers(this, 'message', 607, 0, '確認しました');return false;"><span id="simpleReplyUserCount-message-607-0"></span>名</a>
+ </li>
+ </ul>
+</div>
+</div>
+<div class="messageConfirm">
+<table width="100%">
+ <tr>
+ <td>
+ </td>
+ <td align="right" class="vr_displayType" nowrap>
+ </td>
+ <td width="1%" class="vr_displayType" align="right" nowrap>
+<a href="ag.cgi?page=MyFolderMessageView&mDBID=4&mEID=608&mDID=4&cp=ml">&lt;&lt; 前へ</a> |
+<a href="ag.cgi?page=MyFolderMessageView&mDBID=8&mEID=577&mDID=4&cp=ml">次へ &gt;&gt;</a>
+ </td>
+ </tr>
+</table>
+</div>
+</div></div>
+<div class="notificationBodyFade" style="display:none"></div>
+<div class="notificationBodyMore" style="display:none"><a class="hilightLink" href="javascript:void(0)" onclick="CB7.Notification.showMain(this); return false;"><span class="vr_textColor">...</span>&nbsp;本文をすべて表示する</a></div>
+</div>
+</div>
+</div>
+<div class="notificationComment">
+<div class="notificationCommentForm"><input type="text" class="notificationCommentInputSimple vr_placeholder" value="コメントを入力してください。"  onfocus="CB7.followJQ.getCommentForm(this); return false;"/>
+</div>
+<div id="FollowContent" class="notificationCommentList">
+<div class="vr_followWrapper" id="follow-root-16">
+<div class="vr_follow updateContents" id="follow-message-607-16" onmouseover="CB7.follow.selectComment('message-607-16')" onmouseout="CB7.follow.unselectComment('message-607-16')">
+<div class="vr_followUserImageColumn">
+<img class="profileImage" src="/cb1080/image/user32.png" style="width: 32px; height: 32px;" align=absmiddle></div>
+<div class="vr_followContentsColumn">
+<div class="vr_followHeader">
+<span class="vr_followNo">3&nbsp;:</span><span class="vr_followUser"><span class="vr_followUserName">和田 一夫</span><span class="vr_followUserGroup">（部長）
+</span></span><span class="vr_followTime">
+ 2015/10/8(木) 13:44
+</span></div>
+<div id="followContents16" class="vr_followContents"><table class="vr_followHeaderTo"><tr><td class="vr_followHeaderToCell"><div id="followContents16-Reply" class="vr_replyToContainer"><span class="vr_reply"><a id="message-607-3-2:000004a342d5cdab" onclick="javascript:CB7.follow.showReplied(this, 'message-607-3', 2)" href="javascript:void(0)"><span class="vr_replyLink">&gt;2</span><span class="vr_replyText">への返信</span>
+</a></span></div>
+</td><td class="vr_followHeaderToCell"><div id="followContents-Mention" class="vr_mentionToContainer">
+<table class="vr_mentionUsers"><tr><td class="vr_mentionUsersCell" nowrap><span class="vr_mentionMark">@</span></td><td class="vr_mentionUsersCell">：</td><td class="vr_mentionUsersCell"><nobr class="js-mention"><span class="js-mention-uid" data-uid="17" data-name="高橋 健太">高橋 健太</span></nobr>
+</td></tr></table></div>
+</td></tr></table>
+<tt>「サイボウズ&nbsp;Office」を200ユーザーで受注しました。<br>今月も頑張っていきます！</tt></div>
+<script type="text/javascript"><!--
+ShowDBInlineView( "followContents16" );
+//--></script>
+<input type="hidden" id="followHeader16" value="和田 一夫さん">
+<div class="followMenu clearfix">
+ <div class="followMenuMain">
+ <div class="followData" data-creator-id="23" data-creator-name="和田 一夫">
+ <span class="followMenuLinkWrapper">
+ <span class="followMenuLinkInner" id="simpleReplyLinkText-message-607-16" onmouseover="YAHOO.util.Dom.addClass(this.parentNode, 'simpleReplyLinkWrapperHover')" onmouseout="YAHOO.util.Dom.removeClass(this.parentNode, 'simpleReplyLinkWrapperHover')">
+ <a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('message', 607, 16, null, false);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>確認しました</a><a id="simpleReplyImageMenuLink-message-607-16" class="simpleReplyImageMenuLink" href="#" onclick="CB7.follow.toggleSimpleReplyMenu(this, 'message', 607, 16);return false;"><img src="/cb1080/image/showdown12.png" align=absmiddle></a>
+ </span>
+ <span class="followMenuLinkInner" id="simpleReplyLinkCancel-message-607-16" style="display:none">
+<a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('message', 607, 16, null, true);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>「確認しました」を取り消す</a>
+ </span>
+ </span>
+<span class="followMenuLinkWrapper vr_iconReply"><a class="" href="#" onClick="CB7.followJQ.inputReferenceToFollowForm( '16', this, 1, 3 );return false;" name=""><img src="/cb1080/image/reply16.png" align=absmiddle>返信する</a></span>&nbsp;
+ </div>
+ </div>
+ <div class="followMenuSub">
+<span class="followMenuLinkWrapper vr_iconUrlTip"><a class="" href="#" onClick="CB7.follow.showPermalink( this, 'https:\u002f\u002fonlinedemo.cybozu.info\u002fscripts\u002foffice10\u002fag.cgi?page=MyFolderMessageView\u0026mDBID=5\u0026mDID=4\u0026tp=t\u0026flno=3#Follow' );return false;" name=""><img src="/cb1080/image/permlink16.png" align=absmiddle>固定リンク</a></span>&nbsp;
+ </div>
+</div>
+<div class="simpleReplyUserList" id="simpleReplyUserList-message-607-16" style="display:none">
+ <div class="simpleReplyUserListTip"></div>
+ <ul class="simpleReplyUsers">
+ <li class="simpleReplyUser" id="simpleReplyUser-message-607-16-spinner" style="display:none">
+ <span class="simpleReplyUserArea"><img src="/cb1080/image/spinner.gif" align="absmiddle"></span>
+ </li>
+ <li class="simpleReplyUser simpleReplyUserMe" id="simpleReplyUser-message-607-16-me" style="display:none">
+ <a href="#" onclick="javascript:CB7.follow.showSimpleReplyMenu(this, 'message', 607, 16);return false;">
+ <span class="profileSimpleReplyImage" style="cursor:pointer" title="加藤 美咲">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle><script language="JavaScript" type="text/javascript"><!--
+CB7.follow.simpleReplyValues['message-607-16'] = null;
+//--></script>
+ </span>
+ </a>
+ </li>
+ <li class="simpleReplyUserCollapse">
+ <a id="simpleReplyUserCounter-message-607-16" class="simpleReplyUserCount" href="#" onclick="CB7.follow.showSimpleReplyUsers(this, 'message', 607, 16, '確認しました');return false;"><span id="simpleReplyUserCount-message-607-16"></span>名</a>
+ </li>
+ </ul>
+</div>
+</div>
+</div>
+</div>
+<div class="vr_followWrapper" id="follow-root-14">
+<div class="vr_follow " id="follow-message-607-14" onmouseover="CB7.follow.selectComment('message-607-14')" onmouseout="CB7.follow.unselectComment('message-607-14')">
+<div class="vr_followUserImageColumn">
+<img class="profileImage" src="/cb1080/image/user32.png" style="width: 32px; height: 32px;" align=absmiddle></div>
+<div class="vr_followContentsColumn">
+<div class="vr_followHeader">
+<span class="vr_followNo">2&nbsp;:</span><span class="vr_followUser"><span class="vr_followUserName">高橋 健太</span><span class="vr_followUserGroup">（総務部）
+</span></span><span class="vr_followTime">
+ 2015/10/8(木) 11:39
+</span></div>
+<div id="followContents14" class="vr_followContents"><tt><br>予算を達成できるように、今月も頑張っていきましょう。<br><br></tt></div>
+<script type="text/javascript"><!--
+ShowDBInlineView( "followContents14" );
+//--></script>
+<input type="hidden" id="followHeader14" value="高橋 健太さん">
+<div class="followMenu clearfix">
+ <div class="followMenuMain">
+ <div class="followData" data-creator-id="17" data-creator-name="高橋 健太">
+ <span class="followMenuLinkWrapper">
+ <span class="followMenuLinkInner" id="simpleReplyLinkText-message-607-14" onmouseover="YAHOO.util.Dom.addClass(this.parentNode, 'simpleReplyLinkWrapperHover')" onmouseout="YAHOO.util.Dom.removeClass(this.parentNode, 'simpleReplyLinkWrapperHover')">
+ <a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('message', 607, 14, null, false);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>確認しました</a><a id="simpleReplyImageMenuLink-message-607-14" class="simpleReplyImageMenuLink" href="#" onclick="CB7.follow.toggleSimpleReplyMenu(this, 'message', 607, 14);return false;"><img src="/cb1080/image/showdown12.png" align=absmiddle></a>
+ </span>
+ <span class="followMenuLinkInner" id="simpleReplyLinkCancel-message-607-14" style="display:none">
+<a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('message', 607, 14, null, true);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>「確認しました」を取り消す</a>
+ </span>
+ </span>
+<span class="followMenuLinkWrapper vr_iconReply"><a class="" href="#" onClick="CB7.followJQ.inputReferenceToFollowForm( '14', this, 1, 2 );return false;" name=""><img src="/cb1080/image/reply16.png" align=absmiddle>返信する</a></span>&nbsp;
+ </div>
+ </div>
+ <div class="followMenuSub">
+<span class="followMenuLinkWrapper vr_iconUrlTip"><a class="" href="#" onClick="CB7.follow.showPermalink( this, 'https:\u002f\u002fonlinedemo.cybozu.info\u002fscripts\u002foffice10\u002fag.cgi?page=MyFolderMessageView\u0026mDBID=5\u0026mDID=4\u0026tp=t\u0026flno=2#Follow' );return false;" name=""><img src="/cb1080/image/permlink16.png" align=absmiddle>固定リンク</a></span>&nbsp;
+ </div>
+</div>
+<div class="simpleReplyUserList" id="simpleReplyUserList-message-607-14" style="display:none">
+ <div class="simpleReplyUserListTip"></div>
+ <ul class="simpleReplyUsers">
+ <li class="simpleReplyUser" id="simpleReplyUser-message-607-14-spinner" style="display:none">
+ <span class="simpleReplyUserArea"><img src="/cb1080/image/spinner.gif" align="absmiddle"></span>
+ </li>
+ <li class="simpleReplyUser simpleReplyUserMe" id="simpleReplyUser-message-607-14-me" style="display:none">
+ <a href="#" onclick="javascript:CB7.follow.showSimpleReplyMenu(this, 'message', 607, 14);return false;">
+ <span class="profileSimpleReplyImage" style="cursor:pointer" title="加藤 美咲">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle><script language="JavaScript" type="text/javascript"><!--
+CB7.follow.simpleReplyValues['message-607-14'] = null;
+//--></script>
+ </span>
+ </a>
+ </li>
+ <li class="simpleReplyUserCollapse">
+ <a id="simpleReplyUserCounter-message-607-14" class="simpleReplyUserCount" href="#" onclick="CB7.follow.showSimpleReplyUsers(this, 'message', 607, 14, '確認しました');return false;"><span id="simpleReplyUserCount-message-607-14"></span>名</a>
+ </li>
+ </ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<form method="post" id="simpleReply-form-message-607" name="simpleReply" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+<input type=hidden name=page value=AjaxSimpleReply>
+<input type="hidden" name="app" value="message">
+<input type="hidden" name="DBID" value="5">
+<input type="hidden" name="MID" value="4">
+<input type="hidden" name="EID" value="607">
+<input type="hidden" name="BC" value="0">
+<input type="hidden" name="FRID" value="">
+<input type="hidden" name="Value" value="">
+<input type="hidden" name="Cancel" value="">
+<input type="hidden" name="ClearNotification" value="1">
+</form>
+<script language="JavaScript" type="text/javascript"><!--
+CB7.follow.AJAX_URL['message-607'] = GetExeFileName( document.URL ) + "?page=AjaxXHRMyFolderMessage%PAGE_ID%&mDBID=5&mEID=607&mDID=4";
+//-->
+</script>
+</div>
+<div class="notificationFooter">
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+</div>
+</div>
+<div class="notificationRow" data-id="608">
+<div class="notificationControllerWrapper">
+ <table class="notificationController">
+ <tr>
+ <td nowrap="nowrap">
+ <div class="notificationControllerInner">
+<a href="javascript:void(0)" class="notificationControllerPrev vr_stdButton lightButton" title="前へ"><span><img src="/cb1080/image/arrow_top_sharp16.png"></span></a><a href="javascript:void(0)" class="notificationControllerNext vr_stdButton lightButton" title="次へ"><span><img src="/cb1080/image/arrow_bottom_sharp16.png"></span></a>
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+ </div>
+ </td>
+ </tr>
+ </table>
+</div>
+<div class="notificationSubject"><a href="ag.cgi?page=MyFolderMessageView&amp;mDBID=4&amp;mDID=4&amp;mEID=608&tp=t"><img src="/cb1080/image/msg16.png" align=absmiddle>【講読自由】総務からのお知らせ</a></div>
+<div class="notificationContents">
+<div class="notificationMain notificationMainUnread">
+<div class="notificationAddress"><span class="notificationAddressItem"><span class="notificationAddressLabel">差出人：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>大山 春香</span><span class="notificationAddressText"> 2015/10/8(木) 12:01</span></span><span class="notificationAddressItem"><span class="notificationAddressLabel">最終更新者：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>大山 春香</span><span class="notificationAddressText"> 2015/10/8(木) 13:01</span></span></div>
+<div class="notificationBodyWrapper">
+<div class="notificationBody"><div class="notificationBodyExpand"><div class="notificationBodyText"><div id="messageText">
+<tt>【講読自由】総務からのお知らせをこちらに掲示していきます。</tt></div>
+<script type="text/javascript"><!--
+ShowDBInlineView( "messageText" );
+//--></script>
+<div class="followMenu clearfix vr_viewContentsMenu">
+ <div class="followMenuMain">
+ <span class="followMenuLinkWrapper">
+ <span class="followMenuLinkInner" id="simpleReplyLinkText-message-608-0" onmouseover="YAHOO.util.Dom.addClass(this.parentNode, 'simpleReplyLinkWrapperHover')" onmouseout="YAHOO.util.Dom.removeClass(this.parentNode, 'simpleReplyLinkWrapperHover')">
+ <a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('message', 608, 0, null, false);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>いいね！</a><a id="simpleReplyImageMenuLink-message-608-0" class="simpleReplyImageMenuLink" href="#" onclick="CB7.follow.toggleSimpleReplyMenu(this, 'message', 608, 0);return false;"><img src="/cb1080/image/showdown12.png" align=absmiddle></a>
+ </span>
+ <span class="followMenuLinkInner" id="simpleReplyLinkCancel-message-608-0" style="display:none">
+<a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('message', 608, 0, null, true);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>「いいね！」を取り消す</a>
+ </span>
+ </span>
+ </div>
+</div>
+<div>
+<div class="simpleReplyUserList" id="simpleReplyUserList-message-608-0" style="display:none">
+ <div class="simpleReplyUserListTip"></div>
+ <ul class="simpleReplyUsers">
+ <li class="simpleReplyUser" id="simpleReplyUser-message-608-0-spinner" style="display:none">
+ <span class="simpleReplyUserArea"><img src="/cb1080/image/spinner.gif" align="absmiddle"></span>
+ </li>
+ <li class="simpleReplyUser simpleReplyUserMe" id="simpleReplyUser-message-608-0-me" style="display:none">
+ <a href="#" onclick="javascript:CB7.follow.showSimpleReplyMenu(this, 'message', 608, 0);return false;">
+ <span class="profileSimpleReplyImage" style="cursor:pointer" title="加藤 美咲">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle><script language="JavaScript" type="text/javascript"><!--
+CB7.follow.simpleReplyValues['message-608-0'] = null;
+//--></script>
+ </span>
+ </a>
+ </li>
+ <li class="simpleReplyUserCollapse">
+ <a id="simpleReplyUserCounter-message-608-0" class="simpleReplyUserCount" href="#" onclick="CB7.follow.showSimpleReplyUsers(this, 'message', 608, 0, 'いいね！');return false;"><span id="simpleReplyUserCount-message-608-0"></span>名</a>
+ </li>
+ </ul>
+</div>
+</div>
+<div class="messageConfirm">
+<table width="100%">
+ <tr>
+ <td>
+ </td>
+ <td align="right" class="vr_displayType" nowrap>
+ </td>
+ <td width="1%" class="vr_displayType" align="right" nowrap>
+<span class="fontDisable">&lt;&lt; 前へ</span> |
+<a href="ag.cgi?page=MyFolderMessageView&mDBID=5&mEID=607&mDID=4&cp=ml">次へ &gt;&gt;</a>
+ </td>
+ </tr>
+</table>
+</div>
+</div></div>
+<div class="notificationBodyFade" style="display:none"></div>
+<div class="notificationBodyMore" style="display:none"><a class="hilightLink" href="javascript:void(0)" onclick="CB7.Notification.showMain(this); return false;"><span class="vr_textColor">...</span>&nbsp;本文をすべて表示する</a></div>
+</div>
+</div>
+</div>
+<div class="notificationComment">
+<div class="notificationCommentForm"><input type="text" class="notificationCommentInputSimple vr_placeholder" value="コメントを入力してください。"  onfocus="CB7.followJQ.getCommentForm(this); return false;"/>
+</div>
+<div id="FollowContent" class="notificationCommentList">
+<div class="vr_followWrapper" id="follow-root-11">
+<div class="vr_follow updateContents" id="follow-message-608-11" onmouseover="CB7.follow.selectComment('message-608-11')" onmouseout="CB7.follow.unselectComment('message-608-11')">
+<div class="vr_followUserImageColumn">
+<img class="profileImage" src="/cb1080/image/user32.png" style="width: 32px; height: 32px;" align=absmiddle></div>
+<div class="vr_followContentsColumn">
+<div class="vr_followHeader">
+<span class="vr_followNo">1&nbsp;:</span><span class="vr_followUser"><span class="vr_followUserName">大山 春香</span><span class="vr_followUserGroup">（総務部）
+</span></span><span class="vr_followTime">
+ 2015/10/8(木) 13:03
+</span></div>
+<div id="followContents11" class="vr_followContents"><tt>名刺の発注をする際に、裏面のデザインを選択していない方が多数見受けられます。<br>裏面のデザインが選択してあることを確認してから、発注ボタンを押すようにお願いします！</tt></div>
+<script type="text/javascript"><!--
+ShowDBInlineView( "followContents11" );
+//--></script>
+<input type="hidden" id="followHeader11" value="大山 春香さん">
+<div class="followMenu clearfix">
+ <div class="followMenuMain">
+ <div class="followData" data-creator-id="208" data-creator-name="大山 春香">
+ <span class="followMenuLinkWrapper">
+ <span class="followMenuLinkInner" id="simpleReplyLinkText-message-608-11" onmouseover="YAHOO.util.Dom.addClass(this.parentNode, 'simpleReplyLinkWrapperHover')" onmouseout="YAHOO.util.Dom.removeClass(this.parentNode, 'simpleReplyLinkWrapperHover')">
+ <a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('message', 608, 11, null, false);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>いいね！</a><a id="simpleReplyImageMenuLink-message-608-11" class="simpleReplyImageMenuLink" href="#" onclick="CB7.follow.toggleSimpleReplyMenu(this, 'message', 608, 11);return false;"><img src="/cb1080/image/showdown12.png" align=absmiddle></a>
+ </span>
+ <span class="followMenuLinkInner" id="simpleReplyLinkCancel-message-608-11" style="display:none">
+<a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('message', 608, 11, null, true);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>「いいね！」を取り消す</a>
+ </span>
+ </span>
+<span class="followMenuLinkWrapper vr_iconReply"><a class="" href="#" onClick="CB7.followJQ.inputReferenceToFollowForm( '11', this, 1, 1 );return false;" name=""><img src="/cb1080/image/reply16.png" align=absmiddle>返信する</a></span>&nbsp;
+ </div>
+ </div>
+ <div class="followMenuSub">
+<span class="followMenuLinkWrapper vr_iconUrlTip"><a class="" href="#" onClick="CB7.follow.showPermalink( this, 'https:\u002f\u002fonlinedemo.cybozu.info\u002fscripts\u002foffice10\u002fag.cgi?page=MyFolderMessageView\u0026mDBID=4\u0026mDID=4\u0026tp=t\u0026flno=1#Follow' );return false;" name=""><img src="/cb1080/image/permlink16.png" align=absmiddle>固定リンク</a></span>&nbsp;
+ </div>
+</div>
+<div class="simpleReplyUserList" id="simpleReplyUserList-message-608-11" style="display:none">
+ <div class="simpleReplyUserListTip"></div>
+ <ul class="simpleReplyUsers">
+ <li class="simpleReplyUser" id="simpleReplyUser-message-608-11-spinner" style="display:none">
+ <span class="simpleReplyUserArea"><img src="/cb1080/image/spinner.gif" align="absmiddle"></span>
+ </li>
+ <li class="simpleReplyUser simpleReplyUserMe" id="simpleReplyUser-message-608-11-me" style="display:none">
+ <a href="#" onclick="javascript:CB7.follow.showSimpleReplyMenu(this, 'message', 608, 11);return false;">
+ <span class="profileSimpleReplyImage" style="cursor:pointer" title="加藤 美咲">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle><script language="JavaScript" type="text/javascript"><!--
+CB7.follow.simpleReplyValues['message-608-11'] = null;
+//--></script>
+ </span>
+ </a>
+ </li>
+ <li class="simpleReplyUserCollapse">
+ <a id="simpleReplyUserCounter-message-608-11" class="simpleReplyUserCount" href="#" onclick="CB7.follow.showSimpleReplyUsers(this, 'message', 608, 11, 'いいね！');return false;"><span id="simpleReplyUserCount-message-608-11"></span>名</a>
+ </li>
+ </ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<form method="post" id="simpleReply-form-message-608" name="simpleReply" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+<input type=hidden name=page value=AjaxSimpleReply>
+<input type="hidden" name="app" value="message">
+<input type="hidden" name="DBID" value="4">
+<input type="hidden" name="MID" value="4">
+<input type="hidden" name="EID" value="608">
+<input type="hidden" name="BC" value="0">
+<input type="hidden" name="FRID" value="">
+<input type="hidden" name="Value" value="">
+<input type="hidden" name="Cancel" value="">
+<input type="hidden" name="ClearNotification" value="1">
+</form>
+<script language="JavaScript" type="text/javascript"><!--
+CB7.follow.AJAX_URL['message-608'] = GetExeFileName( document.URL ) + "?page=AjaxXHRMyFolderMessage%PAGE_ID%&mDBID=4&mEID=608&mDID=4";
+//-->
+</script>
+</div>
+<div class="notificationFooter">
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript" charset="UTF-8" src="/cb1080/html/mail.js?_v=1086120220502162043.js"></script>
+<div class="notificationCategory notificationCategorySchedule" data-type="Schedule" data-app="7">
+<div class="notificationCategoryName">スケジュール</div>
+<div class="notificationRows">
+<div class="notificationRow" data-id="838" data-nid="524" data-date="da.2016.1.26" data-key="838">
+<div class="notificationControllerWrapper">
+ <table class="notificationController">
+ <tr>
+ <td nowrap="nowrap">
+ <div class="notificationControllerInner">
+<a href="javascript:void(0)" class="notificationControllerPrev vr_stdButton lightButton" title="前へ"><span><img src="/cb1080/image/arrow_top_sharp16.png"></span></a><a href="javascript:void(0)" class="notificationControllerNext vr_stdButton lightButton" title="次へ"><span><img src="/cb1080/image/arrow_bottom_sharp16.png"></span></a>
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+ </div>
+ </td>
+ </tr>
+ </table>
+</div>
+<div class="notificationSubject"><a href="ag.cgi?page=ScheduleView&date=da.2016.1.26&UID=27&sEID=838&tp=t&fnid=524&dummy=1#Follow"><img src="/cb1080/image/event16.png" align=absmiddle>1/26
+会議:マーケティング進捗会議</a><span class="notificationInfo">（コメント書き込み）</span></div>
+<div class="notificationContents">
+<div class="notificationMain notificationMainUnread">
+<div class="notificationAddress"><span class="notificationAddressItem"><span class="notificationAddressLabel">登録情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太</span><span class="notificationAddressText"> 2016/1/26(火) 18:35</span></span></div>
+<div class="notificationBodyWrapper">
+<div class="notificationBody"><div class="notificationBodyExpand"><div class="notificationBodyText"><table class="dataView scheduleDataView" width="100%" >
+ <col width="1%">
+ <col width="99%">
+ <tr valign="top">
+ <th align="left" nowrap>日時</th>
+ <td nowrap>2016 年 1 月 26 日 （火） 14 時 00 分 ～ 15 時 00 分 </td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>予定</th>
+ <td>会議:マーケティング進捗会議</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>メモ</th>
+ <td>
+<div id="scheduleMemo">
+<tt>プロモーションを中心とした進捗・相談の場</tt></div>
+ </td></tr>
+<script type="text/javascript"><!--
+ShowDBInlineView( "scheduleMemo" );
+//--></script>
+ <tr valign="top">
+ <th align="left" nowrap>参加者<span class="vr_scheduleUserCount">（2名）</span></th>
+ <td>
+<script type="text/javascript" language="JavaScript"><!--//
+function ShowMyGroupAdd()
+{
+ var form = document.forms['MemberFunction'];
+ confirmWin = window.open("ag.cgi?page=AGBlank","Confirm","width=800,height=600,scrollbars=1,location=0,resizable=1");
+ form.target = "Confirm";
+ form.page.value = "PersonalMyGroupAddPopup";
+ form.r.value = "Calendar";
+ form.submit();
+ return true;
+}
+//--></script>
+<form method="post" name="MemberFunction" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+ <input type="hidden" name="page" value="">
+ <input type="hidden" name="r" value="">
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太<input type="hidden" name="sUID" value="17"></nobr></span>
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle>加藤 美咲<input type="hidden" name="sUID" value="27"></nobr><img src="/cb1080/image/warn16.png" align=absmiddle alt="重複予定あり" title="重複予定あり"></span>
+ </td>
+ </tr>
+ <tr valign="top">
+ <th align="left" nowrap>施設</th>
+ <td>
+<span class="facility"><nobr class="inlineblockNobr"><img src="/cb1080/image/facility16.png" align=absmiddle alt="16" title="16" onClick="16">第一会議室 </nobr></span>
+<input type="hidden" name="sFID" value="33"></form>
+ </td>
+ </tr>
+<tr valign="top">
+ <th align="left" nowrap>添付ファイル</th>
+ <td>
+ <div class="vr_viewContentsAttach">
+ <table class="scheduleAttachView">
+ </table>
+ </div>
+ </td>
+</tr>
+</table>
+</div></div>
+<div class="notificationBodyFade" style="display:none"></div>
+<div class="notificationBodyMore" style="display:none"><a class="hilightLink" href="javascript:void(0)" onclick="CB7.Notification.showMain(this); return false;"><span class="vr_textColor">...</span>&nbsp;本文をすべて表示する</a></div>
+</div>
+</div>
+</div>
+<div class="notificationReaction">
+<div class="followMenu clearfix vr_viewContentsMenu">
+<div class="followMenuMain">
+ <span class="followMenuLinkWrapper">
+ <span class="followMenuLinkInner" id="simpleReplyLinkText-schedule-838-0" onmouseover="YAHOO.util.Dom.addClass(this.parentNode, 'simpleReplyLinkWrapperHover')" onmouseout="YAHOO.util.Dom.removeClass(this.parentNode, 'simpleReplyLinkWrapperHover')">
+ <a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('schedule', 838, 0, null, false);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>いいね！</a><a id="simpleReplyImageMenuLink-schedule-838-0" class="simpleReplyImageMenuLink" href="#" onclick="CB7.follow.toggleSimpleReplyMenu(this, 'schedule', 838, 0);return false;"><img src="/cb1080/image/showdown12.png" align=absmiddle></a>
+ </span>
+ <span class="followMenuLinkInner" id="simpleReplyLinkCancel-schedule-838-0" style="display:none">
+<a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('schedule', 838, 0, null, true);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>「いいね！」を取り消す</a>
+ </span>
+ </span>
+</div>
+</div>
+<div>
+<div class="simpleReplyUserList" id="simpleReplyUserList-schedule-838-0" style="display:none">
+ <div class="simpleReplyUserListTip"></div>
+ <ul class="simpleReplyUsers">
+ <li class="simpleReplyUser" id="simpleReplyUser-schedule-838-0-spinner" style="display:none">
+ <span class="simpleReplyUserArea"><img src="/cb1080/image/spinner.gif" align="absmiddle"></span>
+ </li>
+ <li class="simpleReplyUser simpleReplyUserMe" id="simpleReplyUser-schedule-838-0-me" style="display:none">
+ <a href="#" onclick="javascript:CB7.follow.showSimpleReplyMenu(this, 'schedule', 838, 0);return false;">
+ <span class="profileSimpleReplyImage" style="cursor:pointer" title="加藤 美咲">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle><script language="JavaScript" type="text/javascript"><!--
+CB7.follow.simpleReplyValues['schedule-838-0'] = null;
+//--></script>
+ </span>
+ </a>
+ </li>
+ <li class="simpleReplyUserCollapse">
+ <a id="simpleReplyUserCounter-schedule-838-0" class="simpleReplyUserCount" href="#" onclick="CB7.follow.showSimpleReplyUsers(this, 'schedule', 838, 0, 'いいね！');return false;"><span id="simpleReplyUserCount-schedule-838-0"></span>名</a>
+ </li>
+ </ul>
+</div>
+</div>
+</div>
+<div class="notificationComment">
+<div class="notificationCommentForm"><input type="text" class="notificationCommentInputSimple vr_placeholder" value="コメントを入力してください。"  onfocus="CB7.followJQ.getCommentForm(this); return false;"/>
+</div>
+<div id="FollowContent" class="notificationCommentList">
+<div class="vr_followWrapper" id="follow-root-8">
+<div class="vr_follow updateContents" id="follow-schedule-838-8" onmouseover="CB7.follow.selectComment('schedule-838-8')" onmouseout="CB7.follow.unselectComment('schedule-838-8')">
+<div class="vr_followUserImageColumn">
+<img class="profileImage" src="/cb1080/image/user32.png" style="width: 32px; height: 32px;" align=absmiddle></div>
+<div class="vr_followContentsColumn">
+<div class="vr_followHeader">
+<div class="followHeaderMain"><span class="vr_followUser"><span class="vr_followUserName">高橋 健太
+</span></span><span class="vr_followTime"> 2016/1/26(火) 18:35</span></div>
+</div>
+<div id="followContents8" class="vr_followContents"><tt>テスト</tt></div><script type="text/javascript"><!--
+ShowDBInlineView( "followContents8" );
+//--></script>
+<div class="followMenu clearfix">
+ <div class="followMenuMain">
+ <div class="followData" data-creator-id="17" data-creator-name="高橋 健太">
+ <span class="followMenuLinkWrapper">
+ <span class="followMenuLinkInner" id="simpleReplyLinkText-schedule-838-8" onmouseover="YAHOO.util.Dom.addClass(this.parentNode, 'simpleReplyLinkWrapperHover')" onmouseout="YAHOO.util.Dom.removeClass(this.parentNode, 'simpleReplyLinkWrapperHover')">
+ <a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('schedule', 838, 8, null, false);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>いいね！</a><a id="simpleReplyImageMenuLink-schedule-838-8" class="simpleReplyImageMenuLink" href="#" onclick="CB7.follow.toggleSimpleReplyMenu(this, 'schedule', 838, 8);return false;"><img src="/cb1080/image/showdown12.png" align=absmiddle></a>
+ </span>
+ <span class="followMenuLinkInner" id="simpleReplyLinkCancel-schedule-838-8" style="display:none">
+<a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('schedule', 838, 8, null, true);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>「いいね！」を取り消す</a>
+ </span>
+ </span>
+ </div>
+ </div>
+ <div class="followMenuSub">
+ </div>
+</div>
+<div class="simpleReplyUserList" id="simpleReplyUserList-schedule-838-8" style="display:none">
+ <div class="simpleReplyUserListTip"></div>
+ <ul class="simpleReplyUsers">
+ <li class="simpleReplyUser" id="simpleReplyUser-schedule-838-8-spinner" style="display:none">
+ <span class="simpleReplyUserArea"><img src="/cb1080/image/spinner.gif" align="absmiddle"></span>
+ </li>
+ <li class="simpleReplyUser simpleReplyUserMe" id="simpleReplyUser-schedule-838-8-me" style="display:none">
+ <a href="#" onclick="javascript:CB7.follow.showSimpleReplyMenu(this, 'schedule', 838, 8);return false;">
+ <span class="profileSimpleReplyImage" style="cursor:pointer" title="加藤 美咲">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle><script language="JavaScript" type="text/javascript"><!--
+CB7.follow.simpleReplyValues['schedule-838-8'] = null;
+//--></script>
+ </span>
+ </a>
+ </li>
+ <li class="simpleReplyUserCollapse">
+ <a id="simpleReplyUserCounter-schedule-838-8" class="simpleReplyUserCount" href="#" onclick="CB7.follow.showSimpleReplyUsers(this, 'schedule', 838, 8, 'いいね！');return false;"><span id="simpleReplyUserCount-schedule-838-8"></span>名</a>
+ </li>
+ </ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<form method="post" id="simpleReply-form-schedule-838" name="simpleReply" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+<input type="hidden" name="page" value="AjaxSimpleReply">
+<input type="hidden" name="app" value="schedule">
+<input type="hidden" name="sEID" value="838">
+<input type="hidden" name="NID" value="524">
+<input type="hidden" name="FRID" value="">
+<input type="hidden" name="Value" value="">
+<input type="hidden" name="Cancel" value="">
+<input type="hidden" name="ClearNotification" value="1">
+</form>
+<script language="JavaScript" type="text/javascript"><!--
+ CB7.follow.AJAX_URL['schedule-838'] = GetExeFileName( document.URL ) + "?page=AjaxXHRSchedule%PAGE_ID%&sEID=838&date=da.2016.1.26";
+ //-->
+</script>
+</div>
+<div class="notificationFooter">
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+</div>
+</div>
+<div class="notificationRow" data-id="831" data-nid="111" data-date="da.2015.10.8" data-key="831">
+<div class="notificationControllerWrapper">
+ <table class="notificationController">
+ <tr>
+ <td nowrap="nowrap">
+ <div class="notificationControllerInner">
+<a href="javascript:void(0)" class="notificationControllerPrev vr_stdButton lightButton" title="前へ"><span><img src="/cb1080/image/arrow_top_sharp16.png"></span></a><a href="javascript:void(0)" class="notificationControllerNext vr_stdButton lightButton" title="次へ"><span><img src="/cb1080/image/arrow_bottom_sharp16.png"></span></a>
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+ </div>
+ </td>
+ </tr>
+ </table>
+</div>
+<div class="notificationSubject"><a href="ag.cgi?page=ScheduleView&date=da.2015.10.8&UID=27&sEID=831&tp=t&fnid=111"><img src="/cb1080/image/event16.png" align=absmiddle>10/8
+来訪:新オフィスのテレビ会議について*</a><span class="notificationInfo">（登録）</span></div>
+<div class="notificationContents">
+<div class="notificationMain notificationMainUnread">
+<div class="notificationAddress"><span class="notificationAddressItem"><span class="notificationAddressLabel">登録情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>大山 春香</span><span class="notificationAddressText"> 2015/10/8(木) 11:58</span></span></div>
+<div class="notificationBodyWrapper">
+<div class="notificationBody"><div class="notificationBodyExpand"><div class="notificationBodyText"><table class="dataView scheduleDataView" width="100%" >
+ <col width="1%">
+ <col width="99%">
+<tr>
+ <th align="left" nowrap>日時</th>
+ <td nowrap>毎週 木曜日 15 時 00 分 ～ 16 時 00 分
+</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>予定</th>
+ <td>来訪:新オフィスのテレビ会議について</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>メモ</th>
+ <td>
+<div id="scheduleMemo">
+<tt>新オフィスのテレビ会議の操作方法について、業者さんがいらっしゃいます。</tt></div>
+ </td></tr>
+<script type="text/javascript"><!--
+ShowDBInlineView( "scheduleMemo" );
+//--></script>
+ <tr valign="top">
+ <th align="left" nowrap>参加者<span class="vr_scheduleUserCount">（2名）</span></th>
+ <td>
+<script type="text/javascript" language="JavaScript"><!--//
+function ShowMyGroupAdd()
+{
+ var form = document.forms['MemberFunction'];
+ confirmWin = window.open("ag.cgi?page=AGBlank","Confirm","width=800,height=600,scrollbars=1,location=0,resizable=1");
+ form.target = "Confirm";
+ form.page.value = "PersonalMyGroupAddPopup";
+ form.r.value = "Calendar";
+ form.submit();
+ return true;
+}
+//--></script>
+<form method="post" name="MemberFunction" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+ <input type="hidden" name="page" value="">
+ <input type="hidden" name="r" value="">
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>大山 春香<input type="hidden" name="sUID" value="208"></nobr></span>
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle>加藤 美咲<input type="hidden" name="sUID" value="27"></nobr></span>
+ </td>
+ </tr>
+ <tr valign="top">
+ <th align="left" nowrap>施設</th>
+ <td>
+<span class="facility"><nobr class="inlineblockNobr"><img src="/cb1080/image/facility16.png" align=absmiddle alt="16" title="16" onClick="16">打合せルーム </nobr></span>
+<input type="hidden" name="sFID" value="35"></form>
+ </td>
+ </tr>
+</table>
+</div></div>
+<div class="notificationBodyFade" style="display:none"></div>
+<div class="notificationBodyMore" style="display:none"><a class="hilightLink" href="javascript:void(0)" onclick="CB7.Notification.showMain(this); return false;"><span class="vr_textColor">...</span>&nbsp;本文をすべて表示する</a></div>
+</div>
+</div>
+</div>
+<div class="notificationComment">
+<a href='ag.cgi?page=ScheduleView&date=da.2015.10.8&UID=27&sEID=831&tp=t&fnid=111'>コメントを書き込む</a>
+<div id="FollowContent" class="notificationCommentList">
+</div>
+</div>
+<form method="post" id="simpleReply-form-schedule-831" name="simpleReply" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+<input type="hidden" name="page" value="AjaxSimpleReply">
+<input type="hidden" name="app" value="schedule">
+<input type="hidden" name="sEID" value="831">
+<input type="hidden" name="NID" value="111">
+<input type="hidden" name="FRID" value="">
+<input type="hidden" name="Value" value="">
+<input type="hidden" name="Cancel" value="">
+<input type="hidden" name="ClearNotification" value="1">
+</form>
+<script language="JavaScript" type="text/javascript"><!--
+ CB7.follow.AJAX_URL['schedule-831'] = GetExeFileName( document.URL ) + "?page=AjaxXHRSchedule%PAGE_ID%&sEID=831&date=da.2015.10.8";
+ //-->
+</script>
+</div>
+<div class="notificationFooter">
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+</div>
+</div>
+<div class="notificationRow" data-id="823" data-nid="112" data-date="da.2015.10.9" data-key="823">
+<div class="notificationControllerWrapper">
+ <table class="notificationController">
+ <tr>
+ <td nowrap="nowrap">
+ <div class="notificationControllerInner">
+<a href="javascript:void(0)" class="notificationControllerPrev vr_stdButton lightButton" title="前へ"><span><img src="/cb1080/image/arrow_top_sharp16.png"></span></a><a href="javascript:void(0)" class="notificationControllerNext vr_stdButton lightButton" title="次へ"><span><img src="/cb1080/image/arrow_bottom_sharp16.png"></span></a>
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+ </div>
+ </td>
+ </tr>
+ </table>
+</div>
+<div class="notificationSubject"><a href="ag.cgi?page=ScheduleView&date=da.2015.10.9&UID=27&sEID=823&tp=t&fnid=112"><img src="/cb1080/image/event16.png" align=absmiddle>10/9
+会議:経理チーム定例会議*</a><span class="notificationInfo">（登録）</span></div>
+<div class="notificationContents">
+<div class="notificationMain notificationMainUnread">
+<div class="notificationAddress"><span class="notificationAddressItem"><span class="notificationAddressLabel">登録情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>大山 春香</span><span class="notificationAddressText"> 2015/10/8(木) 11:56</span></span></div>
+<div class="notificationBodyWrapper">
+<div class="notificationBody"><div class="notificationBodyExpand"><div class="notificationBodyText"><table class="dataView scheduleDataView" width="100%" >
+ <col width="1%">
+ <col width="99%">
+<tr>
+ <th align="left" nowrap>日時</th>
+ <td nowrap>毎週 金曜日 09 時 00 分 ～ 10 時 00 分
+</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>予定</th>
+ <td>会議:経理チーム定例会議</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>メモ</th>
+ <td>
+<div id="scheduleMemo">
+<tt><br>
+</tt></div>
+ </td></tr>
+<script type="text/javascript"><!--
+ShowDBInlineView( "scheduleMemo" );
+//--></script>
+ <tr valign="top">
+ <th align="left" nowrap>参加者<span class="vr_scheduleUserCount">（2名）</span></th>
+ <td>
+<script type="text/javascript" language="JavaScript"><!--//
+function ShowMyGroupAdd()
+{
+ var form = document.forms['MemberFunction'];
+ confirmWin = window.open("ag.cgi?page=AGBlank","Confirm","width=800,height=600,scrollbars=1,location=0,resizable=1");
+ form.target = "Confirm";
+ form.page.value = "PersonalMyGroupAddPopup";
+ form.r.value = "Calendar";
+ form.submit();
+ return true;
+}
+//--></script>
+<form method="post" name="MemberFunction" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+ <input type="hidden" name="page" value="">
+ <input type="hidden" name="r" value="">
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>大山 春香<input type="hidden" name="sUID" value="208"></nobr></span>
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle>加藤 美咲<input type="hidden" name="sUID" value="27"></nobr></span>
+ </td>
+ </tr>
+ <tr valign="top">
+ <th align="left" nowrap>施設</th>
+ <td>
+</form>
+<br>
+ </td>
+ </tr>
+</table>
+</div></div>
+<div class="notificationBodyFade" style="display:none"></div>
+<div class="notificationBodyMore" style="display:none"><a class="hilightLink" href="javascript:void(0)" onclick="CB7.Notification.showMain(this); return false;"><span class="vr_textColor">...</span>&nbsp;本文をすべて表示する</a></div>
+</div>
+</div>
+</div>
+<div class="notificationComment">
+<a href='ag.cgi?page=ScheduleView&date=da.2015.10.9&UID=27&sEID=823&tp=t&fnid=112'>コメントを書き込む</a>
+<div id="FollowContent" class="notificationCommentList">
+</div>
+</div>
+<form method="post" id="simpleReply-form-schedule-823" name="simpleReply" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+<input type="hidden" name="page" value="AjaxSimpleReply">
+<input type="hidden" name="app" value="schedule">
+<input type="hidden" name="sEID" value="823">
+<input type="hidden" name="NID" value="112">
+<input type="hidden" name="FRID" value="">
+<input type="hidden" name="Value" value="">
+<input type="hidden" name="Cancel" value="">
+<input type="hidden" name="ClearNotification" value="1">
+</form>
+<script language="JavaScript" type="text/javascript"><!--
+ CB7.follow.AJAX_URL['schedule-823'] = GetExeFileName( document.URL ) + "?page=AjaxXHRSchedule%PAGE_ID%&sEID=823&date=da.2015.10.9";
+ //-->
+</script>
+</div>
+<div class="notificationFooter">
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+</div>
+</div>
+<div class="notificationRow" data-id="777" data-nid="82" data-date="da.2014.4.14" data-key="777">
+<div class="notificationControllerWrapper">
+ <table class="notificationController">
+ <tr>
+ <td nowrap="nowrap">
+ <div class="notificationControllerInner">
+<a href="javascript:void(0)" class="notificationControllerPrev vr_stdButton lightButton" title="前へ"><span><img src="/cb1080/image/arrow_top_sharp16.png"></span></a><a href="javascript:void(0)" class="notificationControllerNext vr_stdButton lightButton" title="次へ"><span><img src="/cb1080/image/arrow_bottom_sharp16.png"></span></a>
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+ </div>
+ </td>
+ </tr>
+ </table>
+</div>
+<div class="notificationSubject"><a href="ag.cgi?page=ScheduleView&date=da.2014.4.14&UID=27&sEID=777&tp=t&fnid=82"><img src="/cb1080/image/event16.png" align=absmiddle>4/14
+会議:総務部定例会*</a><span class="notificationInfo">（登録）</span></div>
+<div class="notificationContents">
+<div class="notificationMain notificationMainUnread">
+<div class="notificationAddress"><span class="notificationAddressItem"><span class="notificationAddressLabel">登録情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太</span><span class="notificationAddressText"> 2014/4/12(土) 2:49</span></span></div>
+<div class="notificationBodyWrapper">
+<div class="notificationBody"><div class="notificationBodyExpand"><div class="notificationBodyText"><table class="dataView scheduleDataView" width="100%" >
+ <col width="1%">
+ <col width="99%">
+<tr>
+ <th align="left" nowrap>日時</th>
+ <td nowrap>毎週 月曜日 13 時 00 分 ～ 14 時 30 分
+</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>予定</th>
+ <td>会議:総務部定例会</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>メモ</th>
+ <td>
+<div id="scheduleMemo">
+<tt><br>
+</tt></div>
+ </td></tr>
+<script type="text/javascript"><!--
+ShowDBInlineView( "scheduleMemo" );
+//--></script>
+ <tr valign="top">
+ <th align="left" nowrap>参加者<span class="vr_scheduleUserCount">（3名）</span></th>
+ <td>
+<script type="text/javascript" language="JavaScript"><!--//
+function ShowMyGroupAdd()
+{
+ var form = document.forms['MemberFunction'];
+ confirmWin = window.open("ag.cgi?page=AGBlank","Confirm","width=800,height=600,scrollbars=1,location=0,resizable=1");
+ form.target = "Confirm";
+ form.page.value = "PersonalMyGroupAddPopup";
+ form.r.value = "Calendar";
+ form.submit();
+ return true;
+}
+//--></script>
+<form method="post" name="MemberFunction" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+ <input type="hidden" name="page" value="">
+ <input type="hidden" name="r" value="">
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太<input type="hidden" name="sUID" value="17"></nobr></span>
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle>加藤 美咲<input type="hidden" name="sUID" value="27"></nobr></span>
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>大山 春香<input type="hidden" name="sUID" value="208"></nobr></span>
+ </td>
+ </tr>
+ <tr valign="top">
+ <th align="left" nowrap>施設</th>
+ <td>
+</form>
+<br>
+ </td>
+ </tr>
+</table>
+</div></div>
+<div class="notificationBodyFade" style="display:none"></div>
+<div class="notificationBodyMore" style="display:none"><a class="hilightLink" href="javascript:void(0)" onclick="CB7.Notification.showMain(this); return false;"><span class="vr_textColor">...</span>&nbsp;本文をすべて表示する</a></div>
+</div>
+</div>
+</div>
+<div class="notificationComment">
+<a href='ag.cgi?page=ScheduleView&date=da.2014.4.14&UID=27&sEID=777&tp=t&fnid=82'>コメントを書き込む</a>
+<div id="FollowContent" class="notificationCommentList">
+</div>
+</div>
+<form method="post" id="simpleReply-form-schedule-777" name="simpleReply" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+<input type="hidden" name="page" value="AjaxSimpleReply">
+<input type="hidden" name="app" value="schedule">
+<input type="hidden" name="sEID" value="777">
+<input type="hidden" name="NID" value="82">
+<input type="hidden" name="FRID" value="">
+<input type="hidden" name="Value" value="">
+<input type="hidden" name="Cancel" value="">
+<input type="hidden" name="ClearNotification" value="1">
+</form>
+<script language="JavaScript" type="text/javascript"><!--
+ CB7.follow.AJAX_URL['schedule-777'] = GetExeFileName( document.URL ) + "?page=AjaxXHRSchedule%PAGE_ID%&sEID=777&date=da.2014.4.14";
+ //-->
+</script>
+</div>
+<div class="notificationFooter">
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+</div>
+</div>
+<div class="notificationRow" data-id="336" data-nid="84" data-date="da.2014.4.15" data-key="336">
+<div class="notificationControllerWrapper">
+ <table class="notificationController">
+ <tr>
+ <td nowrap="nowrap">
+ <div class="notificationControllerInner">
+<a href="javascript:void(0)" class="notificationControllerPrev vr_stdButton lightButton" title="前へ"><span><img src="/cb1080/image/arrow_top_sharp16.png"></span></a><a href="javascript:void(0)" class="notificationControllerNext vr_stdButton lightButton" title="次へ"><span><img src="/cb1080/image/arrow_bottom_sharp16.png"></span></a>
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+ </div>
+ </td>
+ </tr>
+ </table>
+</div>
+<div class="notificationSubject"><a href="ag.cgi?page=ScheduleView&date=da.2014.4.15&UID=27&sEID=336&tp=t&fnid=84"><img src="/cb1080/image/event16.png" align=absmiddle>4/15
+会議:マーケティング進捗会議*</a><span class="notificationInfo">（変更）</span></div>
+<div class="notificationContents">
+<div class="notificationMain notificationMainUnread">
+<div class="notificationAddress"><span class="notificationAddressItem"><span class="notificationAddressLabel">登録情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太</span><span class="notificationAddressText"> 2011/9/21(水) 19:55</span></span><span class="notificationAddressItem"><span class="notificationAddressLabel">更新情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太</span><span class="notificationAddressText"> 2016/1/26(火) 18:35</span></span></div>
+<div class="notificationBodyWrapper">
+<div class="notificationBody"><div class="notificationBodyExpand"><div class="notificationBodyText"><table class="dataView scheduleDataView" width="100%" >
+ <col width="1%">
+ <col width="99%">
+<tr>
+ <th align="left" nowrap>日時</th>
+ <td nowrap>毎週 火曜日 14 時 00 分 ～ 15 時 00 分
+</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>予定</th>
+ <td>会議:マーケティング進捗会議</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>メモ</th>
+ <td>
+<div id="scheduleMemo">
+<tt>プロモーションを中心とした進捗・相談の場</tt></div>
+ </td></tr>
+<script type="text/javascript"><!--
+ShowDBInlineView( "scheduleMemo" );
+//--></script>
+ <tr valign="top">
+ <th align="left" nowrap>参加者<span class="vr_scheduleUserCount">（2名）</span></th>
+ <td>
+<script type="text/javascript" language="JavaScript"><!--//
+function ShowMyGroupAdd()
+{
+ var form = document.forms['MemberFunction'];
+ confirmWin = window.open("ag.cgi?page=AGBlank","Confirm","width=800,height=600,scrollbars=1,location=0,resizable=1");
+ form.target = "Confirm";
+ form.page.value = "PersonalMyGroupAddPopup";
+ form.r.value = "Calendar";
+ form.submit();
+ return true;
+}
+//--></script>
+<form method="post" name="MemberFunction" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+ <input type="hidden" name="page" value="">
+ <input type="hidden" name="r" value="">
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太<input type="hidden" name="sUID" value="17"></nobr></span>
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle>加藤 美咲<input type="hidden" name="sUID" value="27"></nobr><img src="/cb1080/image/warn16.png" align=absmiddle alt="重複予定あり" title="重複予定あり"></span>
+ </td>
+ </tr>
+ <tr valign="top">
+ <th align="left" nowrap>施設</th>
+ <td>
+<span class="facility"><nobr class="inlineblockNobr"><img src="/cb1080/image/facility16.png" align=absmiddle alt="16" title="16" onClick="16">第一会議室 </nobr></span>
+<input type="hidden" name="sFID" value="33"></form>
+ </td>
+ </tr>
+</table>
+</div></div>
+<div class="notificationBodyFade" style="display:none"></div>
+<div class="notificationBodyMore" style="display:none"><a class="hilightLink" href="javascript:void(0)" onclick="CB7.Notification.showMain(this); return false;"><span class="vr_textColor">...</span>&nbsp;本文をすべて表示する</a></div>
+</div>
+</div>
+</div>
+<div class="notificationComment">
+<a href='ag.cgi?page=ScheduleView&date=da.2014.4.15&UID=27&sEID=336&tp=t&fnid=84'>コメントを書き込む</a>
+<div id="FollowContent" class="notificationCommentList">
+</div>
+</div>
+<form method="post" id="simpleReply-form-schedule-336" name="simpleReply" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+<input type="hidden" name="page" value="AjaxSimpleReply">
+<input type="hidden" name="app" value="schedule">
+<input type="hidden" name="sEID" value="336">
+<input type="hidden" name="NID" value="84">
+<input type="hidden" name="FRID" value="">
+<input type="hidden" name="Value" value="">
+<input type="hidden" name="Cancel" value="">
+<input type="hidden" name="ClearNotification" value="1">
+</form>
+<script language="JavaScript" type="text/javascript"><!--
+ CB7.follow.AJAX_URL['schedule-336'] = GetExeFileName( document.URL ) + "?page=AjaxXHRSchedule%PAGE_ID%&sEID=336&date=da.2014.4.15";
+ //-->
+</script>
+</div>
+<div class="notificationFooter">
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+</div>
+</div>
+<div class="notificationRow" data-id="296" data-nid="83" data-date="da.2014.4.14" data-key="296">
+<div class="notificationControllerWrapper">
+ <table class="notificationController">
+ <tr>
+ <td nowrap="nowrap">
+ <div class="notificationControllerInner">
+<a href="javascript:void(0)" class="notificationControllerPrev vr_stdButton lightButton" title="前へ"><span><img src="/cb1080/image/arrow_top_sharp16.png"></span></a><a href="javascript:void(0)" class="notificationControllerNext vr_stdButton lightButton" title="次へ"><span><img src="/cb1080/image/arrow_bottom_sharp16.png"></span></a>
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+ </div>
+ </td>
+ </tr>
+ </table>
+</div>
+<div class="notificationSubject"><a href="ag.cgi?page=ScheduleView&date=da.2014.4.14&UID=27&sEID=296&tp=t&fnid=83"><img src="/cb1080/image/event16.png" align=absmiddle>4/14
+会議:営業会議*</a><span class="notificationInfo">（変更）</span></div>
+<div class="notificationContents">
+<div class="notificationMain notificationMainUnread">
+<div class="notificationAddress"><span class="notificationAddressItem"><span class="notificationAddressLabel">登録情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太</span><span class="notificationAddressText"> 2011/9/21(水) 19:42</span></span><span class="notificationAddressItem"><span class="notificationAddressLabel">更新情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太</span><span class="notificationAddressText"> 2014/4/12(土) 2:43</span></span></div>
+<div class="notificationBodyWrapper">
+<div class="notificationBody"><div class="notificationBodyExpand"><div class="notificationBodyText"><table class="dataView scheduleDataView" width="100%" >
+ <col width="1%">
+ <col width="99%">
+<tr>
+ <th align="left" nowrap>日時</th>
+ <td nowrap>毎週 月曜日 09 時 00 分 ～ 10 時 30 分
+</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>予定</th>
+ <td>会議:営業会議</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>メモ</th>
+ <td>
+<div id="scheduleMemo">
+<tt>□目的<br>・連絡事項をしっかり伝える<br>・他のメンバーの活動を知り、自分の活動に生かす<br><br>□やること<br>・部長からの連絡<br>・各自の報告<br>・その他<br>　－簡単な勉強会等</tt></div>
+ </td></tr>
+<script type="text/javascript"><!--
+ShowDBInlineView( "scheduleMemo" );
+//--></script>
+ <tr valign="top">
+ <th align="left" nowrap>参加者<span class="vr_scheduleUserCount">（2名）</span></th>
+ <td>
+<script type="text/javascript" language="JavaScript"><!--//
+function ShowMyGroupAdd()
+{
+ var form = document.forms['MemberFunction'];
+ confirmWin = window.open("ag.cgi?page=AGBlank","Confirm","width=800,height=600,scrollbars=1,location=0,resizable=1");
+ form.target = "Confirm";
+ form.page.value = "PersonalMyGroupAddPopup";
+ form.r.value = "Calendar";
+ form.submit();
+ return true;
+}
+//--></script>
+<form method="post" name="MemberFunction" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+ <input type="hidden" name="page" value="">
+ <input type="hidden" name="r" value="">
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太<input type="hidden" name="sUID" value="17"></nobr></span>
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle>加藤 美咲<input type="hidden" name="sUID" value="27"></nobr></span>
+ </td>
+ </tr>
+ <tr valign="top">
+ <th align="left" nowrap>施設</th>
+ <td>
+<span class="facility"><nobr class="inlineblockNobr"><img src="/cb1080/image/facility16.png" align=absmiddle alt="16" title="16" onClick="16">第一会議室 </nobr></span>
+<input type="hidden" name="sFID" value="33"></form>
+ </td>
+ </tr>
+</table>
+</div></div>
+<div class="notificationBodyFade" style="display:none"></div>
+<div class="notificationBodyMore" style="display:none"><a class="hilightLink" href="javascript:void(0)" onclick="CB7.Notification.showMain(this); return false;"><span class="vr_textColor">...</span>&nbsp;本文をすべて表示する</a></div>
+</div>
+</div>
+</div>
+<div class="notificationComment">
+<a href='ag.cgi?page=ScheduleView&date=da.2014.4.14&UID=27&sEID=296&tp=t&fnid=83'>コメントを書き込む</a>
+<div id="FollowContent" class="notificationCommentList">
+</div>
+</div>
+<form method="post" id="simpleReply-form-schedule-296" name="simpleReply" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+<input type="hidden" name="page" value="AjaxSimpleReply">
+<input type="hidden" name="app" value="schedule">
+<input type="hidden" name="sEID" value="296">
+<input type="hidden" name="NID" value="83">
+<input type="hidden" name="FRID" value="">
+<input type="hidden" name="Value" value="">
+<input type="hidden" name="Cancel" value="">
+<input type="hidden" name="ClearNotification" value="1">
+</form>
+<script language="JavaScript" type="text/javascript"><!--
+ CB7.follow.AJAX_URL['schedule-296'] = GetExeFileName( document.URL ) + "?page=AjaxXHRSchedule%PAGE_ID%&sEID=296&date=da.2014.4.14";
+ //-->
+</script>
+</div>
+<div class="notificationFooter">
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+</div>
+</div>
+<div class="notificationRow" data-id="284" data-nid="109" data-date="da.2014.4.15" data-key="284">
+<div class="notificationControllerWrapper">
+ <table class="notificationController">
+ <tr>
+ <td nowrap="nowrap">
+ <div class="notificationControllerInner">
+<a href="javascript:void(0)" class="notificationControllerPrev vr_stdButton lightButton" title="前へ"><span><img src="/cb1080/image/arrow_top_sharp16.png"></span></a><a href="javascript:void(0)" class="notificationControllerNext vr_stdButton lightButton" title="次へ"><span><img src="/cb1080/image/arrow_bottom_sharp16.png"></span></a>
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+ </div>
+ </td>
+ </tr>
+ </table>
+</div>
+<div class="notificationSubject"><a href="ag.cgi?page=ScheduleView&date=da.2014.4.15&UID=27&sEID=284&tp=t&fnid=109"><img src="/cb1080/image/event16.png" align=absmiddle>4/15
+会議:進捗確認ミーティング*</a><span class="notificationInfo">（変更）</span></div>
+<div class="notificationContents">
+<div class="notificationMain notificationMainUnread">
+<div class="notificationAddress"><span class="notificationAddressItem"><span class="notificationAddressLabel">登録情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle>加藤 美咲</span><span class="notificationAddressText"> 2011/9/21(水) 19:38</span></span><span class="notificationAddressItem"><span class="notificationAddressLabel">更新情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太</span><span class="notificationAddressText"> 2014/4/12(土) 2:39</span></span></div>
+<div class="notificationBodyWrapper">
+<div class="notificationBody"><div class="notificationBodyExpand"><div class="notificationBodyText"><table class="dataView scheduleDataView" width="100%" >
+ <col width="1%">
+ <col width="99%">
+<tr>
+ <th align="left" nowrap>日時</th>
+ <td nowrap>毎週 火曜日 14 時 00 分 ～ 15 時 00 分
+</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>予定</th>
+ <td>会議:進捗確認ミーティング</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>メモ</th>
+ <td>
+<div id="scheduleMemo">
+<tt><br>
+</tt></div>
+ </td></tr>
+<script type="text/javascript"><!--
+ShowDBInlineView( "scheduleMemo" );
+//--></script>
+ <tr valign="top">
+ <th align="left" nowrap>参加者<span class="vr_scheduleUserCount">（2名）</span></th>
+ <td>
+<script type="text/javascript" language="JavaScript"><!--//
+function ShowMyGroupAdd()
+{
+ var form = document.forms['MemberFunction'];
+ confirmWin = window.open("ag.cgi?page=AGBlank","Confirm","width=800,height=600,scrollbars=1,location=0,resizable=1");
+ form.target = "Confirm";
+ form.page.value = "PersonalMyGroupAddPopup";
+ form.r.value = "Calendar";
+ form.submit();
+ return true;
+}
+//--></script>
+<form method="post" name="MemberFunction" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+ <input type="hidden" name="page" value="">
+ <input type="hidden" name="r" value="">
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle>加藤 美咲<input type="hidden" name="sUID" value="27"></nobr><img src="/cb1080/image/warn16.png" align=absmiddle alt="重複予定あり" title="重複予定あり"></span>
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>和田 一夫<input type="hidden" name="sUID" value="23"></nobr></span>
+ </td>
+ </tr>
+ <tr valign="top">
+ <th align="left" nowrap>施設</th>
+ <td>
+<span class="facility"><nobr class="inlineblockNobr"><img src="/cb1080/image/facility16.png" align=absmiddle alt="16" title="16" onClick="16">第二会議室 </nobr></span>
+<input type="hidden" name="sFID" value="34"></form>
+ </td>
+ </tr>
+</table>
+</div></div>
+<div class="notificationBodyFade" style="display:none"></div>
+<div class="notificationBodyMore" style="display:none"><a class="hilightLink" href="javascript:void(0)" onclick="CB7.Notification.showMain(this); return false;"><span class="vr_textColor">...</span>&nbsp;本文をすべて表示する</a></div>
+</div>
+</div>
+</div>
+<div class="notificationComment">
+<a href='ag.cgi?page=ScheduleView&date=da.2014.4.15&UID=27&sEID=284&tp=t&fnid=109'>コメントを書き込む</a>
+<div id="FollowContent" class="notificationCommentList">
+</div>
+</div>
+<form method="post" id="simpleReply-form-schedule-284" name="simpleReply" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+<input type="hidden" name="page" value="AjaxSimpleReply">
+<input type="hidden" name="app" value="schedule">
+<input type="hidden" name="sEID" value="284">
+<input type="hidden" name="NID" value="109">
+<input type="hidden" name="FRID" value="">
+<input type="hidden" name="Value" value="">
+<input type="hidden" name="Cancel" value="">
+<input type="hidden" name="ClearNotification" value="1">
+</form>
+<script language="JavaScript" type="text/javascript"><!--
+ CB7.follow.AJAX_URL['schedule-284'] = GetExeFileName( document.URL ) + "?page=AjaxXHRSchedule%PAGE_ID%&sEID=284&date=da.2014.4.15";
+ //-->
+</script>
+</div>
+<div class="notificationFooter">
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+</div>
+</div>
+<div class="notificationRow" data-id="292" data-nid="85" data-date="da.2014.4.16" data-key="292">
+<div class="notificationControllerWrapper">
+ <table class="notificationController">
+ <tr>
+ <td nowrap="nowrap">
+ <div class="notificationControllerInner">
+<a href="javascript:void(0)" class="notificationControllerPrev vr_stdButton lightButton" title="前へ"><span><img src="/cb1080/image/arrow_top_sharp16.png"></span></a><a href="javascript:void(0)" class="notificationControllerNext vr_stdButton lightButton" title="次へ"><span><img src="/cb1080/image/arrow_bottom_sharp16.png"></span></a>
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+ </div>
+ </td>
+ </tr>
+ </table>
+</div>
+<div class="notificationSubject"><a href="ag.cgi?page=ScheduleView&date=da.2014.4.16&UID=27&sEID=292&tp=t&fnid=85"><img src="/cb1080/image/event16.png" align=absmiddle>4/16
+往訪:梶田物産様*</a><span class="notificationInfo">（変更）</span></div>
+<div class="notificationContents">
+<div class="notificationMain notificationMainUnread">
+<div class="notificationAddress"><span class="notificationAddressItem"><span class="notificationAddressLabel">登録情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太</span><span class="notificationAddressText"> 2011/9/21(水) 19:41</span></span><span class="notificationAddressItem"><span class="notificationAddressLabel">更新情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太</span><span class="notificationAddressText"> 2014/4/12(土) 2:38</span></span></div>
+<div class="notificationBodyWrapper">
+<div class="notificationBody"><div class="notificationBodyExpand"><div class="notificationBodyText"><table class="dataView scheduleDataView" width="100%" >
+ <col width="1%">
+ <col width="99%">
+<tr>
+ <th align="left" nowrap>日時</th>
+ <td nowrap>毎週 水曜日 15 時 00 分 ～ 18 時 00 分
+</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>予定</th>
+ <td>往訪:梶田物産様</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>メモ</th>
+ <td>
+<div id="scheduleMemo">
+<tt>16時アポイント</tt></div>
+ </td></tr>
+<script type="text/javascript"><!--
+ShowDBInlineView( "scheduleMemo" );
+//--></script>
+ <tr valign="top">
+ <th align="left" nowrap>参加者<span class="vr_scheduleUserCount">（2名）</span></th>
+ <td>
+<script type="text/javascript" language="JavaScript"><!--//
+function ShowMyGroupAdd()
+{
+ var form = document.forms['MemberFunction'];
+ confirmWin = window.open("ag.cgi?page=AGBlank","Confirm","width=800,height=600,scrollbars=1,location=0,resizable=1");
+ form.target = "Confirm";
+ form.page.value = "PersonalMyGroupAddPopup";
+ form.r.value = "Calendar";
+ form.submit();
+ return true;
+}
+//--></script>
+<form method="post" name="MemberFunction" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+ <input type="hidden" name="page" value="">
+ <input type="hidden" name="r" value="">
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>和田 一夫<input type="hidden" name="sUID" value="23"></nobr></span>
+<span class="participant">
+<nobr class="inlineblockNobr"><img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle>加藤 美咲<input type="hidden" name="sUID" value="27"></nobr></span>
+ </td>
+ </tr>
+ <tr valign="top">
+ <th align="left" nowrap>施設</th>
+ <td>
+</form>
+<br>
+ </td>
+ </tr>
+</table>
+</div></div>
+<div class="notificationBodyFade" style="display:none"></div>
+<div class="notificationBodyMore" style="display:none"><a class="hilightLink" href="javascript:void(0)" onclick="CB7.Notification.showMain(this); return false;"><span class="vr_textColor">...</span>&nbsp;本文をすべて表示する</a></div>
+</div>
+</div>
+</div>
+<div class="notificationComment">
+<a href='ag.cgi?page=ScheduleView&date=da.2014.4.16&UID=27&sEID=292&tp=t&fnid=85'>コメントを書き込む</a>
+<div id="FollowContent" class="notificationCommentList">
+</div>
+</div>
+<form method="post" id="simpleReply-form-schedule-292" name="simpleReply" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+<input type="hidden" name="page" value="AjaxSimpleReply">
+<input type="hidden" name="app" value="schedule">
+<input type="hidden" name="sEID" value="292">
+<input type="hidden" name="NID" value="85">
+<input type="hidden" name="FRID" value="">
+<input type="hidden" name="Value" value="">
+<input type="hidden" name="Cancel" value="">
+<input type="hidden" name="ClearNotification" value="1">
+</form>
+<script language="JavaScript" type="text/javascript"><!--
+ CB7.follow.AJAX_URL['schedule-292'] = GetExeFileName( document.URL ) + "?page=AjaxXHRSchedule%PAGE_ID%&sEID=292&date=da.2014.4.16";
+ //-->
+</script>
+</div>
+<div class="notificationFooter">
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+</div>
+</div>
+</div>
+</div>
+<div class="notificationCategory notificationCategoryBulletin" data-type="Bulletin" data-app="5">
+<div class="notificationCategoryName">掲示板</div>
+<div class="notificationRows">
+<div class="notificationRow notificationTypeUpdate" data-id="5">
+<div class="notificationControllerWrapper">
+ <table class="notificationController">
+ <tr>
+ <td nowrap="nowrap">
+ <div class="notificationControllerInner">
+<a href="javascript:void(0)" class="notificationControllerPrev vr_stdButton lightButton" title="前へ"><span><img src="/cb1080/image/arrow_top_sharp16.png"></span></a><a href="javascript:void(0)" class="notificationControllerNext vr_stdButton lightButton" title="次へ"><span><img src="/cb1080/image/arrow_bottom_sharp16.png"></span></a>
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+ </div>
+ </td>
+ </tr>
+ </table>
+</div>
+<div class="notificationSubject"><a href="ag.cgi?page=BulletinView&bid=5&gid=&cid=&cp=blc&tp=t&dummy=1#Follow"><img src="/cb1080/image/bulletin16_u.png" align=absmiddle>「カスタムアプリ」の活用法</a>
+<font size=-1>（全体）</font>
+</div>
+<div class="notificationContents">
+<div class="notificationMainShowMenu"><a id="notificationRecordLink" class="hilightLink" href="javascript:void(0)" onclick="CB7.Notification.getMain(this); return false;">本文を表示する</a></div>
+<div class="notificationMain" style="display: none;"></div>
+<div class="notificationComment">
+<div class="notificationCommentForm"><input type="text" class="notificationCommentInputSimple vr_placeholder" value="コメントを入力してください。"  onfocus="CB7.followJQ.getCommentForm(this); return false;"/>
+</div>
+<div id="FollowContent">
+ <div class="vr_followList notificationCommentList">
+<div class="vr_followWrapper" id="follow-root-88">
+<div class="updateContents vr_follow" id="follow-bulletin-5-88" onmouseover="CB7.follow.selectComment('bulletin-5-88')" onmouseout="CB7.follow.unselectComment('bulletin-5-88')">
+<div class="vr_followUserImageColumn">
+<img class="profileImage" src="/cb1080/image/user32.png" style="width: 32px; height: 32px;" align=absmiddle></div>
+<div class="vr_followContentsColumn">
+<div class="vr_followHeader">
+<span class="vr_followNo">5&nbsp;:</span><span class="vr_followUser"><span class="vr_followUserName">和田 一夫</span><span class="vr_followUserGroup">（部長）
+</span></span><span class="vr_followTime">
+ 2015/10/8(木) 13:46
+</span></div>
+<div id="followContents88" class="vr_followContents"><table class="vr_followHeaderTo"><tr><td class="vr_followHeaderToCell"><div id="followContents88-Reply" class="vr_replyToContainer"><span class="vr_reply"><a id="bulletin-5-5-4:000004a316a4fae7" onclick="javascript:CB7.follow.showReplied(this, 'bulletin-5-5', 4)" href="javascript:void(0)"><span class="vr_replyLink">&gt;4</span><span class="vr_replyText">への返信</span>
+</a></span></div>
+</td><td class="vr_followHeaderToCell"><div id="followContents-Mention" class="vr_mentionToContainer">
+<table class="vr_mentionUsers"><tr><td class="vr_mentionUsersCell" nowrap><span class="vr_mentionMarkMe">@</span></td><td class="vr_mentionUsersCell">：</td><td class="vr_mentionUsersCell"><nobr class="vr_mentionUserMe"><img src="/cb1080/image/loginuser16.png" align=absmiddle><span class="js-mention-uid" data-uid="27" data-name="加藤 美咲">加藤 美咲</span></nobr>
+</td></tr></table></div>
+</td></tr></table>
+<tt>通知機能も充実していますね。</tt></div>
+<script type="text/javascript"><!--
+ShowDBInlineView( "followContents88" );
+//--></script>
+<input type="hidden" id="followHeader88" value="和田 一夫さん">
+<div class="followMenu clearfix">
+ <div class="followMenuMain">
+ <div class="followData" data-creator-id="23" data-creator-name="和田 一夫">
+ <span class="followMenuLinkWrapper">
+ <span class="followMenuLinkInner" id="simpleReplyLinkText-bulletin-5-88" onmouseover="YAHOO.util.Dom.addClass(this.parentNode, 'simpleReplyLinkWrapperHover')" onmouseout="YAHOO.util.Dom.removeClass(this.parentNode, 'simpleReplyLinkWrapperHover')">
+ <a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('bulletin', 5, 88, null, false);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>すごい！</a><a id="simpleReplyImageMenuLink-bulletin-5-88" class="simpleReplyImageMenuLink" href="#" onclick="CB7.follow.toggleSimpleReplyMenu(this, 'bulletin', 5, 88);return false;"><img src="/cb1080/image/showdown12.png" align=absmiddle></a>
+ </span>
+ <span class="followMenuLinkInner" id="simpleReplyLinkCancel-bulletin-5-88" style="display:none">
+<a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('bulletin', 5, 88, null, true);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>「すごい！」を取り消す</a>
+ </span>
+ </span>
+<span class="followMenuLinkWrapper vr_iconReply"><a class="" href="#" onClick="CB7.followJQ.inputReferenceToFollowForm( '88', this, 1, 5 );return false;" name=""><img src="/cb1080/image/reply16.png" align=absmiddle>返信する</a></span>&nbsp;
+ </div>
+ </div>
+ <div class="followMenuSub">
+<span class="followMenuLinkWrapper vr_iconUrlTip"><a class="" href="#" onClick="CB7.follow.showPermalink( this, 'https:\u002f\u002fonlinedemo.cybozu.info\u002fscripts\u002foffice10\u002fag.cgi?page=BulletinView\u0026bid=5\u0026gid=\u0026cid=\u0026cp=blc\u0026tp=t\u0026flno=5#Follow' );return false;" name=""><img src="/cb1080/image/permlink16.png" align=absmiddle>固定リンク</a></span>&nbsp;
+<span class="followMenuLinkWrapper vr_iconDelete"><a class="" href="javascript:void(0)" onClick="CB7.followJQ.deleteFollow('ag.cgi?page=AjaxXHRBulletinFollowDelete\u0026bid=5\u0026frid=88\u0026gid=\u0026cid=\u0026cp=\u0026sp=\u0026IsNotificationList=1\u0026admin=1\u0026isdlg=1', this, 'コメントの削除');" name=""><img src="/cb1080/image/delete16.png" align=absmiddle>削除する</a></span>&nbsp;
+ </div>
+</div>
+<div class="simpleReplyUserList" id="simpleReplyUserList-bulletin-5-88" style="display:none">
+ <div class="simpleReplyUserListTip"></div>
+ <ul class="simpleReplyUsers">
+ <li class="simpleReplyUser" id="simpleReplyUser-bulletin-5-88-spinner" style="display:none">
+ <span class="simpleReplyUserArea"><img src="/cb1080/image/spinner.gif" align="absmiddle"></span>
+ </li>
+ <li class="simpleReplyUser simpleReplyUserMe" id="simpleReplyUser-bulletin-5-88-me" style="display:none">
+ <a href="#" onclick="javascript:CB7.follow.showSimpleReplyMenu(this, 'bulletin', 5, 88);return false;">
+ <span class="profileSimpleReplyImage" style="cursor:pointer" title="加藤 美咲">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle><script language="JavaScript" type="text/javascript"><!--
+CB7.follow.simpleReplyValues['bulletin-5-88'] = null;
+//--></script>
+ </span>
+ </a>
+ </li>
+ <li class="simpleReplyUserCollapse">
+ <a id="simpleReplyUserCounter-bulletin-5-88" class="simpleReplyUserCount" href="#" onclick="CB7.follow.showSimpleReplyUsers(this, 'bulletin', 5, 88, 'すごい！');return false;"><span id="simpleReplyUserCount-bulletin-5-88"></span>名</a>
+ </li>
+ </ul>
+</div>
+</div>
+</div>
+</div>
+<div class="vr_followWrapper" id="follow-root-85">
+<div class=" vr_follow" id="follow-bulletin-5-85" onmouseover="CB7.follow.selectComment('bulletin-5-85')" onmouseout="CB7.follow.unselectComment('bulletin-5-85')">
+<div class="vr_followUserImageColumn">
+<img class="profileImage" src="/cb1080/image/loginuser32.png" style="width: 32px; height: 32px;" align=absmiddle></div>
+<div class="vr_followContentsColumn">
+<div class="vr_followHeader">
+<span class="vr_followNo">4&nbsp;:</span><span class="vr_followUser"><span class="vr_followUserName">加藤 美咲</span><span class="vr_followUserGroup">（営業部）
+</span></span><span class="vr_followTime">
+ 2015/10/8(木) 13:29
+</span></div>
+<div id="followContents85" class="vr_followContents"><tt>カスタムアプリではインライン表示が可能です。<br><br><a href="ag.cgi?Page=DBTotalingView&amp;DID=116&amp;VID=69&amp;Prev=DBView&amp;QID=all&amp;TID=291#inline">ag.cgi?Page=DBTotalingView&amp;DID=116&amp;VID=69&amp;Prev=DBView&amp;QID=all&amp;TID=291#inline</a><br><br>本文などに、カスタムアプリの集計グラフを表示させることができます。</tt></div>
+<script type="text/javascript"><!--
+ShowDBInlineView( "followContents85" );
+//--></script>
+<input type="hidden" id="followHeader85" value="加藤 美咲さん">
+<div class="followMenu clearfix">
+ <div class="followMenuMain">
+ <div class="followData" data-creator-id="27" data-creator-name="加藤 美咲">
+ <span class="followMenuLinkWrapper">
+ <span class="followMenuLinkInner" id="simpleReplyLinkText-bulletin-5-85" style="display:none" onmouseover="YAHOO.util.Dom.addClass(this.parentNode, 'simpleReplyLinkWrapperHover')" onmouseout="YAHOO.util.Dom.removeClass(this.parentNode, 'simpleReplyLinkWrapperHover')">
+ <a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('bulletin', 5, 85, null, false);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>すごい！</a><a id="simpleReplyImageMenuLink-bulletin-5-85" class="simpleReplyImageMenuLink" href="#" onclick="CB7.follow.toggleSimpleReplyMenu(this, 'bulletin', 5, 85);return false;"><img src="/cb1080/image/showdown12.png" align=absmiddle></a>
+ </span>
+ <span class="followMenuLinkInner" id="simpleReplyLinkCancel-bulletin-5-85">
+<a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('bulletin', 5, 85, null, true);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>「すごい！」を取り消す</a>
+ </span>
+ </span>
+<span class="followMenuLinkWrapper vr_iconReply"><a class="" href="#" onClick="CB7.followJQ.inputReferenceToFollowForm( '85', this, 1, 4 );return false;" name=""><img src="/cb1080/image/reply16.png" align=absmiddle>返信する</a></span>&nbsp;
+ </div>
+ </div>
+ <div class="followMenuSub">
+<span class="followMenuLinkWrapper vr_iconUrlTip"><a class="" href="#" onClick="CB7.follow.showPermalink( this, 'https:\u002f\u002fonlinedemo.cybozu.info\u002fscripts\u002foffice10\u002fag.cgi?page=BulletinView\u0026bid=5\u0026gid=\u0026cid=\u0026cp=blc\u0026tp=t\u0026flno=4#Follow' );return false;" name=""><img src="/cb1080/image/permlink16.png" align=absmiddle>固定リンク</a></span>&nbsp;
+<span class="followMenuLinkWrapper vr_iconDelete"><a class="" href="javascript:void(0)" onClick="CB7.followJQ.deleteFollow('ag.cgi?page=AjaxXHRBulletinFollowDelete\u0026bid=5\u0026frid=85\u0026gid=\u0026cid=\u0026cp=\u0026sp=\u0026IsNotificationList=1', this, 'コメントの削除');" name=""><img src="/cb1080/image/delete16.png" align=absmiddle>削除する</a></span>&nbsp;
+ </div>
+</div>
+<div class="simpleReplyUserList" id="simpleReplyUserList-bulletin-5-85">
+ <div class="simpleReplyUserListTip"></div>
+ <ul class="simpleReplyUsers">
+ <li class="simpleReplyUser" id="simpleReplyUser-bulletin-5-85-spinner" style="display:none">
+ <span class="simpleReplyUserArea"><img src="/cb1080/image/spinner.gif" align="absmiddle"></span>
+ </li>
+ <li class="simpleReplyUser simpleReplyUserMe" id="simpleReplyUser-bulletin-5-85-me" data-contains="1">
+ <a href="#" onclick="javascript:CB7.follow.showSimpleReplyMenu(this, 'bulletin', 5, 85);return false;">
+ <span class="profileSimpleReplyImage" style="cursor:pointer" title="加藤 美咲">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle><script language="JavaScript" type="text/javascript"><!--
+CB7.follow.simpleReplyValues['bulletin-5-85'] = null;
+//--></script>
+ </span>
+ </a>
+ </li>
+ <li class="simpleReplyUserCollapse">
+ <a id="simpleReplyUserCounter-bulletin-5-85" class="simpleReplyUserCount" href="#" onclick="CB7.follow.showSimpleReplyUsers(this, 'bulletin', 5, 85, 'すごい！');return false;"><span id="simpleReplyUserCount-bulletin-5-85">1</span>名</a>
+ </li>
+ </ul>
+</div>
+</div>
+</div>
+</div>
+<input type="hidden" id="NextHID" value="22">
+<div class="notificationCommentMore"><a class="hilightLink" href="javascript:void(0)" onclick="CB7.Notification.getComment(this); return false;">コメントをさらに表示する</a></div>
+ </div>
+</div>
+</div>
+<form method="post" id="simpleReply-form-bulletin-5" name="simpleReply" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+<input type=hidden name=page value=AjaxSimpleReply>
+<input type="hidden" name="app" value="bulletin">
+<input type="hidden" name="BID" value="5">
+<input type="hidden" name="GID" value="">
+<input type="hidden" name="CID" value="">
+<input type="hidden" name="BC" value="1">
+<input type="hidden" name="FRID" value="">
+<input type="hidden" name="Value" value="">
+<input type="hidden" name="Cancel" value="">
+<input type="hidden" name="ClearNotification" value="1">
+</form>
+<script language="JavaScript" type="text/javascript"><!--
+CB7.follow.AJAX_URL['bulletin-5'] = GetExeFileName( document.URL ) + "?page=AjaxXHRBulletin%PAGE_ID%&bid=5";
+//-->
+</script>
+</div>
+<div class="notificationFooter">
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+</div>
+</div>
+</div>
+</div>
+<div class="notificationCategory notificationCategoryReport" data-type="Report" data-app="4">
+<div class="notificationCategoryName">報告書</div>
+<div class="notificationRows">
+<div class="notificationRow" data-id="9" data-key="9">
+<div class="notificationControllerWrapper">
+ <table class="notificationController">
+ <tr>
+ <td nowrap="nowrap">
+ <div class="notificationControllerInner">
+<a href="javascript:void(0)" class="notificationControllerPrev vr_stdButton lightButton" title="前へ"><span><img src="/cb1080/image/arrow_top_sharp16.png"></span></a><a href="javascript:void(0)" class="notificationControllerNext vr_stdButton lightButton" title="次へ"><span><img src="/cb1080/image/arrow_bottom_sharp16.png"></span></a>
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+ </div>
+ </td>
+ </tr>
+ </table>
+</div>
+<div class="notificationSubject"><a href="ag.cgi?page=ReportView&rid=9&tp=t"><img src="/cb1080/image/report16.png" align=absmiddle>来期の契約内容について</a></div>
+<div class="notificationContents">
+<div class="notificationMain notificationMainUnread">
+<div class="notificationAddress"><span class="notificationAddressItem"><span class="notificationAddressLabel">作成者：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>和田 一夫</span><span class="notificationAddressText"> 2011/9/1(木) 17:00</span></span><span class="notificationAddressItem"><span class="notificationAddressLabel">更新情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>和田 一夫</span><span class="notificationAddressText"> 2013/10/9(水) 10:33</span></span></div>
+<div class="notificationBodyWrapper">
+<div class="notificationBody"><div class="notificationBodyExpand"><div class="notificationBodyText"><table class="dataView" width="100%" >
+<colgroup width="15%">
+<colgroup width="85%">
+ <tr valign="top">
+ <th align="left" nowrap>会社</th>
+ <td>
+<img src="/cb1080/image/company16.png" align=absmiddle>やまだ商事 営業部<br>
+</td>
+ </tr>
+ <tr valign="top">
+ <th align="left" nowrap>相手参加者</th>
+ <td>伊藤 太郎<br></td>
+ </tr>
+ <tr valign="top">
+ <th align="left" nowrap>参加者</th>
+ <td>
+<nobr>和田 一夫</nobr>
+<br></td>
+ </tr>
+ <tr>
+ <th align="left" nowrap>日付</th>
+ <td nowrap>
+2013 年 10 月 1 日 (火)
+</td>
+ </tr>
+<tr valign="top">
+ <th align="left" nowrap>内容</th>
+ <td ><div id="reportText5">
+<tt>先方は、「来期も継続して現行の契約内容でお願いしたい」とのことでした。<br><br>大変満足してくださっており、再来期はもう少し受注数を増やしたいとのことでした。<br>よかったです。<br><br>また新しいプロジェクトが発足するようです。<br>その時にコンペを行なうようですので、食い込んでいけるようがんばります。<br>＃まだ極秘ということで、全容を明かしていただけませんでした。</tt></div>
+<script type="text/javascript"><!--
+ShowDBInlineView( "reportText5" );
+//--></script>
+ </td>
+</tr>
+<tr valign="top">
+ <th align="left" nowrap>課題</th>
+ <td ><div id="reportText6">
+<tt>再来期は、うちの卸価格が変わるので、それを伝えなければなりません。<br>早い段階からのアプローチが必要と思います。<br>新規プロジェクトの動向を探ること</tt></div>
+<script type="text/javascript"><!--
+ShowDBInlineView( "reportText6" );
+//--></script>
+ </td>
+</tr>
+<tr valign="top">
+ <th align="left" nowrap>資料</th>
+ <td ><br>
+ </td>
+</tr>
+ <tr>
+ <th align="left" nowrap>更新情報</th>
+ <td nowrap>
+<img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>和田 一夫 (2013/10/9 10:33)
+ </td>
+ </tr>
+</table>
+<div class="notificationReaction">
+<div class="followMenu clearfix vr_viewContentsMenu">
+<div class="followMenuMain">
+ <span class="followMenuLinkWrapper">
+ <span class="followMenuLinkInner" id="simpleReplyLinkText-report-9-0" onmouseover="YAHOO.util.Dom.addClass(this.parentNode, 'simpleReplyLinkWrapperHover')" onmouseout="YAHOO.util.Dom.removeClass(this.parentNode, 'simpleReplyLinkWrapperHover')">
+ <a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('report', 9, 0, null, false);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>いいね！</a><a id="simpleReplyImageMenuLink-report-9-0" class="simpleReplyImageMenuLink" href="#" onclick="CB7.follow.toggleSimpleReplyMenu(this, 'report', 9, 0);return false;"><img src="/cb1080/image/showdown12.png" align=absmiddle></a>
+ </span>
+ <span class="followMenuLinkInner" id="simpleReplyLinkCancel-report-9-0" style="display:none">
+<a class="simpleReplyTextLink" href="#" onclick="CB7.follow.simpleReply('report', 9, 0, null, true);return false;"><img src="/cb1080/image/good16.png" align=absmiddle>「いいね！」を取り消す</a>
+ </span>
+ </span>
+</div>
+</div>
+<div>
+<div class="simpleReplyUserList" id="simpleReplyUserList-report-9-0" style="display:none">
+ <div class="simpleReplyUserListTip"></div>
+ <ul class="simpleReplyUsers">
+ <li class="simpleReplyUser" id="simpleReplyUser-report-9-0-spinner" style="display:none">
+ <span class="simpleReplyUserArea"><img src="/cb1080/image/spinner.gif" align="absmiddle"></span>
+ </li>
+ <li class="simpleReplyUser simpleReplyUserMe" id="simpleReplyUser-report-9-0-me" style="display:none">
+ <a href="#" onclick="javascript:CB7.follow.showSimpleReplyMenu(this, 'report', 9, 0);return false;">
+ <span class="profileSimpleReplyImage" style="cursor:pointer" title="加藤 美咲">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle><script language="JavaScript" type="text/javascript"><!--
+CB7.follow.simpleReplyValues['report-9-0'] = null;
+//--></script>
+ </span>
+ </a>
+ </li>
+ <li class="simpleReplyUserCollapse">
+ <a id="simpleReplyUserCounter-report-9-0" class="simpleReplyUserCount" href="#" onclick="CB7.follow.showSimpleReplyUsers(this, 'report', 9, 0, 'いいね！');return false;"><span id="simpleReplyUserCount-report-9-0"></span>名</a>
+ </li>
+ </ul>
+</div>
+</div>
+</div>
+</div></div>
+<div class="notificationBodyFade" style="display:none"></div>
+<div class="notificationBodyMore" style="display:none"><a class="hilightLink" href="javascript:void(0)" onclick="CB7.Notification.showMain(this); return false;"><span class="vr_textColor">...</span>&nbsp;本文をすべて表示する</a></div>
+</div>
+</div>
+</form>
+</div>
+<div class="notificationComment">
+<div id="FollowContent" class="notificationCommentList">
+</div>
+</div>
+<form method="post" id="simpleReply-form-report-9" name="simpleReply" action="ag.cgi?" style="display:inline;">
+<input type="hidden" name="csrf_ticket" value="46295a6abc7c55600950c26fab5a2688">
+<input type=hidden name=page value=AjaxSimpleReply>
+<input type="hidden" name="app" value="report">
+<input type="hidden" name="rRID" value="9">
+<input type="hidden" name="FRID" value="">
+<input type="hidden" name="Value" value="">
+<input type="hidden" name="Cancel" value="">
+<input type="hidden" name="ClearNotification" value="1">
+</form>
+<script language="JavaScript" type="text/javascript"><!--
+ CB7.follow.AJAX_URL['report-9'] = GetExeFileName( document.URL ) + "?page=AjaxXHRReport%PAGE_ID%&rrid=9";
+//-->
+</script>
+</div>
+<div class="notificationFooter">
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+</div>
+</div>
+</div>
+</div>
+<div class="notificationCategory notificationCategoryProjectTask" data-type="ProjectTask" data-app="8" data-pid="74">
+<div class="notificationCategoryName">製品販促計画（タスク）</div>
+<div class="notificationRows">
+<div class="notificationRow" data-id="55">
+<div class="notificationControllerWrapper">
+ <table class="notificationController">
+ <tr>
+ <td nowrap="nowrap">
+ <div class="notificationControllerInner">
+<a href="javascript:void(0)" class="notificationControllerPrev vr_stdButton lightButton" title="前へ"><span><img src="/cb1080/image/arrow_top_sharp16.png"></span></a><a href="javascript:void(0)" class="notificationControllerNext vr_stdButton lightButton" title="次へ"><span><img src="/cb1080/image/arrow_bottom_sharp16.png"></span></a>
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+ </div>
+ </td>
+ </tr>
+ </table>
+</div>
+<div class="notificationSubject"><a href="ag.cgi?page=ProjectTaskView&pid=74&tid=55&cp=plv&tp=t"><img src="/cb1080/image/task16.png" align=absmiddle>メール配信</a> <span class="notificationInfo">（登録）</span></div>
+<div class="notificationContents">
+<div class="notificationMain notificationMainUnread">
+<div class="notificationAddress"><span class="notificationAddressItem"><span class="notificationAddressLabel">作成情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>和田 一夫</span><span class="notificationAddressText"> 2011/7/8(金) 16:44</span></span><span class="notificationAddressItem"><span class="notificationAddressLabel">更新情報：</span><span class="notificationAddressText"><img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太</span><span class="notificationAddressText"> 2013/10/9(水) 10:13</span></span></div>
+<div class="notificationBodyWrapper">
+<div class="notificationBody"><div class="notificationBodyExpand"><div class="notificationBodyText"><table class="dataView" width="80%" >
+ <col width="20%">
+ <col width="80%">
+ <tr valign="top">
+ <th align="left" nowrap>タスク名</th>
+ <td>メール配信</td></tr>
+ <tr valign="top">
+ <th align="left" nowrap>予定期間</th>
+ <td>2013/10/1 ～ 2013/10/31</td></tr>
+ <tr>
+ <th align="left" nowrap>実績期間</th>
+ <td nowrap><br></td>
+ </tr>
+ <tr>
+ <th align="left" nowrap>状況</th>
+ <td nowrap><font color=red>×遅れ</font>
+<font size=-1>（開始予定日が過ぎています。）</font>
+</td>
+ </tr>
+ <tr>
+ <th align="left" nowrap>担当者</th>
+ <td>和田 一夫,
+<img src="/cb1080/image/loginuser16.png" align=absmiddle>加藤 美咲</td>
+ </tr>
+ <tr valign="top">
+ <th align="left" nowrap>メモ</th>
+ <td>
+<tt><br>
+</tt> </td></tr>
+ <tr>
+ <th align="left" nowrap>作成情報</th>
+ <td nowrap>
+<img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>和田 一夫  2011/7/8(金) 16:44
+ </td>
+ </tr>
+ <tr>
+ <th align="left" nowrap>更新情報</th>
+ <td nowrap>
+<img class="profileImage" src="/cb1080/image/user20.png" style="width: 20px; height: 20px;" align=absmiddle>高橋 健太  2013/10/9(水) 10:13
+ </td>
+ </tr>
+</form>
+</table>
+</div></div>
+<div class="notificationBodyFade" style="display:none"></div>
+<div class="notificationBodyMore" style="display:none"><a class="hilightLink" href="javascript:void(0)" onclick="CB7.Notification.showMain(this); return false;"><span class="vr_textColor">...</span>&nbsp;本文をすべて表示する</a></div>
+</div>
+</div>
+</div>
+</div>
+<div class="notificationFooter">
+<button type="button" class="vr_stdButton" onclick="CB7.Notification.clearNotification(this, '');"><img src="/cb1080/image/remove16_mono.png" align=absmiddle alt="既読にする" title="既読にする"><span class="notificationDeleteCaption">既読にする</span>
+</button>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="vr_filterMention" style="display:none">
+<div class="notificationCategory notificationCategoryWorkflow" data-type="Workflow" data-app="1">
+<div class="notificationCategoryName">ワークフロー</div>
+<div class="notificationRows">
+<div class="notificationRow" data-id="866">
+</div>
+</div>
+</div>
+<div class="notificationCategory notificationCategoryMessage" data-type="Message" data-app="2">
+<div class="notificationCategoryName">メッセージ</div>
+<div class="notificationRows">
+<div class="notificationRow" data-id="608">
+</div>
+</div>
+</div>
+<div class="notificationCategory notificationCategorySchedule" data-type="Schedule" data-app="7">
+<div class="notificationCategoryName">スケジュール</div>
+<div class="notificationRows">
+<div class="notificationRow" data-id="831" data-nid="611" data-date="da.2015.10.8" data-key="831">
+</div>
+<div class="notificationRow" data-id="823" data-nid="620" data-date="da.2015.10.9" data-key="823">
+</div>
+</div>
+</div>
+<div class="notificationCategory notificationCategoryBulletin" data-type="Bulletin" data-app="5">
+<div class="notificationCategoryName">掲示板</div>
+<div class="notificationRows">
+<div class="notificationRow notificationTypeUpdate" data-id="5">
+</div>
+</div>
+</div>
+</div>
+ </div>
+ </div>
+ </td>
+ </tr>
+</table>
+</td></tr></table>
+<div class="vr_contentBottom clearfix">
+<a class="vr_scrollUp" href="javascript:void(0);" onclick="$('html, body').animate({scrollTop:0}, 500); return false;">▲</a>
+</div>
+</div></div>
+ <div class="footbar">
+<div id="permalink-container" class="vr_urlTip" style="display:none">
+ <div class="vr_tipContent">
+ <div class="vr_tipContentHeader">
+<img src="/cb1080/image/permlink16.png" align=absmiddle>固定リンク</div>
+ <div class="vr_tipContentBody">
+ <div id="permalink-description-comment">このURLを貼り付けると、このコメントに直接アクセスできます。</div>
+ <div id="permalink-description-body">このURLを貼り付けると、このページに直接アクセスできます。</div>
+ <div>
+ <input class="vr_commentUrl" type="text" readonly="" value="" name="commentUrl">
+ </div>
+ </div>
+ </div>
+</div>
+<div id="simpleReplyImageMenu" class="simpleReplyImageMenu" style="display: none;">
+ <ul class="simpleReplyImageList">
+ <li class="simpleReplyPreImage" onmouseover="YAHOO.util.Dom.addClass(this, 'activeSimpleReplyImage')" onmouseout="YAHOO.util.Dom.removeClass(this, 'activeSimpleReplyImage')">
+ <a class="profileSimpleReplyImage" href="#" onclick="CB7.follow.simpleReply(null, null, null, null);return false;">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle> </a>
+ </li>
+ <li class="simpleReplyPreImage" onmouseover="YAHOO.util.Dom.addClass(this, 'activeSimpleReplyImage')" onmouseout="YAHOO.util.Dom.removeClass(this, 'activeSimpleReplyImage')">
+ <a class="profileSimpleReplyImage" href="#" onclick="CB7.follow.simpleReply(null, null, null, 'good');return false;">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle> <img class="simpleReplyImage" src="/cb1080/image/good/good.png">
+ </a>
+ </li>
+ <li class="simpleReplyPreImage" onmouseover="YAHOO.util.Dom.addClass(this, 'activeSimpleReplyImage')" onmouseout="YAHOO.util.Dom.removeClass(this, 'activeSimpleReplyImage')">
+ <a class="profileSimpleReplyImage" href="#" onclick="CB7.follow.simpleReply(null, null, null, 'ok');return false;">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle> <img class="simpleReplyImage" src="/cb1080/image/good/ok.png">
+ </a>
+ </li>
+ <li class="simpleReplyPreImage" onmouseover="YAHOO.util.Dom.addClass(this, 'activeSimpleReplyImage')" onmouseout="YAHOO.util.Dom.removeClass(this, 'activeSimpleReplyImage')">
+ <a class="profileSimpleReplyImage" href="#" onclick="CB7.follow.simpleReply(null, null, null, 'smile');return false;">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle> <img class="simpleReplyImage" src="/cb1080/image/good/smile.png">
+ </a>
+ </li>
+ <li class="simpleReplyPreImage" onmouseover="YAHOO.util.Dom.addClass(this, 'activeSimpleReplyImage')" onmouseout="YAHOO.util.Dom.removeClass(this, 'activeSimpleReplyImage')">
+ <a class="profileSimpleReplyImage" href="#" onclick="CB7.follow.simpleReply(null, null, null, 'sad');return false;">
+<img class="profileImage" src="/cb1080/image/loginuser20.png" style="width: 20px; height: 20px;" align=absmiddle> <img class="simpleReplyImage" src="/cb1080/image/good/sad.png">
+ </a>
+ </li>
+ </ul>
+</div>
+<div class="copyright">サイボウズ Office Version 10.8.6 20220502162043</div></div></div>

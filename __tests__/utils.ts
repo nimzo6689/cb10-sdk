@@ -4,6 +4,7 @@ export const fileAddHtml = fs.readFileSync(`${__dirname}/resources/page_FileAdd`
 export const myFolderMessageViewHtml = fs.readFileSync(`${__dirname}/resources/page_MyFolderMessageView`).toString();
 export const userListIndexHtml = fs.readFileSync(`${__dirname}/resources/page_UserListIndex`).toString();
 export const myFolderIndexHtml = fs.readFileSync(`${__dirname}/resources/page_MyFolderIndex`).toString();
+export const notificationIndexHtml = fs.readFileSync(`${__dirname}/resources/page_NotificationIndex`).toString();
 
 export const error10101Html = fs.readFileSync(`${__dirname}/resources/error/page_error_10101`).toString();
 
