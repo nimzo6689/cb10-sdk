@@ -1,5 +1,6 @@
 import { AxiosAdapter, AxiosRequestConfig } from 'axios';
 import { CybozuOffice } from '../../src/index';
+import { CybozuOfficeSDKException } from '../../src/common/Errors';
 import { defaultCB10Options, notificationIndexHtml, normalResponse } from '../utils';
 
 describe('通知一覧', () => {
@@ -60,5 +61,12 @@ describe('通知一覧', () => {
     ];
 
     expect(JSON.stringify(actual.messages)).toBe(JSON.stringify(expected));
+  });
+
+  it('既読一覧の取得不可', async () => {
+    const client = new CybozuOffice({ ...defaultCB10Options });
+    await expect(async () => {
+      await client.notification.getContents({ kind: 'read' });
+    }).rejects.toThrow(CybozuOfficeSDKException);
   });
 });
