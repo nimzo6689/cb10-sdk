@@ -68,6 +68,7 @@ export interface GetOptions {
  */
 export interface SessionCredentials {
   cookie: string;
+  myOwnUID: number;
   csrfTicket?: string;
 }
 
@@ -259,6 +260,7 @@ export default class Transport {
     const cookieValue = Transport.#extractSessionCookie(loginResponse);
     this.options.sessionCredentials = {
       cookie: cookieValue,
+      myOwnUID: Number(loginResponse.headers['x-cybozu-user']),
     };
   }
 

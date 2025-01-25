@@ -24,6 +24,7 @@ describe('ログイン', () => {
                   'AGSESSID=6e85000b30625dba981127762ce00c9fb25b0419a8febfda; path=/scripts/office10/; secure; HttpOnly',
                   'AGLOGINID=17; expires=Thu, 23-Jan-2025 14:20:07 GMT; path=/scripts/office10/; secure',
                 ],
+                'x-cybozu-user': '17',
               },
               data: '',
             })
@@ -47,6 +48,7 @@ describe('ログイン', () => {
     expect(client.transport.sessionCredentials?.cookie).toBe(
       'AGSESSID=6e85000b30625dba981127762ce00c9fb25b0419a8febfda'
     );
+    expect(client.transport.sessionCredentials?.myOwnUID).toBe(17);
     expect(client.transport.sessionCredentials?.csrfTicket).toBe('9003b2751bdbd00fc31225b9bdc736b8');
   });
 
@@ -107,6 +109,7 @@ describe('ログイン', () => {
                   'AGSESSID=6e85000b30625dba981127762ce00c9fb25b0419a8febfda; path=/scripts/office10/; secure; HttpOnly',
                   'AGLOGINID=17; expires=Thu, 23-Jan-2025 14:20:07 GMT; path=/scripts/office10/; secure',
                 ],
+                'x-cybozu-user': '17',
               },
               data: '',
             })
@@ -139,6 +142,7 @@ describe('ログイン', () => {
         ...needsLoginCB10Options,
         sessionCredentials: {
           cookie: 'AGSESSID=old_session',
+          myOwnUID: 17,
           csrfTicket: 'old_csrf',
         },
       },
@@ -149,6 +153,7 @@ describe('ログイン', () => {
     expect(client.transport.sessionCredentials?.cookie).toBe(
       'AGSESSID=6e85000b30625dba981127762ce00c9fb25b0419a8febfda'
     );
+    expect(client.transport.sessionCredentials?.myOwnUID).toBe(17);
     expect(client.transport.sessionCredentials?.csrfTicket).toBe('9003b2751bdbd00fc31225b9bdc736b8');
   });
 });
