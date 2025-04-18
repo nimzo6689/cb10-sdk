@@ -26,6 +26,7 @@ export const defaultCB10Options = {
   ...needsLoginCB10Options,
   sessionCredentials: {
     cookie: 'skip',
+    myOwnUID: 1,
     csrfTicket: 'skip',
   },
 };
